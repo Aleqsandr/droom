@@ -1,46 +1,42 @@
 import React, { Component } from 'react';
 import {Layer, Rect, Stage, Group} from 'react-konva';
-
-// Simple drawing rectangle class
-class MyRect extends React.Component {
-    constructor(...args) {
-      super(...args);
-      this.state = {
-        color: 'green'
-      };
-      this.handleClick = this.handleClick.bind(this);
-    }
-    handleClick() {
-      this.setState({
-        color: Konva.Util.getRandomColor()
-      });
-    }
-    render() {
-        return (
-            <Rect
-                x={10} y={10} width={50} height={50}
-                fill={this.state.color}
-                shadowBlur={10}
-                onClick={this.handleClick}
-            />
-        );
-    }
-}
+import BaseDrum from './components/BaseDrum.jsx';
+import Notes from './components/Notes.jsx';
 
 // App component - represents the whole app
 export default class App extends Component {
+  constructor(props) {
+    super(props);
+
+    this.state = {
+      keyCode:null,
+      group:null
+    };
+  }
+
+  componentDidMount() {
+    document.addEventListener("keydown",this.handleKey.bind(this));
+  }
+
+  handleKey(e) {
+    this.setState({
+      keyCode:e.keyCode
+    });
+  }
+
+  handleGroup(val) {
+    this.setState({
+      group:val
+    });
+  }
 
   render() {
     return (
       <div className="container">
-        <header>
-          <h1>Drumloop</h1>
-        </header>
         <main>
-          <Stage width={700} height={700}>
-            <Layer>
-                <MyRect/>
-            </Layer>
+          <Stage width={window.innerWidth} height={window.innerHeight}>
+            <BaseDrum handleGroup={this.handleGroup.bind(this)}/>
+            <Notes keyCode={this.state.keyCode} group={this.state.group}/>
           </Stage>
         </main>
       </div>
