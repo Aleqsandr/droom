@@ -6,10 +6,11 @@
   },
   "dependencies": {
     "babel-runtime": "6.18.0",
+    "konva": "^1.2.2",
     "meteor-node-stubs": "~0.2.0",
     "react": "^15.4.2",
-    "react-canvas": "^1.2.1",
     "react-dom": "^15.4.2",
+    "react-konva": "^1.1.1",
     "react-router": "^3.0.0"
   }
 }
