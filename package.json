@@ -6,8 +6,10 @@
   },
   "dependencies": {
     "babel-runtime": "6.18.0",
+    "canvas": "^1.6.2",
     "konva": "^1.2.2",
     "meteor-node-stubs": "~0.2.0",
+    "node-gyp": "^3.4.0",
     "react": "^15.4.2",
     "react-dom": "^15.4.2",
     "react-konva": "^1.1.1",
