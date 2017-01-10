@@ -10,6 +10,7 @@ export default class BaseReceiver extends Component {
 
   startAnimation() {
     let note = this.refs.note;
+    
     // to() is a method of `Konva.Node` instances
     note.to({
         y:window.innerHeight,
