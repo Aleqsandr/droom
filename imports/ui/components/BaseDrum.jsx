@@ -12,7 +12,7 @@ export default class BaseDrum extends Component {
     let size = 50, padding = 25, y = window.innerHeight - size - padding;
     return (
       <Layer>
-        <Group ref="groupReceiver" y={window.innerHeight - size - padding} x={window.innerWidth/2}>
+        <Group ref="groupReceiver" y={window.innerHeight - size - padding} x={ (window.innerWidth) / 2 }>
           <BaseReceiver x={0} size={size} color="#ff0000"/>
           <BaseReceiver x={size*1+padding} size={size} color="#00ff00"/>
           <BaseReceiver x={size*2+padding*2} size={size} color="#fff000"/>

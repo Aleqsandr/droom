@@ -9,14 +9,27 @@ export default class App extends Component {
     super(props);
 
     this.state = {
+      width:null,
+      height:null,
       keyCode:null,
       group:null
     };
   }
 
-  componentDidMount() {
-    document.addEventListener("keydown",this.handleKey.bind(this));
+  updateDimensions() {
+      this.setState({width: window.innerWidth, height: window.innerHeight});
   }
+  componentWillMount() {
+      this.updateDimensions();
+  }
+  componentDidMount() {
+      window.addEventListener("resize", this.updateDimensions.bind(this));
+      document.addEventListener("keydown",this.handleKey.bind(this));
+  }
+  componentWillUnmount() {
+      window.removeEventListener("resize", this.updateDimensions.bind(this));
+  }
+
 
   handleKey(e) {
     this.setState({
@@ -34,7 +47,7 @@ export default class App extends Component {
     return (
       <div className="container">
         <main>
-          <Stage width={window.innerWidth} height={window.innerHeight}>
+          <Stage width={this.state.width} height={this.state.height}>
             <BaseDrum handleGroup={this.handleGroup.bind(this)}/>
             <Notes keyCode={this.state.keyCode} group={this.state.group}/>
           </Stage>
