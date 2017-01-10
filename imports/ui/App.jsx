@@ -4,7 +4,7 @@ import BaseDrum from './components/BaseDrum.jsx';
 import Notes from './components/Notes.jsx';
 import Midi from '../midi/Midi.jsx';
 
-// App component - represents the whole app
+// App component - represents the whole game window
 export default class App extends Component {
   constructor(props) {
     super(props);
