@@ -43,7 +43,7 @@ export default class Midi extends Component {
     var inputs = midi.inputs.values();
     for(var input = inputs.next(); input && !input.done; input = inputs.next()) {
       console.log(input.value);
-      input.value.onmidimessage = onMIDIMessage;
+      input.value.onmidimessage = this.onMIDIMessage.bind(this);
       console.log(input.value);
       console.log(input.value.onmidimessage);
       this.listInputs(input);
@@ -64,8 +64,9 @@ export default class Midi extends Component {
   }
 
   onMIDIMessage(event) {
-    console.log("ok");
-    console.log(event);
+    // console.log(event.data);
+
+    this.props.getNoteNumber(event.data);
     // this.setState({
     //   data     :event.data,
     //   cmd      : data[0] >> 4,
@@ -80,15 +81,15 @@ export default class Midi extends Component {
     // pressure / tilt on
     // pressure: 176, cmd 11:
     // bend: 224, cmd: 14
-    console.log(data[0] & 0xf0);
-    switch (data[0] & 0xf0) {
-        case 144: // noteOn message
-            this.noteOn(note, velocity);
-            break;
-        case 128: // noteOff message
-            this.noteOff(note, velocity);
-            break;
-    }
+    //console.log(data[0] & 0xf0);
+    // switch (data[0] & 0xf0) {
+    //     case 144: // noteOn message
+    //         this.noteOn(note, velocity);
+    //         break;
+    //     case 128: // noteOff message
+    //         this.noteOff(note, velocity);
+    //         break;
+    // }
 
     //console.log('data', data, 'cmd', cmd, 'channel', channel);
   }

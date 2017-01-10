@@ -11,7 +11,9 @@ export default class App extends Component {
 
     this.state = {
       keyCode:null,
-      group:null
+      group:null,
+      note:null,
+      velocity:null
     };
   }
 
@@ -31,14 +33,20 @@ export default class App extends Component {
     });
   }
 
+  getNoteNumber(note){
+    if (note[1] == 38){
+      this.setState({note : note[1], velocity : note[2]});
+    }
+  }
+
   render() {
     return (
       <div className="container">
-        <Midi/>
+        <Midi getNoteNumber={this.getNoteNumber.bind(this)}/>
         <main>
           <Stage width={window.innerWidth} height={window.innerHeight}>
             <BaseDrum handleGroup={this.handleGroup.bind(this)}/>
-            <Notes keyCode={this.state.keyCode} group={this.state.group}/>
+            <Notes noteIO={this.state.note} keyCode={this.state.keyCode} group={this.state.group}/>
           </Stage>
         </main>
       </div>

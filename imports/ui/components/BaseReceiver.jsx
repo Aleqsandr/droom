@@ -4,6 +4,10 @@ import {Layer, Rect, Stage, Group} from 'react-konva';
 // App component - represents the whole app
 export default class BaseReceiver extends Component {
 
+  checkNoteOn(note){
+
+  }
+
   render() {
     let height = 50, padding = 25;
     return (
@@ -13,6 +17,7 @@ export default class BaseReceiver extends Component {
           height={this.props.size}
           x={this.props.x}
           fill={this.props.color}
+          note={this.props.note}
       />
     );
   }
