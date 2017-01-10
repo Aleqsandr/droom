@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
 import {Layer, Rect, Stage, Group} from 'react-konva';
-import midifile from '/client/midifile.js';
 
 // App component - represents the whole app
 export default class Note extends Component {

@@ -1,9 +1,22 @@
 import React, { Component } from 'react';
 import {Layer, Rect, Stage, Group} from 'react-konva';
 import Note from './Note.jsx';
+import midifile from '/client/midifile.js';
+import Stream from '/client/stream.js';
+// var midiFileParser = require('midi-file-parser');
+//var fs = require('fs');
 
 // App component - represents the whole app
 export default class Notes extends Component {
+
+  componentDidMount() {
+    // var midiFileParser = require('midi-file-parser');
+    // var fs = require('fs')
+    // var file = fs.readFileSync('/client/the_strokes-last_nite.midi', 'binary')
+    // file = window.atob(file)
+    // var midi = midiFileParser(file);
+    // console.log(midi)
+  }
 
   render() {
     let size = 50, padding = 25;
