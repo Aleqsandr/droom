@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import {Layer, Rect, Stage, Group} from 'react-konva';
 import BaseDrum from './components/BaseDrum.jsx';
 import Notes from './components/Notes.jsx';
+import Midi from '../midi/Midi.jsx';
 
 // App component - represents the whole app
 export default class App extends Component {
@@ -46,6 +47,7 @@ export default class App extends Component {
   render() {
     return (
       <div className="container">
+        <Midi/>
         <main>
           <Stage width={this.state.width} height={this.state.height}>
             <BaseDrum handleGroup={this.handleGroup.bind(this)}/>
