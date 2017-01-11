@@ -11,6 +11,7 @@
     "konva": "^1.2.2",
     "meteor-node-stubs": "~0.2.0",
     "midi-file-parser": "^1.0.0",
+    "midifile": "^1.0.4",
     "node-gyp": "^3.4.0",
     "react": "^15.4.2",
     "react-dom": "^15.4.2",
