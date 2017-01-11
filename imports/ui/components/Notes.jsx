@@ -6,7 +6,9 @@ import Stream from '/client/stream.js';
 // var midiFileParser = require('midi-file-parser');
 //var fs = require('fs');
 
-import midifile from "midifile";
+import MIDIFile from "midifile";
+import MIDIEvents from "midievents";
+import MIDIFileHeader from "/client/assets/lib/MIDIFileHeader.js";
 
 
 // Begin loading indication.
@@ -32,20 +34,61 @@ import midifile from "midifile";
 export default class Notes extends Component {
 
   componentDidMount() {
-    console.log("yo")
-    var oReq = new XMLHttpRequest();
-    oReq.open("GET", "/client/the_strokes-last_nite.midi", true);
-    oReq.responseType = "arraybuffer";
+    var myRequest = new Request('http://www.matthieubessol.com/soundfont/SIMPLE.mid');
+    fetch(myRequest).then(function(response) {
+        return response.arrayBuffer();
+    }).then(function(buffer) {
+        var midiFile = new MIDIFile(buffer);
+        // Reading headers
+        midiFile.header.getFormat(); // 0, 1 or 2
+        midiFile.header.getTracksCount(); // n
+        //Time division
+        if(midiFile.header.getTimeDivision() === MIDIFileHeader.TICKS_PER_BEAT) {
+         midiFile.header.getTicksPerBeat();
+        } else {
+         midiFile.header.getSMPTEFrames();
+         midiFile.header.getTicksPerFrame();
+        }
 
-    console.log("continue")
+        // MIDI events retriever
+        var events = midiFile.getMidiEvents();
+        events[1].subtype; // type of [MIDI event](https://github.com/nfroidure/MIDIFile/blob/master/src/MIDIFile.js#L34)
+        events[1].playTime; // time in ms at wich the event must be played
+        events[1].param1; // first parameter
+        events[1].param2; // second one
 
-    oReq.onload = function (oEvent) {
-      console.log(oEvent);
-      var arrayBuffer = oReq.response; // Note: not oReq.responseText
-      if (arrayBuffer) {
-        console.log(arraybuffer)
-      }
-    };
+        console.log(events[1].playTime);
+
+        var events = midiFile.getTrackEvents(0);
+        // Or for a single track
+        var trackEventsChunk = midiFile.tracks[0].getTrackContent();
+        var events = MIDIEvents.createParser(trackEventsChunk);
+
+
+        var alrdSubtype = [0];
+
+        var compteur = 0;
+
+        while(event = events.next()) {
+          var isIn = false;
+          for (var i = alrdSubtype.length - 1; i >= 0; i--) {
+            if(alrdSubtype[i]===event.delta)
+              isIn=true;
+          }
+          if(!isIn)
+            alrdSubtype.push(event.delta)
+
+          if(event.delta === 720)
+            compteur++;
+          // console.log(event)
+            // Printing meta events containing text only
+            if(event.type === MIDIEvents.EVENT_META && event.text) {
+                //console.log('Text meta: '+event.text);
+            }
+        }
+
+        console.log(compteur)
+    });
   }
 
   render() {
