@@ -6,10 +6,13 @@ import Stream from '/client/stream.js';
 // var midiFileParser = require('midi-file-parser');
 //var fs = require('fs');
 
-import MIDIFile from "midifile";
+import MidiFile from "midifile";
 import MIDIEvents from "midievents";
 import MIDIFileHeader from "/client/assets/lib/MIDIFileHeader.js";
 
+require('/client/MIDI.js');
+
+var notes= [];
 
 // Begin loading indication.
   var player;
@@ -29,74 +32,49 @@ import MIDIFileHeader from "/client/assets/lib/MIDIFileHeader.js";
   ];
 
 
-
 // App component - represents the whole app
 export default class Notes extends Component {
 
-  componentDidMount() {
-    var myRequest = new Request('http://www.matthieubessol.com/soundfont/SIMPLE.mid');
-    fetch(myRequest).then(function(response) {
-        return response.arrayBuffer();
-    }).then(function(buffer) {
-        var midiFile = new MIDIFile(buffer);
-        // Reading headers
-        midiFile.header.getFormat(); // 0, 1 or 2
-        midiFile.header.getTracksCount(); // n
-        //Time division
-        if(midiFile.header.getTimeDivision() === MIDIFileHeader.TICKS_PER_BEAT) {
-         midiFile.header.getTicksPerBeat();
-        } else {
-         midiFile.header.getSMPTEFrames();
-         midiFile.header.getTicksPerFrame();
-        }
+  constructor(props) {
+    super(props);
 
-        // MIDI events retriever
-        var events = midiFile.getMidiEvents();
-        events[1].subtype; // type of [MIDI event](https://github.com/nfroidure/MIDIFile/blob/master/src/MIDIFile.js#L34)
-        events[1].playTime; // time in ms at wich the event must be played
-        events[1].param1; // first parameter
-        events[1].param2; // second one
+    this.state = {
+      timeToFall:3,
+      nbItem:0,
+      currentNote:0,
+      group:this.props.group
+    };
 
-        console.log(events[1].playTime);
-
-        var events = midiFile.getTrackEvents(0);
-        // Or for a single track
-        var trackEventsChunk = midiFile.tracks[0].getTrackContent();
-        var events = MIDIEvents.createParser(trackEventsChunk);
-
-
-        var alrdSubtype = [0];
-
-        var compteur = 0;
-
-        while(event = events.next()) {
-          var isIn = false;
-          for (var i = alrdSubtype.length - 1; i >= 0; i--) {
-            if(alrdSubtype[i]===event.delta)
-              isIn=true;
-          }
-          if(!isIn)
-            alrdSubtype.push(event.delta)
-
-          if(event.delta === 720)
-            compteur++;
-          // console.log(event)
-            // Printing meta events containing text only
-            if(event.type === MIDIEvents.EVENT_META && event.text) {
-                //console.log('Text meta: '+event.text);
-            }
-        }
-
-        console.log(compteur)
+    var self = this;
+    MIDI.loadPlugin(function() {
+      player = MIDI.Player;
+      player.loadFile( "http://www.matthieubessol.com/soundfont/SIMPLE.mid", player.start,null,function() {console.log("nope")} );
+      player.addListener(function(data){
+        self.addNewNote(data);
+      });
     });
+  }
+
+  addNewNote(data) {
+    this.setState({
+      nbItem:++this.state.nbItem,
+      currentNote:data.note
+    })
+  }
+
+  componentDidMount() {
+    // this.addNewNote();
+  }
+
+  componentWillReceiveProps(nextProps) {
+    this.setState({
+      group:nextProps.group
+    })
   }
 
   render() {
     let size = 50, padding = 25;
-    var notes = [];
-    for (var i = 4; i >= 0; i--) {
-      notes.push(<Note noteIO={this.props.noteIO} timeout={i*1000} key={i} size={size} x={i*2} color="#ff0000" keyCode={this.props.keyCode} group={this.props.group}/>);
-    }
+    notes.push(<Note noteIO={this.props.noteIO} currentNote={this.state.currentNote} timeCreation={Date.now()} size={size} x={0} color="#ff0000" timeToFall={this.state.timeToFall} keyCode={this.props.keyCode} group={this.state.group}/>);
     return (
       <Layer>
         <Group y={0} x={window.innerWidth/2}>

@@ -43,7 +43,7 @@ if (typeof MIDI === 'undefined') MIDI = {};
 		var onsuccess = onsuccess || opts.onsuccess;
 		var onerror = onerror || opts.onerror;
 		var onprogress = onprogress || opts.onprogress;
-		///
+
 		// if (typeof NodeFS !== 'undefined' && root.loc.isLocalUrl(url)) {
 		// 	NodeFS.readFile(url, 'utf8', function(err, res) {
 		// 		if (err) {
@@ -54,7 +54,7 @@ if (typeof MIDI === 'undefined') MIDI = {};
 		// 	});
 		// 	return;
 		// }
-		///
+
 		var xhr = new XMLHttpRequest();
 		xhr.open(method, url, true);
 		///
@@ -124,14 +124,13 @@ if (typeof MIDI === 'undefined') MIDI = {};
 								onerror && onerror.call(xhr, evt);
 							}
 						}
-						///
 						onsuccess.call(xhr, evt, res);
 					}
 				} else {
 					onerror && onerror.call(xhr, evt);
 				}
 			}
-		};
+		}
 		xhr.send(data);
 		return xhr;
 	};
