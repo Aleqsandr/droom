@@ -4,7 +4,7 @@
 	----------------------------------------------------------
 	https://github.com/mudcube/MIDI.js
 	----------------------------------------------------------
-	Inspired by javax.sound.midi (albeit a super simple version): 
+	Inspired by javax.sound.midi (albeit a super simple version):
 		http://docs.oracle.com/javase/6/docs/api/javax/sound/midi/package-summary.html
 	----------------------------------------------------------
 	Technologies
@@ -174,7 +174,6 @@ MIDI.Player = MIDI.Player || {};
 					script.type = 'text/javascript';
 					script.text = responseText;
 					document.body.appendChild(script);
-					///
 					onsuccess();
 				}
 			});
