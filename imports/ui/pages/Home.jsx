@@ -14,8 +14,8 @@ export default class Home extends Component {
           </ul>
         </nav>
         <div className="home">
-          <img className="home__logo"></img>
-          <button className="homme__playbtn"><Link to="/app">Play game</Link></button>
+          <img className="home__logo" src="/img/mainlogo.gif"></img>
+          <button className="home__playbtn"><Link to="/app">PLAY</Link></button>
         </div>
       </div>
     );
