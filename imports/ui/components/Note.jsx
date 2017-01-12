@@ -27,6 +27,7 @@ export default class Note extends Component {
 
   componentWillReceiveProps(nextProps) {
     this.setState({group:nextProps.group});
+    console.log("receive new");
     this.checkCollision(nextProps);
     this.setState({
       group:nextProps.group
@@ -45,6 +46,7 @@ export default class Note extends Component {
   }
 
   checkCollision(nextProps) {
+    console.log("check collision");
     let pas = 10;
     let y = this.refs.note.getY(), x = this.refs.note.getX();
     let posX = nextProps.group.getChildren()[0].x(), posY = group.y() + nextProps.group.getChildren()[0].y();

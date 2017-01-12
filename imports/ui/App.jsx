@@ -47,7 +47,7 @@ export default class App extends Component {
   }
 
   getNoteNumber(note){
-    if (note[1] == 38){
+    if (note[1]){
       this.setState({note : note[1], velocity : note[2]});
     }
   }

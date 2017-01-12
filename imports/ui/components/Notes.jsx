@@ -22,7 +22,7 @@ export default class Notes extends Component {
     var self = this;
     MIDI.loadPlugin(function() {
       player = MIDI.Player;
-      player.loadFile( "http://www.matthieubessol.com/soundfont/SIMPLE.mid", player.start,null,function() {console.log("nope")} );
+      player.loadFile( "http://www.matthieubessol.com/soundfont/testmusic.mid", player.start,null,function() {console.log("nope")} );
       player.addListener(function(data){
         self.addNewNote(data);
       });
@@ -30,6 +30,7 @@ export default class Notes extends Component {
   }
 
   addNewNote(data) {
+    console.log("ok")
     this.setState({
       nbItem:++this.state.nbItem,
       currentNote:data.note
@@ -41,9 +42,9 @@ export default class Notes extends Component {
   }
 
   componentWillReceiveProps(nextProps) {
-    this.setState({
-      group:nextProps.group
-    })
+    // this.setState({
+    //   group:nextProps.group
+    // })
   }
 
   render() {
@@ -51,7 +52,7 @@ export default class Notes extends Component {
     notes.push(<Note noteIO={this.props.noteIO} currentNote={this.state.currentNote} timeCreation={Date.now()} size={size} x={0} color="#ff0000" timeToFall={this.state.timeToFall} keyCode={this.props.keyCode} group={this.state.group}/>);
     return (
       <Layer>
-        <Group y={0} x={window.innerWidth/2}>
+        <Group y={0} x={window.innerWidth/3}>
           {notes}
         </Group>
       </Layer>
