@@ -9,7 +9,6 @@ export default class BaseDrum extends Component {
 
     this.state = {
       colorK: '#BDBDBD',
-      keyCode:null
     };
   }
 
@@ -19,8 +18,9 @@ export default class BaseDrum extends Component {
   }
 
   componentWillReceiveProps(newProps) {
+    console.log(newProps.keyCode, newProps)
     this.setState({keyCode:newProps});
-    this.checkRect(newProps);
+    this.checkRect(newProps.handleGroup);
   }
 
   checkRect(newProps){
@@ -28,6 +28,7 @@ export default class BaseDrum extends Component {
         this.setState({colorK: 'red'});
       }
   }
+
   render() {
     let size = 50, padding = 25, y = window.innerHeight - size - padding;
     return (

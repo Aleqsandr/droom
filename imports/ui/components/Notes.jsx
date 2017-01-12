@@ -49,7 +49,7 @@ export default class Notes extends Component {
 
   render() {
     let size = 50, padding = 25;
-    notes.push(<Note noteIO={this.props.noteIO} currentNote={this.state.currentNote} timeCreation={Date.now()} size={size} x={0} color="#ff0000" timeToFall={this.state.timeToFall} keyCode={this.props.keyCode} group={this.state.group}/>);
+    notes.push(<Note key={Date.now()} noteIO={this.props.noteIO} currentNote={this.state.currentNote} timeCreation={Date.now()} size={size} x={0} color="#ff0000" timeToFall={this.state.timeToFall} group={this.state.group}/>);
     return (
       <Layer>
         <Group y={0} x={window.innerWidth/3}>
