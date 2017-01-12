@@ -59,7 +59,7 @@ export default class App extends Component {
         <main>
           <Stage width={this.state.width} height={this.state.height}>
             <BaseDrum handleGroup={this.handleGroup.bind(this)}/>
-            <Notes noteIO={this.state.note} keyCode={this.state.keyCode} group={this.state.group}/>
+            <Notes noteIO={this.state.note} keyCodes={this.state.keyCode} group={this.state.group}/>
           </Stage>
         </main>
       </div>
