@@ -31,6 +31,9 @@ export default class App extends Component {
 
   componentDidMount() {
     //test
+    document.getElementsByTagName("canvas")[0].getContext("2d",
+                 { antialias: false,
+                   depth: false });
   }
   componentWillUnmount() {
       window.removeEventListener("resize", this.updateDimensions.bind(this));

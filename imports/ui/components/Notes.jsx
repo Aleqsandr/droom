@@ -54,6 +54,9 @@ export default class Notes extends Component {
   }
 
   componentWillReceiveProps(nextProps) {
+      for (var i = this.refs.notesContainer.getChildren().length - 1; i >= 0; i--) {
+          console.log(this.refs.notesContainer.getChildren()[i])
+      }
     this.setState({group:nextProps.group});
     if(nextProps.group)
         this.launchCollisions(nextProps);
@@ -66,14 +69,17 @@ export default class Notes extends Component {
   }
 
   checkCollision(el,nextProps,i) {
-    if(times[i]+(this.state.timeToFall - this.state.timeOfCollision)*1000 < Date.now() && noteValues[i] > 0) {
+    let current = Date.now(),
+        diff = times[i]+(this.state.timeToFall - this.state.timeOfCollision)*1000;
+
+    if(diff-100 < current && diff < current+ 200 && noteValues[i] == nextProps.noteIO) {
         times.splice(i, 1);
         notes.splice(i, 1);
         noteValues.splice(i, 1);
         el.destroy();
     }
 
-    if(times[i]+(this.state.timeToFall+1)*1000 < Date.now()) {
+    if(times[i]+(this.state.timeToFall+1)*1000 < diff) {
         times.splice(i, 1);
         notes.splice(i, 1);
         noteValues.splice(i, 1);

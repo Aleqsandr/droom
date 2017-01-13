@@ -18,7 +18,6 @@ export default class BaseDrum extends Component {
   }
 
   componentWillReceiveProps(newProps) {
-    console.log(newProps.keyCode, newProps)
     this.setState({keyCode:newProps});
     this.checkRect(newProps.handleGroup);
   }
