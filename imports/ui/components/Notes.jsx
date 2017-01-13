@@ -1,11 +1,11 @@
 import React, { Component } from 'react';
 import {Layer, Rect, Stage, Group} from 'react-konva';
 import Note from './Note.jsx';
+import update from 'react-addons-update';
 
 require('/client/MIDI.js');
 
-var notes= [];
-var player;
+var player, notes = [], times = [], noteValues = [];
 // App component - represents the whole app
 export default class Notes extends Component {
 
@@ -16,7 +16,10 @@ export default class Notes extends Component {
       timeToFall:3,
       nbItem:0,
       currentNote:0,
-      group:this.props.group
+      group:this.props.group,
+      newp:0,
+      notes:[],
+      timeOfCollision:3*75/window.innerHeight,
     };
 
     var self = this;
@@ -29,8 +32,16 @@ export default class Notes extends Component {
     });
   }
 
+  pxToTime(val){
+    this.state.timeToFall*val/window.innerHeight;
+  }
+
   addNewNote(data) {
-    console.log("ok")
+    let size = 50, padding = 25;
+    var time = Date.now();
+    times.push(time)
+    noteValues.push(data.note);
+    notes.push(<Note newP={this.state.newp} key={time} noteIO={this.props.noteIO} currentNote={data.note} timeCreation={Date.now()} size={size} x={0} color="#ff0000" timeToFall={this.state.timeToFall} keyCode={this.props.keyCode} group={this.state.group}/>);
     this.setState({
       nbItem:++this.state.nbItem,
       currentNote:data.note
@@ -38,21 +49,42 @@ export default class Notes extends Component {
   }
 
   componentDidMount() {
-    // this.addNewNote();
+
   }
 
   componentWillReceiveProps(nextProps) {
-    // this.setState({
-    //   group:nextProps.group
-    // })
+    this.setState({group:nextProps.group});
+    if(nextProps.group)
+        this.launchCollisions(nextProps);
+  }
+
+  launchCollisions(nextProps) {
+    for (var i = this.refs.notesContainer.getChildren().length - 1; i >= 0; i--) {
+        this.checkCollision(this.refs.notesContainer.getChildren()[i],nextProps,i);
+    }
+  }
+
+  checkCollision(el,nextProps,i) {
+    if(times[i]+(this.state.timeToFall - this.state.timeOfCollision)*1000 < Date.now() && noteValues[i] > 0) {
+        times.splice(i, 1);
+        notes.splice(i, 1);
+        noteValues.splice(i, 1);
+        el.destroy();
+    }
+
+    if(times[i]+(this.state.timeToFall+1)*1000 < Date.now()) {
+        times.splice(i, 1);
+        notes.splice(i, 1);
+        noteValues.splice(i, 1);
+        el.destroy();
+    }
   }
 
   render() {
     let size = 50, padding = 25;
-    notes.push(<Note noteIO={this.props.noteIO} currentNote={this.state.currentNote} timeCreation={Date.now()} size={size} x={0} color="#ff0000" timeToFall={this.state.timeToFall} keyCode={this.props.keyCode} group={this.state.group}/>);
     return (
       <Layer>
-        <Group y={0} x={window.innerWidth/3}>
+        <Group y={0} x={window.innerWidth/3} ref="notesContainer">
           {notes}
         </Group>
       </Layer>

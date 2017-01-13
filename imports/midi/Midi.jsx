@@ -42,10 +42,7 @@ export default class Midi extends Component {
     midi = midiAccess;
     var inputs = midi.inputs.values();
     for(var input = inputs.next(); input && !input.done; input = inputs.next()) {
-      console.log(input.value);
       input.value.onmidimessage = this.onMIDIMessage.bind(this);
-      console.log(input.value);
-      console.log(input.value.onmidimessage);
       this.listInputs(input);
     }
 

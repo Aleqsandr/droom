@@ -16,6 +16,7 @@
     "midifile": "^1.0.4",
     "node-gyp": "^3.5.0",
     "react": "^15.4.2",
+    "react-addons-update": "^15.4.2",
     "react-dom": "^15.4.2",
     "react-konva": "^1.1.1",
     "react-router": "^3.0.0"

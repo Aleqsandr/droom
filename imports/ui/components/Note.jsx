@@ -26,18 +26,20 @@ export default class Note extends Component {
   }
 
   componentWillReceiveProps(nextProps) {
-    this.setState({group:nextProps.group});
-    console.log("receive new");
-    this.checkCollision(nextProps);
+    console.log("note receive new props")
     this.setState({
       group:nextProps.group
-    })
+    });
+    this.checkCollision(nextProps);
+  }
+
+  test() {
+    console.log("okiiiii");
   }
 
   getCorrectGroup() {
     for (var i = this.state.group.getChildren().length - 1; i >= 0; i--) {
       if(this.state.group.getChildren()[i].getAttr("note") === this.props.currentNote) {
-        console.log(this.state.group.getChildren()[i].x());
         this.setState({
           x:this.state.group.getChildren()[i].x()
         })
@@ -46,35 +48,40 @@ export default class Note extends Component {
   }
 
   checkCollision(nextProps) {
-    console.log("check collision");
-    let pas = 10;
-    let y = this.refs.note.getY(), x = this.refs.note.getX();
-    let posX = nextProps.group.getChildren()[0].x(), posY = group.y() + nextProps.group.getChildren()[0].y();
+    // console.log("check collision");
+    // let pas = 10;
+    // let y = this.refs.note.getY(), x = this.refs.note.getX();
+    // let posX = nextProps.group.getChildren()[0].x(), posY = group.y() + nextProps.group.getChildren()[0].y();
 
-    // CheckY()
-    // console.log(y+this.props.size)
-    // console.log(posY-pas)
-    if(y+nextProps.size >= posY-pas && y+nextProps.size <= posY+pas+nextProps.size) {
+    // // CheckY()
+    // // console.log(y+this.props.size)
+    // // console.log(posY-pas)
+    // if(y+nextProps.size >= posY-pas && y+nextProps.size <= posY+pas+nextProps.size) {
 
-      if(nextProps.noteIO == nextProps.group.getChildren()[0].getAttr("note")){
-        console.log(nextProps.noteIO)
-        this.refs.note.destroy();
+    //   if(nextProps.noteIO == nextProps.group.getChildren()[0].getAttr("note")){
+    //     this.refs.note.destroy();
 
-        nextProps.group.getChildren()[0].to({scaleX:1.9, scaleY:1.2, duration: 0});
-        nextProps.group.getChildren()[0].to({scaleX:1, scaleY:1, duration: 0.9});
-      }
+    //     nextProps.group.getChildren()[0].to({scaleX:1.9, scaleY:1.2, duration: 0});
+    //     nextProps.group.getChildren()[0].to({scaleX:1, scaleY:1, duration: 0.9});
+    //   }
 
-    }
-    // if()
+    /*
+    3 --> height
+    ? --> 0.25
+    */
+
+    // }
   }
 
   render() {
+    //console.log("wowowowow render")
     return (
       <Rect
           ref="note"
           width={this.props.size}
           height={this.props.size}
           x={this.state.x}
+          y={-this.props.size}
           fill={this.props.color}
       />
     );
