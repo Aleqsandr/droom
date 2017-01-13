@@ -22,28 +22,29 @@ export default class App extends Component {
   updateDimensions() {
       this.setState({width: window.innerWidth, height: window.innerHeight});
   }
+
   componentWillMount() {
       this.updateDimensions();
-  }
-  componentDidMount() {
       window.addEventListener("resize", this.updateDimensions.bind(this));
-      document.addEventListener("keydown",this.handleKey.bind(this));
+      document.addEventListener("keydown",this.handleKeyPress.bind(this));
+  }
+
+  componentDidMount() {
+    //test
   }
   componentWillUnmount() {
       window.removeEventListener("resize", this.updateDimensions.bind(this));
-  }
-
-
-  handleKey(e) {
-    this.setState({
-      keyCode:e.keyCode
-    });
+      document.removeEventListener("keydown",this.handleKeyPress.bind(this));
   }
 
   handleGroup(val) {
     this.setState({
       group:val
     });
+  }
+
+  handleKeyPress(e){
+    this.setState({keyCode: e.keyCode});
   }
 
   getNoteNumber(note){
@@ -58,8 +59,8 @@ export default class App extends Component {
         <Midi getNoteNumber={this.getNoteNumber.bind(this)}/>
         <main>
           <Stage width={this.state.width} height={this.state.height}>
-            <BaseDrum handleGroup={this.handleGroup.bind(this)}/>
-            <Notes noteIO={this.state.note} keyCodes={this.state.keyCode} group={this.state.group}/>
+            <BaseDrum keyCode={this.state.keyCode} handleGroup={this.handleGroup.bind(this)} />
+            <Notes noteIO={this.state.note}  group={this.state.group} />
           </Stage>
         </main>
       </div>
