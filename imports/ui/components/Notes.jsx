@@ -54,9 +54,6 @@ export default class Notes extends Component {
   }
 
   componentWillReceiveProps(nextProps) {
-      for (var i = this.refs.notesContainer.getChildren().length - 1; i >= 0; i--) {
-          console.log(this.refs.notesContainer.getChildren()[i])
-      }
     this.setState({group:nextProps.group});
     if(nextProps.group)
         this.launchCollisions(nextProps);
@@ -91,7 +88,7 @@ export default class Notes extends Component {
     let size = 50, padding = 25;
     return (
       <Layer>
-        <Group y={0} x={window.innerWidth/4} ref="notesContainer">
+        <Group y={0} x={0} ref="notesContainer">
           {notes}
         </Group>
       </Layer>

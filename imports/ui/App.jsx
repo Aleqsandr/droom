@@ -20,7 +20,10 @@ export default class App extends Component {
   }
 
   updateDimensions() {
-      this.setState({width: window.innerWidth, height: window.innerHeight});
+      this.setState({
+        width: window.innerWidth,
+        height: window.innerHeight
+      });
   }
 
   componentWillMount() {
@@ -61,7 +64,7 @@ export default class App extends Component {
       <div className="container">
         <Midi getNoteNumber={this.getNoteNumber.bind(this)}/>
         <main>
-          <Stage width={this.state.width} height={this.state.height}>
+          <Stage width={this.state.width*0.5} height={this.state.height}>
             <BaseDrum keyCode={this.state.keyCode} handleGroup={this.handleGroup.bind(this)} />
             <Notes noteIO={this.state.note}  group={this.state.group} />
           </Stage>
