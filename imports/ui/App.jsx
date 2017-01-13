@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import {Layer, Rect, Stage, Group} from 'react-konva';
 import BaseDrum from './components/BaseDrum.jsx';
 import Notes from './components/Notes.jsx';
+import Compteur from './components/Compteur.jsx';
 import Midi from '../midi/Midi.jsx';
 
 // App component - represents the whole game window
@@ -15,7 +16,8 @@ export default class App extends Component {
       keyCode:null,
       group:null,
       note:null,
-      velocity:null
+      velocity:null,
+      finishStarter:false,
     };
   }
 
@@ -55,18 +57,29 @@ export default class App extends Component {
 
   getNoteNumber(note){
     if (note[1]){
-      this.setState({note : note[1], velocity : note[2]});
+      this.setState({
+        note : note[1],
+        velocity : note[2]
+      });
     }
+  }
+
+  finishCompteur() {
+    this.props.canStart();
+    this.setState({
+      finishStarter:true
+    })
   }
 
   render() {
     return (
       <div className="container">
+        <Compteur finish={this.finishCompteur.bind(this)}/>
         <Midi getNoteNumber={this.getNoteNumber.bind(this)}/>
         <main>
           <Stage width={this.state.width*0.5} height={this.state.height}>
             <BaseDrum keyCode={this.state.keyCode} handleGroup={this.handleGroup.bind(this)} />
-            <Notes noteIO={this.state.note}  group={this.state.group} />
+            <Notes noteIO={this.state.note} group={this.state.group} data={this.props.data}/>
           </Stage>
         </main>
       </div>

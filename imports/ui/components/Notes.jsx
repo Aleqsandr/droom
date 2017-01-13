@@ -14,6 +14,7 @@ export default class Notes extends Component {
 
     this.state = {
       timeToFall:3,
+      prevData:null,
       nbItem:0,
       currentNote:0,
       group:this.props.group,
@@ -21,16 +22,6 @@ export default class Notes extends Component {
       notes:[],
       timeOfCollision:3*75/window.innerHeight,
     };
-
-    var self = this;
-    MIDI.loadPlugin(function() {
-      player = MIDI.Player;
-      player.loadFile( "http://www.matthieubessol.com/soundfont/testmusic.mid", player.start,null,function() {console.log("nope")} );
-      player.addListener(function(data){
-        if(data.message == 144) // NoteOn
-          self.addNewNote(data);
-      });
-    });
   }
 
   pxToTime(val){
@@ -38,6 +29,7 @@ export default class Notes extends Component {
   }
 
   addNewNote(data) {
+    if(!data) return;
     let size = 50, padding = 25;
     var time = Date.now();
     times.push(time)
@@ -54,6 +46,11 @@ export default class Notes extends Component {
   }
 
   componentWillReceiveProps(nextProps) {
+    if(nextProps.data){
+      this.setState({prevData:nextProps.data.now})
+      if(nextProps.data.now != this.state.prevData)
+        this.addNewNote(nextProps.data)
+    }
     this.setState({group:nextProps.group});
     if(nextProps.group)
         this.launchCollisions(nextProps);
