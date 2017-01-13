@@ -27,7 +27,8 @@ export default class Notes extends Component {
       player = MIDI.Player;
       player.loadFile( "http://www.matthieubessol.com/soundfont/testmusic.mid", player.start,null,function() {console.log("nope")} );
       player.addListener(function(data){
-        self.addNewNote(data);
+        if(data.message == 144) // NoteOn
+          self.addNewNote(data);
       });
     });
   }
@@ -84,7 +85,7 @@ export default class Notes extends Component {
     let size = 50, padding = 25;
     return (
       <Layer>
-        <Group y={0} x={window.innerWidth/3} ref="notesContainer">
+        <Group y={0} x={window.innerWidth/4} ref="notesContainer">
           {notes}
         </Group>
       </Layer>
