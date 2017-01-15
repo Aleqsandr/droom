@@ -11,10 +11,10 @@ export default class Home extends Component {
         <div className="bg3"></div>
         <div className="bg4"></div>
         <nav className="menu">
-          <img className="menu__logo" src="../../images/mainlogo.gif"></img>
+          <div className="menu__logo"></div>
           <ul className="menu__list">
             <li className="menu__list__item"><Link to="/app" className="play">PLAY</Link></li>
-            <li className="menu__list__item"><Link to="/app">ABOUT</Link></li>
+            <li className="menu__list__item"><Link to="/about">ABOUT</Link></li>
           </ul>
         </nav>
       </div>

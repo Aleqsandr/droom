@@ -121,8 +121,10 @@ $montserrat: 'Montserrat', sans-serif;
 
 	&__logo
 	{
+		height: 300.15px;
 		width: 450px;
 		margin-bottom: 20px;
+		background: url(../images/mainlogo.gif) no-repeat center/100%;
 	}
 
 	&__list
