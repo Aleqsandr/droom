@@ -53,8 +53,8 @@ export default class Notes extends Component {
   }
 
   componentWillReceiveProps(nextProps) {
-      for (var i = this.refs.notesContainer.getChildren().length - 1; i >= 0; i--) {
-          console.log(this.refs.notesContainer.getChildren()[i])
+      for (let i = this.refs.notesContainer.getChildren().length - 1; i >= 0; i--) {
+          //console.log(this.refs.notesContainer.getChildren()[i])
       }
     this.setState({group:nextProps.group});
     if(nextProps.group)
@@ -62,7 +62,7 @@ export default class Notes extends Component {
   }
 
   launchCollisions(nextProps) {
-    for (var i = this.refs.notesContainer.getChildren().length - 1; i >= 0; i--) {
+    for (let i = this.refs.notesContainer.getChildren().length - 1; i >= 0; i--) {
         this.checkCollision(this.refs.notesContainer.getChildren()[i],nextProps,i);
     }
   }

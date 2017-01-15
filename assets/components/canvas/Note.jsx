@@ -26,10 +26,10 @@ export default class Note extends Component {
   }
 
   componentWillReceiveProps(nextProps) {
-    console.log("note receive new props")
     this.setState({
       group:nextProps.group
     });
+
     this.checkCollision(nextProps);
   }
 

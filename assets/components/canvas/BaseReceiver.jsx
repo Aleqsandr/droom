@@ -3,11 +3,7 @@ import {Layer, Rect, Stage, Group} from 'react-konva';
 
 // App component - represents the whole app
 export default class BaseReceiver extends Component {
-
-  checkNoteOn(note){
-
-  }
-
+  
   render() {
     return (
       <Rect
@@ -17,6 +13,7 @@ export default class BaseReceiver extends Component {
           x={this.props.x}
           fill={this.props.color}
           note={this.props.note}
+          keyCode={this.props.keyCode}
       />
     );
   }
