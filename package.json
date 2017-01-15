@@ -33,6 +33,7 @@
     "jsdom": "^9.9.1",
     "konva": "^1.3.0",
     "midi-file-parser": "^1.0.0",
+    "midi.js": "^0.3.0",
     "midievents": "^1.0.1",
     "midifile": "^1.0.4",
     "node-gyp": "^3.5.0",

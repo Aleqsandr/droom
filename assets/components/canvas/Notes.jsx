@@ -2,8 +2,7 @@ import React, { Component } from 'react';
 import {Layer, Rect, Stage, Group} from 'react-konva';
 import Note from './Note.jsx';
 import update from 'react-addons-update';
-
-//require('../../MIDI.js');
+import MIDI from 'midi.js';
 
 var player, notes = [], times = [], noteValues = [];
 // App component - represents the whole app
