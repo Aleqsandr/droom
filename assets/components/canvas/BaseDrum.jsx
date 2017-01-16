@@ -7,7 +7,6 @@ export default class BaseDrum extends Component {
 
   componentDidMount() {
     this.props.handleGroup(this.refs.groupReceiver);
-
   }
 
   render() {

@@ -64,34 +64,7 @@ export default class Midi extends Component {
   }
 
   onMIDIMessage(event) {
-    // console.log(event.data);
-
     this.props.getNoteNumber(event.data);
-    // this.setState({
-    //   data     :event.data,
-    //   cmd      : data[0] >> 4,
-    //   channel  : data[0] & 0xf,
-    //   type     : data[0] & 0xf0,
-    //   note     : data[1],
-    //   velocity : data[2]
-    // });
-    // with pressure and tilt off
-    // note off: 128, cmd: 8
-    // note on: 144, cmd: 9
-    // pressure / tilt on
-    // pressure: 176, cmd 11:
-    // bend: 224, cmd: 14
-    //console.log(data[0] & 0xf0);
-    // switch (data[0] & 0xf0) {
-    //     case 144: // noteOn message
-    //         this.noteOn(note, velocity);
-    //         break;
-    //     case 128: // noteOff message
-    //         this.noteOff(note, velocity);
-    //         break;
-    // }
-
-    //console.log('data', data, 'cmd', cmd, 'channel', channel);
   }
 
   onStateChange(event) {

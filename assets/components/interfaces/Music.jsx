@@ -60,9 +60,7 @@ export default class Music extends Component {
 
       if(data.message == 144){ // NoteOn
         self.setState({data:data, shouldAnim:false})
-        MIDI.noteOn(0, data.note, velocity, delay);
-      } else
-        MIDI.noteOff(0, data.note, delay + 0.75);
+      }
     });
   }
 

@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import {Layer, Rect, Stage, Group} from 'react-konva';
 import Note from './Note.jsx';
 import update from 'react-addons-update';
+import MIDI from 'midi.js';
 
 import 'midi.js';
 
@@ -51,7 +52,7 @@ export default class Notes extends Component {
     this.setState({group:nextProps.group});
     if(nextProps.group && prevTime != nextProps.timeKick){
       prevTime = nextProps.timeKick;
-      this.launchCollisions(nextProps);
+      //this.launchCollisions(nextProps);
       this.checkKey(nextProps.keyCode);
     }
   }
@@ -147,6 +148,8 @@ export default class Notes extends Component {
 
     if(diff-100 < current && diff < current+ 200 && noteValues[i] == valNote[0]) {
         // Success.
+        console.log(valNote[0])
+        MIDI.noteOn(0, valNote[0], 127, 0);
         times.splice(i, 1);
         notes.splice(i, 1);
         noteValues.splice(i, 1);
