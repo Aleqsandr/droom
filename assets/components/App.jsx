@@ -18,6 +18,8 @@ export default class App extends Component {
       note:null,
       velocity:null,
       finishStarter:false,
+      shouldAnim:false,
+      timeKick:null,
     };
   }
 
@@ -52,14 +54,16 @@ export default class App extends Component {
   }
 
   handleKeyPress(e){
-    this.setState({keyCode: e.keyCode});
+    this.setState({keyCode: e.keyCode, shouldAnim:true,timeKick:Date.now()});
   }
 
   getNoteNumber(note){
     if (note[1]){
       this.setState({
         note : note[1],
-        velocity : note[2]
+        velocity : note[2],
+        shouldAnim:true,
+        timeKick:Date.now()
       });
     }
   }
@@ -71,6 +75,10 @@ export default class App extends Component {
     })
   }
 
+  componentWillReceiveProps(nextProps) {
+    this.setState({shouldAnim:nextProps.shouldAnim})
+  }
+
   render() {
     return (
       <div className="container">
@@ -78,8 +86,8 @@ export default class App extends Component {
         <Midi getNoteNumber={this.getNoteNumber.bind(this)}/>
         <main>
           <Stage width={this.state.width*0.5} height={this.state.height}>
-            <BaseDrum keyCode={this.state.keyCode} handleGroup={this.handleGroup.bind(this)} />
-            <Notes noteIO={this.state.note} group={this.state.group} data={this.props.data}/>
+            <BaseDrum handleGroup={this.handleGroup.bind(this)} />
+            <Notes timeKick={this.state.timeKick} shouldAnim={this.state.shouldAnim} keyCode={this.state.keyCode} noteIO={this.state.note} group={this.state.group} data={this.props.data}/>
           </Stage>
         </main>
       </div>

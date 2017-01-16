@@ -5,7 +5,7 @@ import update from 'react-addons-update';
 
 import 'midi.js';
 
-var player, notes = [], times = [], noteValues = [];
+var player, notes = [], times = [], noteValues = [], prevTime= 0;
 // App component - represents the whole app
 export default class Notes extends Component {
 
@@ -20,6 +20,7 @@ export default class Notes extends Component {
       group:this.props.group,
       newp:0,
       notes:[],
+      key:null,
       timeOfCollision:3*75/window.innerHeight,
     };
   }
@@ -41,10 +42,6 @@ export default class Notes extends Component {
     })
   }
 
-  componentDidMount() {
-
-  }
-
   componentWillReceiveProps(nextProps) {
     if(nextProps.data){
       this.setState({prevData:nextProps.data.now})
@@ -52,28 +49,120 @@ export default class Notes extends Component {
         this.addNewNote(nextProps.data)
     }
     this.setState({group:nextProps.group});
-    if(nextProps.group)
-        this.launchCollisions(nextProps);
-  }
-
-  launchCollisions(nextProps) {
-    for (var i = this.refs.notesContainer.getChildren().length - 1; i >= 0; i--) {
-        this.checkCollision(this.refs.notesContainer.getChildren()[i],nextProps,i);
+    if(nextProps.group && prevTime != nextProps.timeKick){
+      prevTime = nextProps.timeKick;
+      this.launchCollisions(nextProps);
+      this.checkKey(nextProps.keyCode);
     }
   }
 
-  checkCollision(el,nextProps,i) {
+  launchCollisions(nextProps) {
+    let id = null;
+    let tab = 0;
+    for (let i = 0; i < this.state.group.getChildren().length; i++) {
+      if(this.state.group.getChildren()[i].getAttr("note") == nextProps.noteIO)
+        id = i;
+
+    }
+    for (let i = this.refs.notesContainer.getChildren().length - 1; i >= 0; i--) {
+        let tab = [nextProps.noteIO,id];
+        this.checkCollision(this.refs.notesContainer.getChildren()[i],tab,i);
+    }
+
+    this.animKick(id);
+  }
+
+  animKick(id) {
+    let self = this, time =50;
+    this.state.group.getChildren()[id].getChildren()[0].to({
+      scaleX: 1,
+      scaleY: 1,
+      duration: 0,
+    });
+
+    this.state.group.getChildren()[id].getChildren()[0].to({
+      scaleX: 1.3,
+      scaleY: 1.3,
+      duration: time/100,
+    });
+
+    setTimeout(function() {
+      self.state.group.getChildren()[id].getChildren()[0].to({
+        scaleX: 1,
+        scaleY: 1,
+        duration: time/100
+      });
+    },time*2);
+  }
+
+  componentDidUpdate(prevProps, prevState) {
+
+  }
+
+  checkKey(key){
+    let current = 0;
+    if(key === 83){
+      current = [46, 0];
+      this.setState({key:46});
+    }
+    if(key === 68){
+      current = [49, 1];
+      this.setState({key:49});
+    }
+    if(key === 70){
+      current = [38, 2];
+      this.setState({key:38});
+    }
+    if(key === 71){
+      current = [48, 3];
+      this.setState({key:48});
+    }
+    if(key === 72){
+      current = [36, 4];
+      this.setState({key:36});
+    }
+    if(key === 74){
+      current = [45, 5];
+      this.setState({key:45});
+    }
+    if(key === 75){
+      current = [43, 6];
+      this.setState({key:43});
+    }
+    if(key === 76){
+      current = [51, 7];
+      this.setState({key:51});
+    }
+
+    for (var i = this.refs.notesContainer.getChildren().length - 1; i >= 0; i--) {
+        this.checkCollision(this.refs.notesContainer.getChildren()[i],current,i);
+    }
+
+    this.animKick(current[1]);
+  }
+
+  checkCollision(el,valNote,i) {
     let current = Date.now(),
         diff = times[i]+(this.state.timeToFall - this.state.timeOfCollision)*1000;
 
-    if(diff-100 < current && diff < current+ 200 && noteValues[i] == nextProps.noteIO) {
+    if(diff-100 < current && diff < current+ 200 && noteValues[i] == valNote[0]) {
+        // Success.
         times.splice(i, 1);
         notes.splice(i, 1);
         noteValues.splice(i, 1);
         el.destroy();
+
+        let self = this, time =50;
+        this.state.group.getChildren()[valNote[1]].getChildren()[0].stroke("#ccedff");
+        this.state.group.getChildren()[valNote[1]].getChildren()[0].strokeWidth(5);
+        setTimeout(function() {
+          self.state.group.getChildren()[valNote[1]].getChildren()[0].strokeWidth(0);
+        },100)
+
     }
 
     if(times[i]+(this.state.timeToFall+1)*1000 < diff) {
+        // Destroy. Failure
         times.splice(i, 1);
         notes.splice(i, 1);
         noteValues.splice(i, 1);
@@ -85,7 +174,7 @@ export default class Notes extends Component {
     let size = 50, padding = 25;
     return (
       <Layer>
-        <Group y={0} x={0} ref="notesContainer">
+        <Group y={0} x={-25} ref="notesContainer">
           {notes}
         </Group>
       </Layer>

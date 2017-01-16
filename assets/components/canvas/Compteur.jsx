@@ -22,7 +22,6 @@ export default class Compteur extends Component {
   }
 
   componentDidUpdate() {
-    console.log(this.state.compteur)
     if(this.state.compteur === 0) {
       clearInterval(this.interval)
       this.setState({compteur:""});

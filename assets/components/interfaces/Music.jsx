@@ -12,17 +12,29 @@ export default class Music extends Component {
       finishStarter:false,
       player:null,
       data:null,
+      shouldAnim:false,
     };
   }
 
   componentDidMount() {
     var self = this;
-    MIDI.loadPlugin(function() {
-      self.setState({
-        player:MIDI.Player
-      })
-      self.state.player.loadFile( "http://www.matthieubessol.com/soundfont/testmusic.mid", self.launchGame.bind(self),null,function() {console.log("nope")} );
-    });
+    // MIDI.loadPlugin(function() {
+    //   self.setState({
+    //     player:MIDI.Player
+    //   })
+    //   self.state.player.loadFile( "http://www.matthieubessol.com/soundfont/drumdelamuerte.mid", self.launchGame.bind(self),null,function() {console.log("nope")} );
+    // });
+
+    MIDI.loadPlugin({
+      soundfontUrl: "./soundfont/",
+      instrument: "synth_drum",
+      onsuccess:function() {
+        self.setState({
+          player:MIDI.Player
+        })
+        self.state.player.loadFile( "http://www.matthieubessol.com/soundfont/drumdelamuerte.mid", self.launchGame.bind(self),null,function() {console.log("nope")} );
+      }
+    })
   }
 
   launchGame() {
@@ -40,8 +52,17 @@ export default class Music extends Component {
     var self = this;
     this.state.player.start();
     this.state.player.addListener(function(data){
-      if(data.message == 144) // NoteOn
-        self.setState({data:data})
+
+      var delay = 0; // play one note every quarter second
+      var velocity = 127; // how hard the note hits
+      // play the note
+      MIDI.setVolume(0, 127);
+
+      if(data.message == 144){ // NoteOn
+        self.setState({data:data, shouldAnim:false})
+        MIDI.noteOn(0, data.note, velocity, delay);
+      } else
+        MIDI.noteOff(0, data.note, delay + 0.75);
     });
   }
 
@@ -49,6 +70,6 @@ export default class Music extends Component {
     if(!this.state.finishStarter)
       return (<div className="Music-container"><div className="compteur">Loading...</div></div>);
     else
-      return (<App data={this.state.data} canStart={this.handleFinishCompteur.bind(this)}/>);
+      return (<App shouldAnim={this.state.shouldAnim} data={this.state.data} canStart={this.handleFinishCompteur.bind(this)}/>);
   }
 }

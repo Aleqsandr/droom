@@ -1,4 +1,7 @@
 import React, { Component } from 'react';
+//require('web-midi-api');
+
+
 
 function onMIDIMessage(message) {
     data = message.data; // this gives us our [command/channel, note, velocity] data.
