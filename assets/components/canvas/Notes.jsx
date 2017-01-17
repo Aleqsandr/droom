@@ -142,7 +142,7 @@ export default class Notes extends Component {
     let current = Date.now(),
         impactTime = times[i]+ 3000 - this.state.timeOfCollision;
 
-    MIDI.setVolume(0,40);
+    MIDI.setVolume(0,80);
     MIDI.noteOn(0, valNote[0], 40, 0);
 
     this.incrementScore();
