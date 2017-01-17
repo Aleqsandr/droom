@@ -9,20 +9,20 @@ export default class Score extends Component {
     this.state = {
       success:null,
       failure:null,
-      val:null
+      score:0
     };
   }
 
-  componentDidMount() {
-
-    var self = this;
-    self.setState({val: 0});
+  componentWillReceiveProps(nextProps){
+    
+    if(nextProps !== 'undefined')
+      this.setState({score:nextProps.scoreUpdate});
   }
 
   render() {
     return (
       <div className="score">
-        {this.state.val}
+        {this.state.score}
       </div>
     );
   }
