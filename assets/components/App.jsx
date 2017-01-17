@@ -91,7 +91,7 @@ export default class App extends Component {
     return (
       <div className="container">
         <Compteur finish={this.finishCompteur.bind(this)}/>
-        <Score/>
+        <Score />
         <Midi getNoteNumber={this.getNoteNumber.bind(this)}/>
         <main>
           <Stage width={this.state.width*0.5} height={this.state.height}>
