@@ -15,7 +15,7 @@ export default class Hud extends Component {
         <div className="hud">
           <div className="hud__top">
             <Compteur finish={this.finishCompteur.bind(this)}/>
-            <Score />
+            <Score timingNote={this.props.timingNote}/>
           </div>
           <div className="hud__bottom">
             <Wow timingNote={this.props.timingNote}/>

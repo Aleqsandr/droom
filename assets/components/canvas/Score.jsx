@@ -9,7 +9,8 @@ export default class Score extends Component {
     this.state = {
       success:null,
       failure:null,
-      val:null
+      val:null,
+      streak:true,
     };
   }
 
@@ -19,10 +20,18 @@ export default class Score extends Component {
     self.setState({val: 0});
   }
 
+  componentWillReceiveProps(nextProps) {
+    if(nextProps.timingNote>0 && nextProps.timingNote < 300)
+      this.setState({streak:this.state.streak+1})
+    else
+      this.setState({streak:0})
+  }
+
   render() {
     return (
       <div className="score">
-        {this.state.val}
+        <div className="score__real">{this.state.val}</div>
+        <div className="score__streak">{this.state.streak}</div>
       </div>
     );
   }
