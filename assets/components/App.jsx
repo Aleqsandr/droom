@@ -5,6 +5,7 @@ import Notes from './canvas/Notes.jsx';
 import Compteur from './canvas/Compteur.jsx';
 import Score from './canvas/Score.jsx';
 import Midi from './midi/Midi.jsx';
+import Hud from "./interfaces/Hud.jsx";
 
 // App component - represents the whole game window
 export default class App extends Component {
@@ -90,9 +91,8 @@ export default class App extends Component {
   render() {
     return (
       <div className="container">
-        <Compteur finish={this.finishCompteur.bind(this)}/>
-        <Score />
         <Midi getNoteNumber={this.getNoteNumber.bind(this)}/>
+        <Hud finishCompteur={this.finishCompteur.bind(this)} timingNote={this.state.timingNote}/>
         <main>
           <Stage width={this.state.width*0.5} height={this.state.height}>
             <BaseDrum handleGroup={this.handleGroup.bind(this)} />

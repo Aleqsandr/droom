@@ -156,6 +156,8 @@ export default class Notes extends Component {
         noteValues.splice(i, 1);
         el.destroy();
 
+        this.props.getTimingNoteSuccess(diff);
+
         let self = this, time =50;
         this.state.group.getChildren()[valNote[1]].getChildren()[0].stroke("#ccedff");
         this.state.group.getChildren()[valNote[1]].getChildren()[0].strokeWidth(5);
@@ -163,17 +165,22 @@ export default class Notes extends Component {
           self.state.group.getChildren()[valNote[1]].getChildren()[0].strokeWidth(0);
         },100)
 
-        this.props.getTimingNoteSuccess(diff);
-
+        return;
     }
 
-    if(times[i]+(this.state.timeToFall+1)*1000 < impactTime) {
+    if(times[i]+(this.state.timeToFall)*1000 + utils.pxToTime(75) < current) {
         // Destroy. Failure
         times.splice(i, 1);
         notes.splice(i, 1);
         noteValues.splice(i, 1);
         el.destroy();
+
+        this.props.getTimingNoteSuccess(diff);
+
+        return;
     }
+    this.props.getTimingNoteSuccess(-1);
+    return;
   }
 
   incrementScore() {

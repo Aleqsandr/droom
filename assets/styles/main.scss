@@ -14,5 +14,17 @@ body{
 }
 
 .konvajs-content {
-    margin-left: 25vw;
+
+}
+
+.container {
+    display: flex;
+
+    .hud {
+        flex:1;
+    }
+
+    main {
+        flex:1;
+    }
 }
