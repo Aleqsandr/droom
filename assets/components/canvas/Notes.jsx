@@ -3,6 +3,7 @@ import {Layer, Rect, Stage, Group} from 'react-konva';
 import Note from './Note.jsx';
 import update from 'react-addons-update';
 import MIDI from 'midi.js';
+import utils from "../../modules/useful.js";
 
 var player, notes = [], times = [], noteValues = [], prevTime= 0;
 // App component - represents the whole app
@@ -20,12 +21,8 @@ export default class Notes extends Component {
       newp:0,
       notes:[],
       key:null,
-      timeOfCollision:3*75/window.innerHeight,
+      timeOfCollision:utils.pxToTime(75),
     };
-  }
-
-  pxToTime(val){
-    this.state.timeToFall*val/window.innerHeight;
   }
 
   addNewNote(data) {
@@ -145,12 +142,15 @@ export default class Notes extends Component {
 
   checkCollision(el,valNote,i) {
     let current = Date.now(),
-        diff = times[i]+(this.state.timeToFall - this.state.timeOfCollision)*1000;
+        impactTime = times[i]+ 3000 - this.state.timeOfCollision;
 
-    if(diff-100 < current && diff < current+ 200 && noteValues[i] == valNote[0]) {
+        MIDI.setVolume(0,40);
+        MIDI.noteOn(0, valNote[0], 40, 0);
+
+
+    let diff = Math.abs(current - impactTime);
+    if(diff < utils.pxToTime(70) && noteValues[i] == valNote[0]) {
         // Success.
-        MIDI.setVolume(0,127);
-        MIDI.noteOn(0, valNote[0], 127, 0);
         times.splice(i, 1);
         notes.splice(i, 1);
         noteValues.splice(i, 1);
@@ -163,9 +163,11 @@ export default class Notes extends Component {
           self.state.group.getChildren()[valNote[1]].getChildren()[0].strokeWidth(0);
         },100)
 
+        this.props.getTimingNoteSuccess(diff);
+
     }
 
-    if(times[i]+(this.state.timeToFall+1)*1000 < diff) {
+    if(times[i]+(this.state.timeToFall+1)*1000 < impactTime) {
         // Destroy. Failure
         times.splice(i, 1);
         notes.splice(i, 1);
