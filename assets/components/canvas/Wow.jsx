@@ -17,7 +17,7 @@ export default class Wow extends Component {
     if(time<0)
       this.setState({text:"really ?!"})
     else if(time<50)
-      this.setState({text:"perfect"})
+      this.setState({text:"wow"})
     else if(time<100)
       this.setState({text:"good"})
     else if(time<200)
