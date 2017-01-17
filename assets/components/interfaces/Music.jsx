@@ -59,8 +59,6 @@ export default class Music extends Component {
     },3000);
 
     this.state.player.addListener(function(data){
-
-
       // play the note
       MIDI.setVolume(0, 0);
 

@@ -20,6 +20,7 @@ export default class App extends Component {
       finishStarter:false,
       shouldAnim:false,
       timeKick:null,
+      timingNote:0,
     };
   }
 
@@ -79,6 +80,12 @@ export default class App extends Component {
     this.setState({shouldAnim:nextProps.shouldAnim})
   }
 
+  getTimingNoteSuccess(val) {
+    this.setState({
+      timingNote:val
+    })
+  }
+
   render() {
     return (
       <div className="container">
@@ -87,7 +94,7 @@ export default class App extends Component {
         <main>
           <Stage width={this.state.width*0.5} height={this.state.height}>
             <BaseDrum handleGroup={this.handleGroup.bind(this)} />
-            <Notes timeKick={this.state.timeKick} shouldAnim={this.state.shouldAnim} keyCode={this.state.keyCode} noteIO={this.state.note} group={this.state.group} data={this.props.data}/>
+            <Notes timeKick={this.state.timeKick} shouldAnim={this.state.shouldAnim} keyCode={this.state.keyCode} noteIO={this.state.note} group={this.state.group} data={this.props.data} getTimingNoteSuccess={this.getTimingNoteSuccess.bind(this)}/>
           </Stage>
         </main>
       </div>
