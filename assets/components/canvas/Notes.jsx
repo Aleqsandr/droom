@@ -139,13 +139,13 @@ export default class Notes extends Component {
 
   checkCollision(el,valNote,i) {
 
-    let current = Date.now();
-    impactTime = times[i]+ 3000 - this.state.timeOfCollision;
+    let current = Date.now(),
+        impactTime = times[i]+ 3000 - this.state.timeOfCollision;
 
     MIDI.setVolume(0,40);
     MIDI.noteOn(0, valNote[0], 40, 0);
 
-    incrementScore();
+    this.incrementScore();
 
 
     let diff = Math.abs(current - impactTime);
@@ -177,9 +177,9 @@ export default class Notes extends Component {
   }
 
   incrementScore() {
-    let tmp = this.state.score;
-    
-    setState({score});
+    // let tmp = this.state.score;
+
+    // this.setState({score:tmp});
   }
 
   render() {
