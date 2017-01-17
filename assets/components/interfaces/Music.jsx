@@ -3,6 +3,7 @@ import Compteur from '../canvas/Compteur.jsx';
 import App from '../App.jsx';
 import MIDI from 'midi.js';
 import "howler";
+import utils from "../../modules/useful.js";
 
 // App component - represents the whole game window
 export default class Music extends Component {
@@ -56,7 +57,7 @@ export default class Music extends Component {
 
     setTimeout(function() {
       sound.play();
-    },3000);
+    },3000 - utils.pxToTime(50));
 
     this.state.player.addListener(function(data){
       // play the note

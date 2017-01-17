@@ -3,8 +3,9 @@ import {Layer, Rect, Stage, Group} from 'react-konva';
 import BaseDrum from './canvas/BaseDrum.jsx';
 import Notes from './canvas/Notes.jsx';
 import Compteur from './canvas/Compteur.jsx';
-import Score from './canvas/Score.jsx';
+// import Score from './canvas/Score.jsx';
 import Midi from './midi/Midi.jsx';
+import Hud from "./interfaces/Hud.jsx";
 
 // App component - represents the whole game window
 export default class App extends Component {
@@ -21,8 +22,8 @@ export default class App extends Component {
       finishStarter:false,
       shouldAnim:false,
       timeKick:null,
-      timingNote:0,
-      scoreUpdate:null
+      timingNote:0
+      //scoreUpdate:null
     };
   }
 
@@ -88,20 +89,19 @@ export default class App extends Component {
     })
   }
 
-  getScoreUpdate(val){
+  /*getScoreUpdate(val){
       console.log(val)
       if (val !== 'undefined' || val !== 'null'){
         this.setState({scoreUpdate: val});
         console.log(this.state.scoreUpdate)
       }
-  }
+  }*/
 
   render() {
     return (
       <div className="container">
-        <Compteur finish={this.finishCompteur.bind(this)}/>
-        <Score scoreUpdate={this.state.scoreUpdate}/>
         <Midi getNoteNumber={this.getNoteNumber.bind(this)}/>
+        <Hud finishCompteur={this.finishCompteur.bind(this)} timingNote={this.state.timingNote}/>
         <main>
           <Stage width={this.state.width*0.5} height={this.state.height}>
             <BaseDrum handleGroup={this.handleGroup.bind(this)} />
@@ -113,7 +113,7 @@ export default class App extends Component {
               group={this.state.group} 
               data={this.props.data} 
               getTimingNoteSuccess={this.getTimingNoteSuccess.bind(this)}
-              getScoreUpdate={this.getScoreUpdate.bind(this)}
+              //getScoreUpdate={this.getScoreUpdate.bind(this)}
             />
           </Stage>
         </main>

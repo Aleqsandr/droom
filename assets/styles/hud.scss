@@ -9,3 +9,12 @@
 	top: 15px;
 	left: 0;
 }
+
+.hud {
+    position:relative;
+
+    &__top, &__bottom {
+        height:50%;
+        position:relative;
+    }
+}

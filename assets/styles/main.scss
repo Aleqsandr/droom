@@ -1,11 +1,10 @@
 @import 'home.scss';
+@import 'about.scss';
 
 @import 'hud.scss';
 
 html,
 body{
-  width:  100vw;
-  height: 100vh;
   margin: 0;
 }
 
@@ -14,5 +13,17 @@ body{
 }
 
 .konvajs-content {
-    margin-left: 25vw;
+
+}
+
+.container {
+    display: flex;
+
+    .hud {
+        flex:1;
+    }
+
+    main {
+        flex:1;
+    }
 }

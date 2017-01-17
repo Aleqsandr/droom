@@ -149,7 +149,7 @@ $montserrat: 'Montserrat', sans-serif;
 	text-align: center;
 	padding: 0;
 	background-color: rgba(0, 0, 0, .45);
-	border: 5px solid white;
+	border: 1px solid white;
 
 	&--loginin
 	{
@@ -310,6 +310,12 @@ $montserrat: 'Montserrat', sans-serif;
 			transform: translateX(-50%);
 			border-bottom: 1px solid rgba(0, 0, 0, 0);
 			padding-bottom: 2px;
+			margin: 0;
+		}
+
+		.signupbutton
+		{
+			margin-top: 15px;
 		}
 
 		p:hover

@@ -21,8 +21,8 @@ export default class Notes extends Component {
       newp:0,
       notes:[],
       key:null,
-      timeOfCollision:utils.pxToTime(75),
-      score:null,
+      timeOfCollision:utils.pxToTime(75)
+      //core:null,
     };
   }
 
@@ -140,20 +140,22 @@ export default class Notes extends Component {
   checkCollision(el,valNote,i) {
 
     let current = Date.now(),
+
     impactTime = times[i]+ 3000 - this.state.timeOfCollision;
 
-    MIDI.setVolume(0,40);
+    MIDI.setVolume(0,80);
     MIDI.noteOn(0, valNote[0], 40, 0);
 
-    
-
     let diff = Math.abs(current - impactTime);
+
     if(diff < utils.pxToTime(70) && noteValues[i] == valNote[0]) {
         // Success.
         times.splice(i, 1);
         notes.splice(i, 1);
         noteValues.splice(i, 1);
         el.destroy();
+
+        this.props.getTimingNoteSuccess(diff);
 
         let self = this, time =50;
         this.state.group.getChildren()[valNote[1]].getChildren()[0].stroke("#ccedff");
@@ -163,10 +165,12 @@ export default class Notes extends Component {
         },100)
 
         this.props.getTimingNoteSuccess(diff);
-        this.incrementScore();
+        //this.incrementScore();
+
+        return;
     }
 
-    if(times[i]+(this.state.timeToFall+1)*1000 < impactTime) {
+    if(times[i]+(this.state.timeToFall)*1000 + utils.pxToTime(75) < current) {
         // Destroy. Failure
         
         times.splice(i, 1);
@@ -176,10 +180,12 @@ export default class Notes extends Component {
         
     }
 
-    
+    this.props.getTimingNoteSuccess(-1);
+    return;
+
   }
 
-  incrementScore() {
+  /*incrementScore() {
 
     let tmp = this.state.score;
     tmp += 10;
@@ -197,7 +203,8 @@ export default class Notes extends Component {
     this.setState({score: tmp});
     
     this.props.getScoreUpdate(this.state.score);
-  }
+
+  }*/
 
   render() {
     let size = 50, padding = 25;
