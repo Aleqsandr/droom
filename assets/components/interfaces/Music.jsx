@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import Compteur from '../canvas/Compteur.jsx';
 import App from '../App.jsx';
 import MIDI from 'midi.js';
-import "howler"
+import "howler";
 import utils from "../../modules/useful.js";
 
 // App component - represents the whole game window
@@ -28,7 +28,7 @@ export default class Music extends Component {
         self.setState({
           player:MIDI.Player
         })
-        // MIDI.setInstrument("synth_drum");
+        MIDI.programChange(0, 118);
         MIDI.setVolume(0, 0);
         self.state.player.loadFile( "./musics/1/drumDroom.midi", self.launchGame.bind(self),null,function() {console.log("nope")} );
       }

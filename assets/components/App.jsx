@@ -3,6 +3,7 @@ import {Layer, Rect, Stage, Group} from 'react-konva';
 import BaseDrum from './canvas/BaseDrum.jsx';
 import Notes from './canvas/Notes.jsx';
 import Compteur from './canvas/Compteur.jsx';
+import Score from './canvas/Score.jsx';
 import Midi from './midi/Midi.jsx';
 
 // App component - represents the whole game window
@@ -90,6 +91,7 @@ export default class App extends Component {
     return (
       <div className="container">
         <Compteur finish={this.finishCompteur.bind(this)}/>
+        <Score />
         <Midi getNoteNumber={this.getNoteNumber.bind(this)}/>
         <main>
           <Stage width={this.state.width*0.5} height={this.state.height}>

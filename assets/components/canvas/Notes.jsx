@@ -22,6 +22,7 @@ export default class Notes extends Component {
       notes:[],
       key:null,
       timeOfCollision:utils.pxToTime(75),
+      score:null,
     };
   }
 
@@ -94,10 +95,6 @@ export default class Notes extends Component {
     },time*2);
   }
 
-  componentDidUpdate(prevProps, prevState) {
-
-  }
-
   checkKey(key){
     let current = 0;
     if(key === 83){
@@ -141,11 +138,14 @@ export default class Notes extends Component {
   }
 
   checkCollision(el,valNote,i) {
-    let current = Date.now(),
-        impactTime = times[i]+ 3000 - this.state.timeOfCollision;
 
-        MIDI.setVolume(0,40);
-        MIDI.noteOn(0, valNote[0], 40, 0);
+    let current = Date.now();
+    impactTime = times[i]+ 3000 - this.state.timeOfCollision;
+
+    MIDI.setVolume(0,40);
+    MIDI.noteOn(0, valNote[0], 40, 0);
+
+    incrementScore();
 
 
     let diff = Math.abs(current - impactTime);
@@ -174,6 +174,12 @@ export default class Notes extends Component {
         noteValues.splice(i, 1);
         el.destroy();
     }
+  }
+
+  incrementScore() {
+    let tmp = this.state.score;
+    
+    setState({score});
   }
 
   render() {
