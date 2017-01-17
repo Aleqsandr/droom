@@ -4,8 +4,6 @@ import Note from './Note.jsx';
 import update from 'react-addons-update';
 import MIDI from 'midi.js';
 
-import 'midi.js';
-
 var player, notes = [], times = [], noteValues = [], prevTime= 0;
 // App component - represents the whole app
 export default class Notes extends Component {
@@ -35,8 +33,11 @@ export default class Notes extends Component {
     let size = 50, padding = 25;
     var time = Date.now();
     times.push(time)
-    noteValues.push(data.note);
-    notes.push(<Note newP={this.state.newp} key={time} noteIO={this.props.noteIO} currentNote={data.note} timeCreation={Date.now()} size={size} x={0} color="#ff0000" timeToFall={this.state.timeToFall} keyCode={this.props.keyCode} group={this.state.group}/>);
+    let note = data.note;
+    if(data.note === 42)
+      note = 49;
+    noteValues.push(note);
+    notes.push(<Note newP={this.state.newp} key={time} noteIO={this.props.noteIO} currentNote={note} timeCreation={Date.now()} size={size} x={0} color="#ff0000" timeToFall={this.state.timeToFall} keyCode={this.props.keyCode} group={this.state.group}/>);
     this.setState({
       nbItem:++this.state.nbItem,
       currentNote:data.note
@@ -69,12 +70,12 @@ export default class Notes extends Component {
         let tab = [nextProps.noteIO,id];
         this.checkCollision(this.refs.notesContainer.getChildren()[i],tab,i);
     }
-
     this.animKick(id);
   }
 
   animKick(id) {
     let self = this, time =50;
+    if(!this.state.group || !id)return;
     this.state.group.getChildren()[id].getChildren()[0].to({
       scaleX: 1,
       scaleY: 1,
@@ -148,7 +149,7 @@ export default class Notes extends Component {
 
     if(diff-100 < current && diff < current+ 200 && noteValues[i] == valNote[0]) {
         // Success.
-        console.log(valNote[0])
+        MIDI.setVolume(0,127);
         MIDI.noteOn(0, valNote[0], 127, 0);
         times.splice(i, 1);
         notes.splice(i, 1);

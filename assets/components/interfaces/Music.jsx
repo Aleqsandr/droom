@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import Compteur from '../canvas/Compteur.jsx';
 import App from '../App.jsx';
 import MIDI from 'midi.js';
+import "howler"
 
 // App component - represents the whole game window
 export default class Music extends Component {
@@ -18,12 +19,6 @@ export default class Music extends Component {
 
   componentDidMount() {
     var self = this;
-    // MIDI.loadPlugin(function() {
-    //   self.setState({
-    //     player:MIDI.Player
-    //   })
-    //   self.state.player.loadFile( "http://www.matthieubessol.com/soundfont/drumdelamuerte.mid", self.launchGame.bind(self),null,function() {console.log("nope")} );
-    // });
 
     MIDI.loadPlugin({
       soundfontUrl: "./soundfont/",
@@ -32,9 +27,12 @@ export default class Music extends Component {
         self.setState({
           player:MIDI.Player
         })
-        self.state.player.loadFile( "http://www.matthieubessol.com/soundfont/drumdelamuerte.mid", self.launchGame.bind(self),null,function() {console.log("nope")} );
+        // MIDI.setInstrument("synth_drum");
+        MIDI.setVolume(0, 0);
+        self.state.player.loadFile( "./musics/1/drumDroom.midi", self.launchGame.bind(self),null,function() {console.log("nope")} );
       }
     })
+
   }
 
   launchGame() {
@@ -51,12 +49,20 @@ export default class Music extends Component {
   handleFinishCompteur() {
     var self = this;
     this.state.player.start();
+
+    var sound = new Howl({
+      src: ['./musics/1/testDroom.mp3']
+    });
+
+    setTimeout(function() {
+      sound.play();
+    },3000);
+
     this.state.player.addListener(function(data){
 
-      var delay = 0; // play one note every quarter second
-      var velocity = 127; // how hard the note hits
+
       // play the note
-      MIDI.setVolume(0, 127);
+      MIDI.setVolume(0, 0);
 
       if(data.message == 144){ // NoteOn
         self.setState({data:data, shouldAnim:false})
