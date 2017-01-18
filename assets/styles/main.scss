@@ -1,7 +1,7 @@
 @import 'home.scss';
 @import 'about.scss';
-
-@import 'hud.scss';
+@import 'hudleft.scss';
+@import 'hudright.scss';
 
 html,
 body{
@@ -20,10 +20,10 @@ body{
     display: flex;
 
     .hud {
-        flex:1;
+        flex: 1;
     }
 
     main {
-        flex:1;
+        flex: 2;
     }
 }

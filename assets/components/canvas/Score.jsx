@@ -12,9 +12,9 @@ export default class Score extends Component {
       success:null,
       failure:null,
       val:null,
-      streak:true,
+      streak: 0,
       prevTiming:null,
-      score:null,
+      score: 0,
     };
   }
 
@@ -41,8 +41,8 @@ export default class Score extends Component {
   render() {
     return (
       <div className="score">
-        <div className="score__real">Score : {this.state.score}</div>
-        <div className="score__streak">Streak : {this.state.streak}</div>
+        <div className="score__real">{this.state.score}</div>
+        <div className="score__streak">{this.state.streak} streak notes</div>
       </div>
     );
   }

@@ -2,27 +2,28 @@ import React, { Component } from 'react';
 import Compteur from '../canvas/Compteur.jsx';
 import Score from '../canvas/Score.jsx';
 import Wow from '../canvas/Wow.jsx';
+import VanessaBar from '../canvas/VanessaBar.jsx';
 
 
 // App component - represents the whole game window
-export default class Hud extends Component {
-  finishCompteur() {
-    this.props.finishCompteur();
-  }
-
+export default class HudRight extends Component {
   scoreUpdate(){
     this.props.scoreUpdate();
   }
 
   render() {
     return (
-        <div className="hud">
+        <div className="hud hud--right">
           <div className="hud__top">
-            <Compteur finish={this.finishCompteur.bind(this)}/>
             <Score scoreUpdate={this.scoreUpdate.bind(this)} timingNote={this.props.timingNote}/>
+            <VanessaBar/>
           </div>
           <div className="hud__bottom">
-            <Wow timingNote={this.props.timingNote}/>
+            <div className="gamemenu">
+              <a href="#"><div className="button"><p>PAUSE</p></div></a><br/>
+              <a href="#"><div className="button"><p>SETTINGS</p></div></a><br/>
+              <a href="#"><div className="button"><p>LOG OUT</p></div></a><br/>
+            </div>
           </div>
         </div>
     )
