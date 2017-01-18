@@ -49,7 +49,6 @@ export default class Note extends Component {
         y = -this.props.size;
 
     if(this.props.isKick) {
-      console.log("kick")
       x = 0;
       y = -4;
       sizeX = window.innerWidth*0.5;

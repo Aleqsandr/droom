@@ -35,9 +35,9 @@ export default class Notes extends Component {
     if(data.note === 42)
       note = 49;
     noteValues.push(note);
-    if(note == 36)
+    if(note == 36 && !this.props.isKeyboard)
       isKick = true;
-    notes.push(<Note newP={this.state.newp} isKick={isKick} key={time} noteIO={this.props.noteIO} currentNote={note} timeCreation={Date.now()} size={size} x={0} color="#ff0000" timeToFall={this.state.timeToFall} keyCode={this.props.keyCode} group={this.state.group}/>);
+    notes.push(<Note newP={this.state.newp} isKick={isKick} key={time} noteIO={this.props.noteIO} currentNote={note} timeCreation={Date.now()} size={size} x={0} color="#ff0000" timeToFall={this.state.timeToFall} keyCode={this.props.keyCode} group={this.state.group} isKeyboard={this.props.isKeyboard}/>);
 
     this.setState({
       nbItem:++this.state.nbItem,
