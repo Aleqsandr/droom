@@ -16,8 +16,12 @@ export default class Score extends Component {
       prevTiming:null,
       score:0,
       multiplier:1,
-      fails:255
+      fails:100
     };
+  }
+
+  handleEndMusic() {
+    this.props.onEndMusic(this.state.score);
   }
 
   componentWillReceiveProps(nextProps) {
@@ -39,14 +43,28 @@ export default class Score extends Component {
                 break;
           }
 
-          this.setState({streak:this.state.streak+1, score:this.state.score+10*this.state.multiplier});
-        } 
-        else
-          this.setState({streak:0, score:this.state.score-5, multiplier:1})
+          this.setState({
+            streak:this.state.streak+1,
+            score:this.state.score+10*this.state.multiplier,
+            fails:this.state.fails+2
+          });
+        }
+        else{
+
+          this.setState({
+            streak:0,
+            score:this.state.score-5,
+            multiplier:1,
+            fails:this.state.fails-10
+          })
+
+          if(this.state.fails - 10 <= 0) {
+            this.handleEndMusic();
+          }
+        }
       }
       prevTime = nextProps.timingNote;
-    } 
-    else {
+    } else {
       prevTime = nextProps.timingNote;
       if(nextProps.timingNote>0 && nextProps.timingNote <= 300){
         switch(this.state.streak) {
@@ -64,10 +82,22 @@ export default class Score extends Component {
               break;
         }
 
-        this.setState({streak:this.state.streak+1, score:this.state.score+10*this.state.multiplier})
+        this.setState({
+          streak:this.state.streak+1,
+          score:this.state.score+10*this.state.multiplier,
+          fails:this.state.fails+2
+        })
       }
-      else
-        this.setState({streak:0, multiplier:1})
+      else {
+        this.setState({
+          streak:0,
+          multiplier:1,
+        })
+
+        if(nextProps.timingNote !== 0) {
+          this.setState({fails:this.state.fails-10})
+        }
+      }
     }
   }
 
@@ -76,8 +106,8 @@ export default class Score extends Component {
       <div className="score">
         <div className="score__real">{this.state.score}</div>
         <div className="score__streak">{this.state.streak} streak notes</div>
-        <div className="score__multiplier">multiplier : X {this.state.multiplier}</div>
-        <div className="score__bar">Failure Bar : {this.state.fails}</div>
+        <div className="score__multiplier">x{this.state.multiplier} MULTIPLIER</div>
+        <div className="score__bar">FAILURE : {this.state.fails}</div>
       </div>
     );
   }

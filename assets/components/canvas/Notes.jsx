@@ -31,11 +31,14 @@ export default class Notes extends Component {
     let size = 50, padding = 25;
     var time = Date.now();
     times.push(time)
-    let note = data.note;
+    let note = data.note, isKick=false;
     if(data.note === 42)
       note = 49;
     noteValues.push(note);
-    notes.push(<Note newP={this.state.newp} key={time} noteIO={this.props.noteIO} currentNote={note} timeCreation={Date.now()} size={size} x={0} color="#ff0000" timeToFall={this.state.timeToFall} keyCode={this.props.keyCode} group={this.state.group}/>);
+    if(note == 36 && !this.props.isKeyboard)
+      isKick = true;
+    notes.push(<Note newP={this.state.newp} isKick={isKick} key={time} noteIO={this.props.noteIO} currentNote={note} timeCreation={Date.now()} size={size} x={0} color="#ff0000" timeToFall={this.state.timeToFall} keyCode={this.props.keyCode} group={this.state.group} isKeyboard={this.props.isKeyboard}/>);
+
     this.setState({
       nbItem:++this.state.nbItem,
       currentNote:data.note
@@ -73,7 +76,9 @@ export default class Notes extends Component {
 
   animKick(id) {
     let self = this, time =50;
-    if(!this.state.group || !id)return;
+
+    if(!this.state.group || id==null)return;
+    console.log(this.state.group.getChildren()[id]);
     this.state.group.getChildren()[id].getChildren()[0].to({
       scaleX: 1,
       scaleY: 1,
@@ -143,8 +148,8 @@ export default class Notes extends Component {
 
     impactTime = times[i]+ 3000 - this.state.timeOfCollision;
 
-    MIDI.setVolume(0,80);
-    MIDI.noteOn(0, valNote[0], 40, 0);
+    MIDI.setVolume(0,0);
+    MIDI.noteOn(0, valNote[0], 0, 0);
 
     let diff = Math.abs(current - impactTime);
 
@@ -170,7 +175,7 @@ export default class Notes extends Component {
         return;
     }
 
-    if(times[i]+(this.state.timeToFall)*1000 + utils.pxToTime(75) < current) {
+    if(times[i]+(this.state.timeToFall+5)*1000 + utils.pxToTime(75) < current) {
         // Destroy. Failure
 
         times.splice(i, 1);
