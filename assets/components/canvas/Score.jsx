@@ -76,8 +76,8 @@ export default class Score extends Component {
       <div className="score">
         <div className="score__real">{this.state.score}</div>
         <div className="score__streak">{this.state.streak} streak notes</div>
-        <div className="score__multiplier">multiplier : X {this.state.multiplier}</div>
-        <div className="score__bar">Failure Bar : {this.state.fails}</div>
+        <div className="score__multiplier">x{this.state.multiplier} MULTIPLIER</div>
+        <div className="score__bar">FAILURE : {this.state.fails}</div>
       </div>
     );
   }
