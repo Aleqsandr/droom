@@ -4,6 +4,7 @@ import App from '../App.jsx';
 import MIDI from 'midi.js';
 import "howler";
 import utils from "../../modules/useful.js";
+import EndMusic from '../interfaces/EndMusic.jsx';
 
 // App component - represents the whole game window
 export default class Music extends Component {
@@ -15,6 +16,8 @@ export default class Music extends Component {
       player:null,
       data:null,
       shouldAnim:false,
+      score:null,
+      isFinish:false
     };
   }
 
@@ -47,6 +50,13 @@ export default class Music extends Component {
     })
   }
 
+  onEndMusic(score) {
+    this.setState({
+      score:score,
+      isFinish:true
+    })
+  }
+
   handleFinishCompteur() {
     var self = this;
     this.state.player.start();
@@ -59,6 +69,7 @@ export default class Music extends Component {
       sound.play();
     },3000 - utils.pxToTime(50));
 
+    this.state.player.BPM = 100;
     this.state.player.addListener(function(data){
       // play the note
       MIDI.setVolume(0, 0);
@@ -70,9 +81,18 @@ export default class Music extends Component {
   }
 
   render() {
+    if(this.state.isFinish)
+      return <EndMusic score={this.state.score}/>
+
     if(!this.state.finishStarter)
       return (<div className="Music-container"><div className="compteur">Loading...</div></div>);
     else
-      return (<App shouldAnim={this.state.shouldAnim} data={this.state.data} canStart={this.handleFinishCompteur.bind(this)}/>);
+      return (
+        <App
+          shouldAnim={this.state.shouldAnim}
+          data={this.state.data}
+          canStart={this.handleFinishCompteur.bind(this)}
+          onEndMusic={this.onEndMusic.bind(this)} />
+        );
   }
 }

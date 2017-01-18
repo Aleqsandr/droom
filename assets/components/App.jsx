@@ -22,7 +22,9 @@ export default class App extends Component {
       finishStarter:false,
       shouldAnim:false,
       timeKick:null,
-      timingNote:0
+      timingNote:0,
+
+      isKeyboard:false
       //scoreUpdate:null
     };
   }
@@ -58,7 +60,12 @@ export default class App extends Component {
   }
 
   handleKeyPress(e){
-    this.setState({keyCode: e.keyCode, shouldAnim:true,timeKick:Date.now()});
+    console.log(e);
+    this.setState({keyCode: e.keyCode,
+      shouldAnim:true,
+      timeKick:Date.now(),
+      isKeyboard:true
+    });
   }
 
   getNoteNumber(note){
@@ -67,7 +74,8 @@ export default class App extends Component {
         note : note[1],
         velocity : note[2],
         shouldAnim:true,
-        timeKick:Date.now()
+        timeKick:Date.now(),
+        isKeyboard:false
       });
     }
   }
@@ -97,6 +105,10 @@ export default class App extends Component {
       }
   }*/
 
+  onEndMusic(score) {
+    this.props.onEndMusic(score);
+  }
+
   render() {
     return (
       <div className="container">
@@ -104,7 +116,7 @@ export default class App extends Component {
         <Hudleft finishCompteur={this.finishCompteur.bind(this)} timingNote={this.state.timingNote}/>
         <main>
           <Stage width={this.state.width*0.5} height={this.state.height}>
-            <BaseDrum handleGroup={this.handleGroup.bind(this)} />
+            <BaseDrum handleGroup={this.handleGroup.bind(this)} isKeyboard={this.state.isKeyboard}/>
             <Notes
               timeKick={this.state.timeKick}
               shouldAnim={this.state.shouldAnim}
@@ -114,10 +126,11 @@ export default class App extends Component {
               data={this.props.data}
               getTimingNoteSuccess={this.getTimingNoteSuccess.bind(this)}
               //getScoreUpdate={this.getScoreUpdate.bind(this)}
+              isKeyboard={this.state.isKeyboard}
             />
           </Stage>
         </main>
-        <Hudright timingNote={this.state.timingNote}/>
+        <Hudright timingNote={this.state.timingNote} onEndMusic={this.onEndMusic.bind(this)}/>
       </div>
     );
   }

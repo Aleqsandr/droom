@@ -43,13 +43,24 @@ export default class Note extends Component {
   }
 
   render() {
+    let sizeX = this.props.size,
+        sizeY = this.props.size,
+        x = this.state.x,
+        y = -this.props.size;
+
+    if(this.props.isKick) {
+      x = 0;
+      y = -4;
+      sizeX = window.innerWidth*0.5;
+      sizeY = 4;
+    }
     return (
       <Rect
           ref="note"
-          width={this.props.size}
-          height={this.props.size}
-          x={this.state.x}
-          y={-this.props.size}
+          width={sizeX}
+          height={sizeY}
+          x={x}
+          y={y}
           fill={this.props.color}
       />
     );

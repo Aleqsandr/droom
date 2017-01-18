@@ -11,11 +11,19 @@ export default class HudRight extends Component {
     this.props.scoreUpdate();
   }
 
+  handleEndMusic(score) {
+    this.props.onEndMusic(score);
+  }
+
   render() {
     return (
         <div className="hud hud--right">
           <div className="hud__top">
-            <Score scoreUpdate={this.scoreUpdate.bind(this)} timingNote={this.props.timingNote}/>
+            <Score
+              scoreUpdate={this.scoreUpdate.bind(this)}
+              timingNote={this.props.timingNote}
+              onEndMusic={this.handleEndMusic.bind(this)}
+            />
             <VanessaBar/>
           </div>
           <div className="hud__bottom">
