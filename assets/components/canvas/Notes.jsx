@@ -172,15 +172,14 @@ export default class Notes extends Component {
 
     if(times[i]+(this.state.timeToFall)*1000 + utils.pxToTime(75) < current) {
         // Destroy. Failure
-        
+
         times.splice(i, 1);
         notes.splice(i, 1);
         noteValues.splice(i, 1);
         el.destroy();
-        
-    }
 
-    this.props.getTimingNoteSuccess(-1);
+    }
+    this.props.getTimingNoteSuccess(diff);
     return;
 
   }
@@ -189,9 +188,9 @@ export default class Notes extends Component {
 
     let tmp = this.state.score;
     tmp += 10;
-    
+
     this.setState({score: tmp});
-    
+
     this.props.getScoreUpdate(this.state.score);
   }
 
@@ -199,9 +198,9 @@ export default class Notes extends Component {
 
     let tmp = this.state.score;
     tmp -= 2;
-    
+
     this.setState({score: tmp});
-    
+
     this.props.getScoreUpdate(this.state.score);
 
   }*/
