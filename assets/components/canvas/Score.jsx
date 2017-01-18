@@ -14,22 +14,17 @@ export default class Score extends Component {
       val:null,
       streak:true,
       prevTiming:null,
+      score:null,
     };
-  }
-
-  componentDidMount() {
-
-    var self = this;
-    self.setState({val: 0});
   }
 
   componentWillReceiveProps(nextProps) {
     if(prevTime) {
       if(nextProps.timingNote != prevTime){
         if(nextProps.timingNote>0 && nextProps.timingNote <= 300)
-          this.setState({streak:this.state.streak+1})
+          this.setState({streak:this.state.streak+1, score:this.state.score+10})
         else
-          this.setState({streak:0})
+          this.setState({streak:0, score:this.state.score-2})
       } else {
 
       }
@@ -37,23 +32,16 @@ export default class Score extends Component {
     } else {
       prevTime = nextProps.timingNote;
       if(nextProps.timingNote>0 && nextProps.timingNote <= 300)
-        this.setState({streak:this.state.streak+1})
+        this.setState({streak:this.state.streak+1, score:this.state.score+10})
       else
         this.setState({streak:0})
     }
   }
 
-  checkStreak() {
-    if(nextProps.timingNote>0 && nextProps.timingNote <= 300)
-      this.setState({streak:this.state.streak+1})
-    else
-      this.setState({streak:0})
-  }
-
   render() {
     return (
       <div className="score">
-        <div className="score__real">Score : {this.state.val}</div>
+        <div className="score__real">Score : {this.state.score}</div>
         <div className="score__streak">Streak : {this.state.streak}</div>
       </div>
     );
