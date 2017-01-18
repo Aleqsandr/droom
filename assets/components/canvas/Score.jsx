@@ -15,7 +15,8 @@ export default class Score extends Component {
       streak:true,
       prevTiming:null,
       score:null,
-      multiplier:1
+      multiplier:1,
+      fails:255
     };
   }
 
@@ -75,7 +76,8 @@ export default class Score extends Component {
       <div className="score">
         <div className="score__real">Score : {this.state.score}</div>
         <div className="score__streak">Streak : {this.state.streak}</div>
-        <div className="score__multiplier">X {this.state.multiplier}</div>
+        <div className="score__multiplier">multiplier : X {this.state.multiplier}</div>
+        <div className="score__bar">Failure Bar : {this.state.fails}</div>
       </div>
     );
   }
