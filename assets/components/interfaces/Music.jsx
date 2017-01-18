@@ -25,12 +25,13 @@ export default class Music extends Component {
       soundfontUrl: "./soundfont/",
       instrument: "synth_drum",
       onsuccess:function() {
+        console.log(MIDI)
         self.setState({
           player:MIDI.Player
         })
         MIDI.programChange(0, 118);
         MIDI.setVolume(0, 0);
-        self.state.player.loadFile( "./musics/1/drumDroom.midi", self.launchGame.bind(self),null,function() {console.log("nope")} );
+        self.state.player.loadFile( "./musics/2/drumDroom2.mid", self.launchGame.bind(self),null,function() {console.log("nope")} );
       }
     })
 
@@ -52,7 +53,7 @@ export default class Music extends Component {
     this.state.player.start();
 
     var sound = new Howl({
-      src: ['./musics/1/testDroom.mp3']
+      src: ['./musics/2/testDroom2.mp3']
     });
 
     setTimeout(function() {
@@ -61,6 +62,7 @@ export default class Music extends Component {
 
     this.state.player.addListener(function(data){
       // play the note
+      console.log(data)
       MIDI.setVolume(0, 0);
 
       if(data.message == 144){ // NoteOn
