@@ -41,7 +41,7 @@ export default class Score extends Component {
           this.setState({streak:this.state.streak+1, score:this.state.score+10*this.state.multiplier});
         } 
         else
-          this.setState({streak:0, score:this.state.score-2, multiplier:1})
+          this.setState({streak:0, score:this.state.score-5, multiplier:1})
       }
       prevTime = nextProps.timingNote;
     } 
