@@ -69,6 +69,7 @@ export default class Music extends Component {
       //sound.play();
     },3000 - utils.pxToTime(50));
 
+    this.state.player.BPM = 100;
     this.state.player.addListener(function(data){
       // play the note
       MIDI.setVolume(0, 0);

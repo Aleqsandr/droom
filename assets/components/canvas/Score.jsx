@@ -16,7 +16,7 @@ export default class Score extends Component {
       prevTiming:null,
       score:0,
       multiplier:1,
-      fails:10
+      fails:100
     };
   }
 
