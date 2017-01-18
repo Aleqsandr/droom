@@ -9,6 +9,8 @@ import VanessaBar from "./canvas/VanessaBar.jsx";
 
 // App component - represents the whole game window
 export default class App extends Component {
+  handler = this.handleKeyPress.bind(this)
+
   constructor(props) {
     super(props);
 
@@ -36,21 +38,14 @@ export default class App extends Component {
       });
   }
 
-  componentWillMount() {
-      this.updateDimensions();
-      window.addEventListener("resize", this.updateDimensions.bind(this));
-      document.addEventListener("keydown",this.handleKeyPress.bind(this));
-  }
-
   componentDidMount() {
-    //test
-    /*document.getElementsByTagName("canvas")[0].getContext("2d",
-                 { antialias: false,
-                   depth: false });*/
+    this.updateDimensions();
+    window.addEventListener("resize", this.updateDimensions.bind(this),false);
+    document.addEventListener("keydown",this.handler,false);
   }
   componentWillUnmount() {
-      window.removeEventListener("resize", this.updateDimensions.bind(this));
-      document.removeEventListener("keydown",this.handleKeyPress.bind(this));
+    window.removeEventListener("resize", this.updateDimensions.bind(this),false);
+    document.removeEventListener("keydown",this.handler,false);
   }
 
   handleGroup(val) {
@@ -60,8 +55,9 @@ export default class App extends Component {
   }
 
   handleKeyPress(e){
-    console.log(e);
-    this.setState({keyCode: e.keyCode,
+    console.log("ok");
+    this.setState({
+      keyCode: e.keyCode,
       shouldAnim:true,
       timeKick:Date.now(),
       isKeyboard:true
@@ -111,7 +107,7 @@ export default class App extends Component {
 
   render() {
     return (
-      <div className="container">
+      <div className="container" ref="container">
         <Midi getNoteNumber={this.getNoteNumber.bind(this)}/>
         <Hudleft finishCompteur={this.finishCompteur.bind(this)} timingNote={this.state.timingNote}/>
         <main>

@@ -86,7 +86,7 @@ export default class Music extends Component {
 
     if(!this.state.finishStarter)
       return (<div className="Music-container"><div className="compteur">Loading...</div></div>);
-    else
+    else {
       return (
         <App
           shouldAnim={this.state.shouldAnim}
@@ -94,5 +94,6 @@ export default class Music extends Component {
           canStart={this.handleFinishCompteur.bind(this)}
           onEndMusic={this.onEndMusic.bind(this)} />
         );
+    }
   }
 }

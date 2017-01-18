@@ -8,7 +8,6 @@ import utils from "../../modules/useful.js";
 var player, notes = [], times = [], noteValues = [], prevTime= 0;
 // App component - represents the whole app
 export default class Notes extends Component {
-
   constructor(props) {
     super(props);
 
@@ -78,7 +77,6 @@ export default class Notes extends Component {
     let self = this, time =50;
 
     if(!this.state.group || id==null)return;
-    console.log(this.state.group.getChildren()[id]);
     this.state.group.getChildren()[id].getChildren()[0].to({
       scaleX: 1,
       scaleY: 1,
