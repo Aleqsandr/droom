@@ -26,7 +26,7 @@ export default class App extends Component {
       timeKick:null,
       timingNote:0,
 
-      isKeyboard:false
+      isKeyboard:true
       //scoreUpdate:null
     };
   }
@@ -55,7 +55,6 @@ export default class App extends Component {
   }
 
   handleKeyPress(e){
-    console.log("ok");
     this.setState({
       keyCode: e.keyCode,
       shouldAnim:true,

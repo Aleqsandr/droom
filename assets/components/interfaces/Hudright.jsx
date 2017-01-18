@@ -2,7 +2,6 @@ import React, { Component } from 'react';
 import Compteur from '../canvas/Compteur.jsx';
 import Score from '../canvas/Score.jsx';
 import Wow from '../canvas/Wow.jsx';
-import VanessaBar from '../canvas/VanessaBar.jsx';
 
 
 // App component - represents the whole game window
@@ -24,7 +23,6 @@ export default class HudRight extends Component {
               timingNote={this.props.timingNote}
               onEndMusic={this.handleEndMusic.bind(this)}
             />
-            <VanessaBar/>
           </div>
           <div className="hud__bottom">
             <div className="gamemenu">

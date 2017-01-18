@@ -14,9 +14,11 @@ export default class HudLeft extends Component {
         <div className="hud hud--left">
           <div className="hud__top">
             <Compteur finish={this.finishCompteur.bind(this)}/>
-            <div className="tracktitle">Killin In The Name Of</div>
-            <div className="trackartist">Rage Against The Machine</div>
-            <div className="trackyear">1992 &#8212; &#9733;&#9733;&#9733;</div>
+            <div className="hud__music">
+              <div className="tracktitle">Killin In The Name Of</div>
+              <div className="trackartist">Rage Against The Machine</div>
+              <div className="trackyear">1992 &#8212; &#9733;&#9733;&#9733;</div>
+            </div>
           </div>
           <div className="hud__bottom">
             <Wow timingNote={this.props.timingNote}/>

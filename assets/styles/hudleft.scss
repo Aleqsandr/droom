@@ -10,13 +10,15 @@ $montserrat: 'Montserrat', sans-serif;
         position:relative;
     }
 
+    &__music {
+        padding-top: 40px;
+        padding-left: 40px;
+    }
+
     &__top
     {
     	.tracktitle
     	{
-    		position: absolute;
-    		top: 40px;
-    		left: 40px;
     		font-weight: 700;
     		font-family: $montserrat;
     		font-size: 2em;
@@ -25,9 +27,6 @@ $montserrat: 'Montserrat', sans-serif;
 
     	.trackartist
     	{
-    		position: absolute;
-    		top: 75px;
-    		left: 42px;
     		font-weight: 700;
     		font-family: $montserrat;
     		font-size: 1em;
@@ -37,9 +36,6 @@ $montserrat: 'Montserrat', sans-serif;
 
     	.trackyear
     	{
-    		position: absolute;
-    		top: 93px;
-    		left: 44px;
     		font-weight: 700;
     		font-family: $montserrat;
     		font-size: 1em;

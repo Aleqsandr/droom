@@ -43,7 +43,7 @@ export default class Note extends Component {
   }
 
   render() {
-    if(this.props.isKick) {
+    if(this.props.isKick && !this.props.isKeyboard) {
       return(
         <Group
           width={window.innerWidth}

@@ -28,7 +28,6 @@ export default class Music extends Component {
       soundfontUrl: "./soundfont/",
       instrument: "synth_drum",
       onsuccess:function() {
-        console.log(MIDI)
         self.setState({
           player:MIDI.Player
         })
@@ -73,7 +72,6 @@ export default class Music extends Component {
     this.state.player.BPM = 100;
     this.state.player.addListener(function(data){
       // play the note
-      console.log(data)
       MIDI.setVolume(0, 0);
 
       if(data.message == 144){ // NoteOn
