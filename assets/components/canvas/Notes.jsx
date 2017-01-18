@@ -31,11 +31,14 @@ export default class Notes extends Component {
     let size = 50, padding = 25;
     var time = Date.now();
     times.push(time)
-    let note = data.note;
+    let note = data.note, isKick=false;
     if(data.note === 42)
       note = 49;
     noteValues.push(note);
-    notes.push(<Note newP={this.state.newp} key={time} noteIO={this.props.noteIO} currentNote={note} timeCreation={Date.now()} size={size} x={0} color="#ff0000" timeToFall={this.state.timeToFall} keyCode={this.props.keyCode} group={this.state.group}/>);
+    if(note == 36)
+      isKick = true;
+    notes.push(<Note newP={this.state.newp} isKick={isKick} key={time} noteIO={this.props.noteIO} currentNote={note} timeCreation={Date.now()} size={size} x={0} color="#ff0000" timeToFall={this.state.timeToFall} keyCode={this.props.keyCode} group={this.state.group}/>);
+
     this.setState({
       nbItem:++this.state.nbItem,
       currentNote:data.note
