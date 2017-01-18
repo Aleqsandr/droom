@@ -16,8 +16,12 @@ export default class Score extends Component {
       prevTiming:null,
       score:null,
       multiplier:1,
-      fails:255
+      fails:100
     };
+  }
+
+  handleEndMusic() {
+    this.props.endMusic();
   }
 
   componentWillReceiveProps(nextProps) {
@@ -39,14 +43,28 @@ export default class Score extends Component {
                 break;
           }
 
-          this.setState({streak:this.state.streak+1, score:this.state.score+10*this.state.multiplier});
-        } 
-        else
-          this.setState({streak:0, score:this.state.score-5, multiplier:1})
+          this.setState({
+            streak:this.state.streak+1,
+            score:this.state.score+10*this.state.multiplier,
+            fails:this.state.fails+2
+          });
+        }
+        else{
+
+          this.setState({
+            streak:0,
+            score:this.state.score-5,
+            multiplier:1,
+            fails:this.state.fails-10
+          })
+
+          if(this.state.fails <= 0) {
+            this.handleEndMusic();
+          }
+        }
       }
       prevTime = nextProps.timingNote;
-    } 
-    else {
+    } else {
       prevTime = nextProps.timingNote;
       if(nextProps.timingNote>0 && nextProps.timingNote <= 300){
         switch(this.state.streak) {
@@ -64,10 +82,22 @@ export default class Score extends Component {
               break;
         }
 
-        this.setState({streak:this.state.streak+1, score:this.state.score+10*this.state.multiplier})
+        this.setState({
+          streak:this.state.streak+1,
+          score:this.state.score+10*this.state.multiplier,
+          fails:this.state.fails+2
+        })
       }
-      else
-        this.setState({streak:0, multiplier:1})
+      else {
+        this.setState({
+          streak:0,
+          multiplier:1,
+        })
+
+        if(nextProps.timingNote !== 0) {
+          this.setState({fails:this.state.fails-10})
+        }
+      }
     }
   }
 

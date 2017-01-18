@@ -146,8 +146,8 @@ export default class Notes extends Component {
 
     impactTime = times[i]+ 3000 - this.state.timeOfCollision;
 
-    MIDI.setVolume(0,80);
-    MIDI.noteOn(0, valNote[0], 40, 0);
+    MIDI.setVolume(0,0);
+    MIDI.noteOn(0, valNote[0], 0, 0);
 
     let diff = Math.abs(current - impactTime);
 
@@ -173,7 +173,7 @@ export default class Notes extends Component {
         return;
     }
 
-    if(times[i]+(this.state.timeToFall)*1000 + utils.pxToTime(75) < current) {
+    if(times[i]+(this.state.timeToFall+5)*1000 + utils.pxToTime(75) < current) {
         // Destroy. Failure
 
         times.splice(i, 1);
