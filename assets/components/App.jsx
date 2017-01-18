@@ -2,8 +2,6 @@ import React, { Component } from 'react';
 import {Layer, Rect, Stage, Group} from 'react-konva';
 import BaseDrum from './canvas/BaseDrum.jsx';
 import Notes from './canvas/Notes.jsx';
-import Compteur from './canvas/Compteur.jsx';
-import Score from './canvas/Score.jsx';
 import Midi from './midi/Midi.jsx';
 import Hud from "./interfaces/Hud.jsx";
 

@@ -179,7 +179,7 @@ export default class Notes extends Component {
 
         return;
     }
-    this.props.getTimingNoteSuccess(-1);
+    this.props.getTimingNoteSuccess(diff);
     return;
   }
 
