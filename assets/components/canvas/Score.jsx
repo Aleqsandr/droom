@@ -12,16 +12,16 @@ export default class Score extends Component {
       success:null,
       failure:null,
       val:null,
-      streak:true,
+      streak: 0,
       prevTiming:null,
-      score:null,
+      score:0,
       multiplier:1,
-      fails:100
+      fails:10
     };
   }
 
   handleEndMusic() {
-    this.props.endMusic();
+    this.props.onEndMusic(this.state.score);
   }
 
   componentWillReceiveProps(nextProps) {
@@ -58,7 +58,7 @@ export default class Score extends Component {
             fails:this.state.fails-10
           })
 
-          if(this.state.fails <= 0) {
+          if(this.state.fails - 10 <= 0) {
             this.handleEndMusic();
           }
         }
@@ -104,8 +104,8 @@ export default class Score extends Component {
   render() {
     return (
       <div className="score">
-        <div className="score__real">Score : {this.state.score}</div>
-        <div className="score__streak">Streak : {this.state.streak}</div>
+        <div className="score__real">{this.state.score}</div>
+        <div className="score__streak">{this.state.streak} streak notes</div>
         <div className="score__multiplier">multiplier : X {this.state.multiplier}</div>
         <div className="score__bar">Failure Bar : {this.state.fails}</div>
       </div>

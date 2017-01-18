@@ -3,7 +3,9 @@ import {Layer, Rect, Stage, Group} from 'react-konva';
 import BaseDrum from './canvas/BaseDrum.jsx';
 import Notes from './canvas/Notes.jsx';
 import Midi from './midi/Midi.jsx';
-import Hud from "./interfaces/Hud.jsx";
+import Hudleft from "./interfaces/Hudleft.jsx";
+import Hudright from "./interfaces/Hudright.jsx";
+import VanessaBar from "./canvas/VanessaBar.jsx";
 
 // App component - represents the whole game window
 export default class App extends Component {
@@ -102,11 +104,15 @@ export default class App extends Component {
       }
   }*/
 
+  onEndMusic(score) {
+    this.props.onEndMusic(score);
+  }
+
   render() {
     return (
       <div className="container">
         <Midi getNoteNumber={this.getNoteNumber.bind(this)}/>
-        <Hud finishCompteur={this.finishCompteur.bind(this)} timingNote={this.state.timingNote}/>
+        <Hudleft finishCompteur={this.finishCompteur.bind(this)} timingNote={this.state.timingNote}/>
         <main>
           <Stage width={this.state.width*0.5} height={this.state.height}>
             <BaseDrum handleGroup={this.handleGroup.bind(this)} isKeyboard={this.state.isKeyboard}/>
@@ -123,6 +129,7 @@ export default class App extends Component {
             />
           </Stage>
         </main>
+        <Hudright timingNote={this.state.timingNote} onEndMusic={this.onEndMusic.bind(this)}/>
       </div>
     );
   }
