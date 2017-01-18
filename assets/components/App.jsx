@@ -60,6 +60,7 @@ export default class App extends Component {
   }
 
   handleKeyPress(e){
+    console.log(e);
     this.setState({keyCode: e.keyCode,
       shouldAnim:true,
       timeKick:Date.now(),
