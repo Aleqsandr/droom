@@ -45,7 +45,7 @@ export default class Notes extends Component {
   }
 
   componentWillReceiveProps(nextProps) {
-    console.log("ce que reçoit notes.jsx : ",nextProps.data)
+    
     if(nextProps.data){
       this.setState({prevData:nextProps.data.now})
       if(nextProps.data.now != this.state.prevData)

@@ -25,15 +25,18 @@ export default class Music extends Component {
     var self = this;
 
     MIDI.loadPlugin({
-      soundfontUrl: "./soundfont/",
+      soundfontUrl: "/soundfont/",
       instrument: "synth_drum",
       onsuccess:function() {
+        console.log(MIDI)
+        
+        MIDI.programChange(0, 118);
+        MIDI.setVolume(0, 0);
+        MIDI.Player.BPM = 85;
         self.setState({
           player:MIDI.Player
         })
-        MIDI.programChange(0, 118);
-        MIDI.setVolume(0, 0);
-        self.state.player.loadFile( "./musics/2/drumDroomTest.mid", self.launchGame.bind(self),null,function() {console.log("nope")} );
+        self.state.player.loadFile( "./musics/2/drumDroomTest2.mid", self.launchGame.bind(self),null,function() {console.log("nope")} );
       }
     })
 
@@ -59,6 +62,8 @@ export default class Music extends Component {
 
   handleFinishCompteur() {
     var self = this;
+    console.log(this.state.player)
+    
     this.state.player.start();
 
     var sound = new Howl({
@@ -69,13 +74,15 @@ export default class Music extends Component {
       sound.play();
     },3000 - utils.pxToTime(50));
 
-    this.state.player.BPM = 100;
+    
     this.state.player.addListener(function(data){
       // play the note
 
       MIDI.setVolume(0, 0);
 
-      if(data.message == 144 || data.now == 150.5){ // NoteOn
+      console.log("data", data)
+
+      if(data.message == 144 || data.now == 125.5){ // NoteOn
         self.setState({data:data, shouldAnim:false})
       }
     });
