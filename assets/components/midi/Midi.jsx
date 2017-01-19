@@ -4,7 +4,7 @@ import React, { Component } from 'react';
 
 function onMIDIMessage(message) {
     data = message.data; // this gives us our [command/channel, note, velocity] data.
-    console.log('MIDI data', data); // MIDI data [144, 63, 73]
+    // console.log('MIDI data', data); // MIDI data [144, 63, 73]
 }
 
 var midi=null,

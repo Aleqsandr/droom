@@ -45,7 +45,6 @@ export default class Notes extends Component {
   }
 
   componentWillReceiveProps(nextProps) {
-    console.log("ce que reçoit notes.jsx : ",nextProps.data)
     if(nextProps.data){
       this.setState({prevData:nextProps.data.now})
       if(nextProps.data.now != this.state.prevData){
@@ -65,6 +64,7 @@ export default class Notes extends Component {
   launchCollisions(nextProps) {
     let id = null;
     let tab = 0;
+    if(!this.state.group) return;
     for (let i = 0; i < this.state.group.getChildren().length; i++) {
       if(this.state.group.getChildren()[i].getAttr("note") == nextProps.noteIO)
         id = i;

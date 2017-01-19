@@ -17,7 +17,8 @@ export default class Music extends Component {
       data:null,
       shouldAnim:false,
       score:null,
-      isFinish:false
+      isFinish:false,
+      musicMP3:null
     };
   }
 
@@ -29,7 +30,8 @@ export default class Music extends Component {
       instrument: "synth_drum",
       onsuccess:function() {
         self.setState({
-          player:MIDI.Player
+          player:MIDI.Player,
+          musicMP3 : new Howl({src: ['./musics/2/testDroom2.wav']})
         })
         MIDI.programChange(0, 118);
         MIDI.setVolume(0, 0);
@@ -55,18 +57,16 @@ export default class Music extends Component {
       score:score,
       isFinish:true
     })
+
+    this.state.musicMP3.stop();
   }
 
   handleFinishCompteur() {
     var self = this;
     this.state.player.start();
 
-    var sound = new Howl({
-      src: ['./musics/2/testDroom2.wav']
-    });
-
     setTimeout(function() {
-      sound.play();
+      self.state.musicMP3.play();
     },3000 - utils.pxToTime(50));
 
     this.state.player.BPM = 100;
