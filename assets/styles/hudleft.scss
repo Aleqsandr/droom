@@ -1,8 +1,45 @@
+@import url('https://fonts.googleapis.com/css?family=Montserrat:400,700');
+
+$montserrat: 'Montserrat', sans-serif;
+
 .hud {
     position:relative;
 
     &__top, &__bottom {
         height:50%;
         position:relative;
+    }
+
+    &__music {
+        padding-top: 40px;
+        padding-left: 40px;
+    }
+
+    &__top
+    {
+    	.tracktitle
+    	{
+    		font-weight: 700;
+    		font-family: $montserrat;
+    		font-size: 2em;
+    		font-style: italic;
+    	}
+
+    	.trackartist
+    	{
+    		font-weight: 700;
+    		font-family: $montserrat;
+    		font-size: 1em;
+    		text-transform: uppercase;
+    		letter-spacing: 3px;
+    	}
+
+    	.trackyear
+    	{
+    		font-weight: 700;
+    		font-family: $montserrat;
+    		font-size: 1em;
+    		letter-spacing: 3px;
+    	}
     }
 }

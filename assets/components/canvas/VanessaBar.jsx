@@ -12,22 +12,20 @@ export default class VanessaBar extends Component {
 		}
 	}
 
-	updateColor()
-	{
-		this.setState({
-			i : this.state.i + 1,
-			red : this.state.i * 10,
-			green : 255 - this.state.i * 10
-		});
+	updateColor(){
+		// this.setState({
+		// 	i : this.state.i + 1,
+		// 	red : this.state.i * 10,
+		// 	green : 255 - this.state.i * 10
+		// });
 
-		if (this.state.red > 255) this.setState({red : 255});
-		if (this.state.green < 0) this.setState({green : 0});
-		if (this.state.green == 0 && this.state.red == 255) alert('HE VOS DARONNES Y BOIVENT DU SPRITE SA MÈRE');
-		console.log(this.state.i, this.state.red, this.state.green);
+		// if (this.state.red > 255) this.setState({red : 255});
+		// if (this.state.green < 0) this.setState({green : 0});
+		// if (this.state.green == 0 && this.state.red == 255) alert('HE VOS DARONNES Y BOIVENT DU SPRITE SA MÈRE');
+		// console.log(this.state.i, this.state.red, this.state.green);
 	};
 
-	resetColor()
-	{
+	resetColor(){
 		this.setState({
 			i : 0,
 			red : 0,
@@ -35,11 +33,17 @@ export default class VanessaBar extends Component {
 		})
 	}
 
-  	render()
-  	{
-  		let style =
-  		{
-  			backgroundColor : "rgb(" + this.state.red + ", " + this.state.green + ", 0)"
+	checkFail(val) {
+		if(val<0)
+			return 0;
+		else if(val>255)
+			return 255;
+		return val;
+	}
+
+  	render(){
+  		var style = {
+  			backgroundColor : 'rgb(' + this.checkFail(255-this.props.fail) + ", " + this.checkFail(this.props.fail) + ', 0)'
   		}
 
 		return (

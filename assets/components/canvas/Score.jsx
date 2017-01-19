@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import VanessaBar from '../canvas/VanessaBar.jsx';
 
 var prevTime = null, toCheck = true;
 
@@ -16,7 +17,7 @@ export default class Score extends Component {
       prevTiming:null,
       score:0,
       multiplier:1,
-      fails:100
+      fails:255
     };
   }
 
@@ -108,6 +109,7 @@ export default class Score extends Component {
         <div className="score__streak">{this.state.streak} streak notes</div>
         <div className="score__multiplier">x{this.state.multiplier} MULTIPLIER</div>
         <div className="score__bar">FAILURE : {this.state.fails}</div>
+        <VanessaBar fail={this.state.fails}/>
       </div>
     );
   }

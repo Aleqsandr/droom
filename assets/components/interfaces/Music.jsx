@@ -28,7 +28,6 @@ export default class Music extends Component {
       soundfontUrl: "./soundfont/",
       instrument: "synth_drum",
       onsuccess:function() {
-        console.log(MIDI)
         self.setState({
           player:MIDI.Player
         })
@@ -73,7 +72,7 @@ export default class Music extends Component {
     this.state.player.BPM = 100;
     this.state.player.addListener(function(data){
       // play the note
-      console.log("lanote", data)
+
       MIDI.setVolume(0, 0);
 
       if(data.message == 144 || data.now == 150.5){ // NoteOn
@@ -88,7 +87,7 @@ export default class Music extends Component {
 
     if(!this.state.finishStarter)
       return (<div className="Music-container"><div className="compteur">Loading...</div></div>);
-    else
+    else {
       return (
         <App
           shouldAnim={this.state.shouldAnim}
@@ -96,5 +95,6 @@ export default class Music extends Component {
           canStart={this.handleFinishCompteur.bind(this)}
           onEndMusic={this.onEndMusic.bind(this)} />
         );
+    }
   }
 }
