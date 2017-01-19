@@ -20,10 +20,10 @@ export default class Note extends Component {
 
   componentDidMount() {
     this.getCorrectGroup();
+    this.startAnimation(this.refs.note)
   }
 
   startAnimation(note) {
-    console.log(note);
     note.to({
         y:window.innerHeight,
         duration: this.props.timeToFall
@@ -41,42 +41,51 @@ export default class Note extends Component {
   }
 
   render() {
-    console.log(this.props.currentNote)
+    return (
+      <Rect
+        ref="note"
+        width={this.props.size}
+        height={this.props.size}
+        x={this.state.x}
+        y={-this.props.size}
+        fill="red"
+    />)
+
     switch(this.props.currentNote) {
       case 46 :
-        return ( <Charleston startAnimation={this.startAnimation.bind(this)} x={this.state.x} y={-this.props.size} size={this.props.size} /> );
+        return ( <Charleston hasToAnim={this.props.hasToAnim} startAnimation={this.startAnimation.bind(this)} x={this.state.x} y={-this.props.size} size={this.props.size} /> );
         break;
 
       case 49 :
-        return ( <Snare startAnimation={this.startAnimation.bind(this)} x={this.state.x} y={-this.props.size} size={this.props.size} />);
+        return ( <Snare hasToAnim={this.props.hasToAnim} startAnimation={this.startAnimation.bind(this)} x={this.state.x} y={-this.props.size} size={this.props.size} />);
         break;
 
       case 38 :
-        return ( <Symbal startAnimation={this.startAnimation.bind(this)} x={this.state.x} y={-this.props.size} size={this.props.size} />);
+        return ( <Symbal hasToAnim={this.props.hasToAnim} startAnimation={this.startAnimation.bind(this)} x={this.state.x} y={-this.props.size} size={this.props.size} />);
         break;
 
       case 48 :
-        return ( <Tom startAnimation={this.startAnimation.bind(this)} x={this.state.x} y={-this.props.size} size={this.props.size} />);
+        return ( <Tom hasToAnim={this.props.hasToAnim} startAnimation={this.startAnimation.bind(this)} x={this.state.x} y={-this.props.size} size={this.props.size} />);
         break;
 
       case 36 :
-        return ( <Kick startAnimation={this.startAnimation.bind(this)} isKeyboard={this.props.isKeyboard} x={this.state.x} y={-this.props.size} size={this.props.size} />);
+        return ( <Kick hasToAnim={this.props.hasToAnim} startAnimation={this.startAnimation.bind(this)} isKeyboard={this.props.isKeyboard} x={this.state.x} y={-this.props.size} size={this.props.size} />);
         break;
 
       case 45 :
-        return ( <Tom startAnimation={this.startAnimation.bind(this)} isKeyboard={this.props.isKeyboard} x={this.state.x} y={-this.props.size} size={this.props.size} />);
+        return ( <Tom hasToAnim={this.props.hasToAnim} startAnimation={this.startAnimation.bind(this)} isKeyboard={this.props.isKeyboard} x={this.state.x} y={-this.props.size} size={this.props.size} />);
         break;
 
       case 43 :
-        return ( <Tom startAnimation={this.startAnimation.bind(this)} x={this.state.x} y={-this.props.size} size={this.props.size} />);
+        return ( <Tom hasToAnim={this.props.hasToAnim} startAnimation={this.startAnimation.bind(this)} x={this.state.x} y={-this.props.size} size={this.props.size} />);
         break;
 
       case 51 :
-        return ( <Symbal startAnimation={this.startAnimation.bind(this)} x={this.state.x} y={-this.props.size} size={this.props.size} />);
+        return ( <Symbal hasToAnim={this.props.hasToAnim} startAnimation={this.startAnimation.bind(this)} x={this.state.x} y={-this.props.size} size={this.props.size} />);
         break;
 
       default :
-        return ( <Tom startAnimation={this.startAnimation.bind(this)} x={this.state.x} y={-this.props.size} size={this.props.size} />);
+        return ( <Tom hasToAnim={this.props.hasToAnim} startAnimation={this.startAnimation.bind(this)} x={this.state.x} y={-this.props.size} size={this.props.size} />);
         break;
     }
   }

@@ -34,7 +34,7 @@ export default class Notes extends Component {
     if(data.note === 42)
       note = 49;
     noteValues.push(note);
-    notes.push(<Note newP={this.state.newp} key={time} noteIO={this.props.noteIO} currentNote={note} timeCreation={Date.now()} size={size} x={0} timeToFall={this.state.timeToFall} keyCode={this.props.keyCode} group={this.state.group} isKeyboard={this.props.isKeyboard}/>);
+    notes.push(<Note newP={this.state.newp} key={time} noteIO={this.props.noteIO} currentNote={note} timeCreation={Date.now()} size={size} x={0} timeToFall={this.state.timeToFall} keyCode={this.props.keyCode} group={this.state.group} isKeyboard={this.props.isKeyboard} hasToAnim={true}/>);
 
     this.setState({
       nbItem:++this.state.nbItem,
@@ -43,7 +43,6 @@ export default class Notes extends Component {
   }
 
   componentWillReceiveProps(nextProps) {
-
     if(nextProps.data){
       this.setState({prevData:nextProps.data.now})
       if(nextProps.data.now != this.state.prevData){
@@ -181,8 +180,6 @@ export default class Notes extends Component {
         notes.splice(i, 1);
         noteValues.splice(i, 1);
         el.destroy();
-
-        console.log
 
     }
     this.props.getTimingNoteSuccess(diff);
