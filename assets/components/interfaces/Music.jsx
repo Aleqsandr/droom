@@ -29,7 +29,6 @@ export default class Music extends Component {
       soundfontUrl: "/soundfont/",
       instrument: "synth_drum",
       onsuccess:function() {
-        console.log(MIDI)
         
         MIDI.programChange(0, 118);
         MIDI.setVolume(0, 0);
@@ -66,7 +65,6 @@ export default class Music extends Component {
 
   handleFinishCompteur() {
     var self = this;
-    console.log(this.state.player)
     
     this.state.player.start();
 
