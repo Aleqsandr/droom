@@ -17,7 +17,8 @@ export default class Music extends Component {
       data:null,
       shouldAnim:false,
       score:null,
-      isFinish:false
+      isFinish:false,
+      musicMP3:null
     };
   }
 
@@ -29,11 +30,12 @@ export default class Music extends Component {
       instrument: "synth_drum",
       onsuccess:function() {
         self.setState({
-          player:MIDI.Player
+          player:MIDI.Player,
+          musicMP3 : new Howl({src: ['./musics/2/testDroom2.wav']})
         })
         MIDI.programChange(0, 118);
         MIDI.setVolume(0, 0);
-        self.state.player.loadFile( "./musics/2/drumDroom2.mid", self.launchGame.bind(self),null,function() {console.log("nope")} );
+        self.state.player.loadFile( "./musics/2/drumDroomTest.mid", self.launchGame.bind(self),null,function() {console.log("nope")} );
       }
     })
 
@@ -55,26 +57,25 @@ export default class Music extends Component {
       score:score,
       isFinish:true
     })
+
+    this.state.musicMP3.stop();
   }
 
   handleFinishCompteur() {
     var self = this;
     this.state.player.start();
 
-    var sound = new Howl({
-      src: ['./musics/2/testDroom2.mp3']
-    });
-
     setTimeout(function() {
-      // sound.play();
+      self.state.musicMP3.play();
     },3000 - utils.pxToTime(50));
 
     this.state.player.BPM = 100;
     this.state.player.addListener(function(data){
       // play the note
+
       MIDI.setVolume(0, 0);
 
-      if(data.message == 144){ // NoteOn
+      if(data.message == 144 || data.now == 150.5){ // NoteOn
         self.setState({data:data, shouldAnim:false})
       }
     });
