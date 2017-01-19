@@ -45,27 +45,30 @@ export default class Notes extends Component {
   }
 
   componentWillReceiveProps(nextProps) {
-    
+
     if(nextProps.data){
       this.setState({prevData:nextProps.data.now})
-      if(nextProps.data.now != this.state.prevData)
+      if(nextProps.data.now != this.state.prevData){
         this.addNewNote(nextProps.data)
+      }
     }
     this.setState({group:nextProps.group});
     if(nextProps.group && prevTime != nextProps.timeKick){
       prevTime = nextProps.timeKick;
-      //this.launchCollisions(nextProps);
-      this.checkKey(nextProps.keyCode);
+      if(this.props.isKeyboard)
+        this.checkKey(nextProps.keyCode);
+      else
+        this.launchCollisions(nextProps);
     }
   }
 
   launchCollisions(nextProps) {
     let id = null;
     let tab = 0;
+    if(!this.state.group) return;
     for (let i = 0; i < this.state.group.getChildren().length; i++) {
       if(this.state.group.getChildren()[i].getAttr("note") == nextProps.noteIO)
         id = i;
-
     }
     for (let i = this.refs.notesContainer.getChildren().length - 1; i >= 0; i--) {
         let tab = [nextProps.noteIO,id];

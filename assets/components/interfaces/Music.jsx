@@ -17,7 +17,8 @@ export default class Music extends Component {
       data:null,
       shouldAnim:false,
       score:null,
-      isFinish:false
+      isFinish:false,
+      musicMP3:null
     };
   }
 
@@ -34,7 +35,8 @@ export default class Music extends Component {
         MIDI.setVolume(0, 0);
         MIDI.Player.BPM = 85;
         self.setState({
-          player:MIDI.Player
+          player:MIDI.Player,
+          musicMP3 : new Howl({src: ['./musics/2/testDroom2.wav']})
         })
         self.state.player.loadFile( "./musics/2/drumDroomTest2.mid", self.launchGame.bind(self),null,function() {console.log("nope")} );
       }
@@ -58,6 +60,8 @@ export default class Music extends Component {
       score:score,
       isFinish:true
     })
+
+    this.state.musicMP3.stop();
   }
 
   handleFinishCompteur() {
@@ -66,12 +70,8 @@ export default class Music extends Component {
     
     this.state.player.start();
 
-    var sound = new Howl({
-      src: ['./musics/2/testDroom2.wav']
-    });
-
     setTimeout(function() {
-      sound.play();
+      self.state.musicMP3.play();
     },3000 - utils.pxToTime(50));
 
     
