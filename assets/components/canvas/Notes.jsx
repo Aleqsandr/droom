@@ -43,6 +43,7 @@ export default class Notes extends Component {
   }
 
   componentWillReceiveProps(nextProps) {
+
     if(nextProps.data){
       this.setState({prevData:nextProps.data.now})
       if(nextProps.data.now != this.state.prevData){
