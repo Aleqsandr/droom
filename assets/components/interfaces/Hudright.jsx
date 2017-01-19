@@ -22,6 +22,7 @@ export default class HudRight extends Component {
               scoreUpdate={this.scoreUpdate.bind(this)}
               timingNote={this.props.timingNote}
               onEndMusic={this.handleEndMusic.bind(this)}
+              velocity={this.props.velocity}
             />
           </div>
           <div className="hud__bottom">

@@ -28,7 +28,7 @@ export default class Score extends Component {
   componentWillReceiveProps(nextProps) {
     if(prevTime) {
       if(nextProps.timingNote != prevTime){
-        if(nextProps.timingNote>0 && nextProps.timingNote <= 300){
+        if(nextProps.timingNote>0 && nextProps.timingNote <= this.props.velocity / 60 * 1000 * 600 / 2000 ){
           switch(this.state.streak) {
             case 3:
                 this.setState({multiplier:2});
@@ -67,7 +67,7 @@ export default class Score extends Component {
       prevTime = nextProps.timingNote;
     } else {
       prevTime = nextProps.timingNote;
-      if(nextProps.timingNote>0 && nextProps.timingNote <= 300){
+      if(nextProps.timingNote>0 && nextProps.timingNote <= this.props.velocity / 60 * 1000 * 600 / 2000){
         switch(this.state.streak) {
           case 3:
               this.setState({multiplier:2});

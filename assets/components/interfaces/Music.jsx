@@ -80,8 +80,6 @@ export default class Music extends Component {
 
       MIDI.setVolume(0, 0);
 
-      console.log("data", data)
-
       if(data.message == 144 || data.now == 125.5){ // NoteOn
         self.setState({data:data, shouldAnim:false})
       }

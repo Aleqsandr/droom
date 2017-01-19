@@ -126,7 +126,7 @@ export default class App extends Component {
             />
           </Stage>
         </main>
-        <HudRight timingNote={this.state.timingNote} onEndMusic={this.onEndMusic.bind(this)}/>
+        <HudRight velocity={this.props.velocity} timingNote={this.state.timingNote} onEndMusic={this.onEndMusic.bind(this)}/>
       </div>
     );
   }
