@@ -45,6 +45,7 @@ export default class Notes extends Component {
   }
 
   componentWillReceiveProps(nextProps) {
+    console.log("ce que reçoit notes.jsx : ",nextProps.data)
     if(nextProps.data){
       this.setState({prevData:nextProps.data.now})
       if(nextProps.data.now != this.state.prevData){
@@ -148,8 +149,8 @@ export default class Notes extends Component {
 
     impactTime = times[i]+ 3000 - this.state.timeOfCollision;
 
-    MIDI.setVolume(0,0);
-    MIDI.noteOn(0, valNote[0], 0, 0);
+    MIDI.setVolume(0,70);
+    MIDI.noteOn(0, valNote[0], 70, 0);
 
     let diff = Math.abs(current - impactTime);
 
