@@ -25,14 +25,6 @@ export default class VanessaBar extends Component {
 		// console.log(this.state.i, this.state.red, this.state.green);
 	};
 
-	resetColor(){
-		this.setState({
-			i : 0,
-			red : 0,
-			green : 255
-		})
-	}
-
 	checkFail(val) {
 		if(val<0)
 			return 0;
@@ -49,7 +41,6 @@ export default class VanessaBar extends Component {
 		return (
 			<div className="bars">
 		      <div className="vanessabar" style={style} onClick={this.updateColor.bind(this)}></div>
-		      <div className="reset" onClick={this.resetColor.bind(this)}></div>
 		    </div>
 	    );
   	}

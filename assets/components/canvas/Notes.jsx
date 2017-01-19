@@ -34,7 +34,10 @@ export default class Notes extends Component {
     if(data.note === 42)
       note = 49;
     noteValues.push(note);
-    notes.push(<Note newP={this.state.newp} key={time} noteIO={this.props.noteIO} currentNote={note} timeCreation={Date.now()} size={size} x={0} timeToFall={this.state.timeToFall} keyCode={this.props.keyCode} group={this.state.group} isKeyboard={this.props.isKeyboard} hasToAnim={true}/>);
+    //notes.push(<Note newP={this.state.newp} key={time} noteIO={this.props.noteIO} currentNote={note} timeCreation={Date.now()} size={size} x={0} timeToFall={this.state.timeToFall} keyCode={this.props.keyCode} group={this.state.group} isKeyboard={this.props.isKeyboard} hasToAnim={true}/>);
+    if(note == 36 && !this.props.isKeyboard)
+      isKick = true;
+    notes.push(<Note velocity={this.props.velocity} newP={this.state.newp} isKick={isKick} key={time} noteIO={this.props.noteIO} currentNote={note} timeCreation={Date.now()} size={size} x={0} color="#ff0000" timeToFall={this.state.timeToFall} keyCode={this.props.keyCode} group={this.state.group} isKeyboard={this.props.isKeyboard}/>);
 
     this.setState({
       nbItem:++this.state.nbItem,
@@ -145,7 +148,7 @@ export default class Notes extends Component {
 
     let current = Date.now(),
 
-    impactTime = times[i]+ 3000 - this.state.timeOfCollision;
+    impactTime = times[i]+ this.props.velocity/60*1000 - this.state.timeOfCollision;
 
     MIDI.setVolume(0,70);
     MIDI.noteOn(0, valNote[0], 70, 0);
