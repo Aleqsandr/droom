@@ -21,7 +21,7 @@ export default class Note extends Component {
     let note = this.refs.note;
     note.to({
         y:window.innerHeight,
-        duration: this.props.timeToFall
+        duration: this.props.velocity / 60
     });
   }
 

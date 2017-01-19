@@ -122,6 +122,7 @@ export default class App extends Component {
               getTimingNoteSuccess={this.getTimingNoteSuccess.bind(this)}
               //getScoreUpdate={this.getScoreUpdate.bind(this)}
               isKeyboard={this.state.isKeyboard}
+              velocity={this.props.velocity}
             />
           </Stage>
         </main>
