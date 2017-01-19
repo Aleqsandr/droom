@@ -66,7 +66,7 @@ export default class Music extends Component {
     });
 
     setTimeout(function() {
-      sound.play();
+      // sound.play();
     },3000 - utils.pxToTime(50));
 
     this.state.player.BPM = 100;

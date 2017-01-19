@@ -26,7 +26,8 @@ export default class Wow extends Component {
       this.setState({text:"bad"})
   }
 
-  render() {
+  render()
+  {
     return (
       <div className="hud__wow">
         <div className="wow__text">

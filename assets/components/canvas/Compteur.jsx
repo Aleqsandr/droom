@@ -18,7 +18,7 @@ export default class Compteur extends Component {
       self.setState({
         compteur: self.state.compteur - 1
       })
-    }, 1000)
+    }, 1000);
   }
 
   componentDidUpdate() {
