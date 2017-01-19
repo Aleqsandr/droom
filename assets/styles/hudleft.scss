@@ -2,6 +2,56 @@
 
 $montserrat: 'Montserrat', sans-serif;
 
+@keyframes fadein
+{
+	from {opacity: 0}
+	to {opacity: 1}
+}
+
+@keyframes fadeout
+{
+	from {opacity: 1}
+	to {opacity: 0}
+}
+
+@keyframes compteur {
+  from {
+    opacity:0;
+    transform:translateX(-50%) translateY(-50%) scale(0);
+  }
+
+  // 32% {
+  //   opacity:1;
+  //   transform:translateX(-50%) translateY(-50%) scale(1);
+  // }
+
+  // 33% {
+  //   opacity:0;
+  //   transform:translateX(-50%) translateY(-50%) scale(0.3);
+  // }
+
+  // 65% {
+  //   opacity:1;
+  //   transform:translateX(-50%) translateY(-50%) scale(1);
+  // }
+
+  // 66% {
+  //   opacity:0;
+  //   transform:translateX(-50%) translateY(-50%) scale(0.3);
+  // }
+
+  // 99% {
+  //   opacity:1;
+  //   transform:translateX(-50%) translateY(-50%) scale(1);
+  // }
+
+  to {
+    opacity:0;
+    color: red;
+    transform:translateX(-50%) translateY(-50%) scale(0);
+  }
+}
+
 .hud {
     position:relative;
 
@@ -23,6 +73,8 @@ $montserrat: 'Montserrat', sans-serif;
     		font-family: $montserrat;
     		font-size: 2em;
     		font-style: italic;
+    		line-height: 0.9em;
+    		margin-bottom: 5px;
     	}
 
     	.trackartist
@@ -41,5 +93,37 @@ $montserrat: 'Montserrat', sans-serif;
     		font-size: 1em;
     		letter-spacing: 3px;
     	}
+
+    	.compteur{
+  			position: fixed;
+  			top: 50%;
+  			left: 50%;
+        // transition:3s;
+        animation: compteur 3s forwards;
+  			transform: translateX(-50%) translateY(-50%) scale(1);
+  			font-family: $montserrat;
+  			font-size: 20em;
+  			font-weight: 700;
+
+		  }
     }
+
+    &__bottom
+   	{
+   		.hud__wow
+   		{
+   			display: inline-block;
+   			position: relative;
+   			left: 50%;
+   			top: 50%;
+   			transform: translateX(-50%) translateY(-50%);
+   		}
+
+   		.wow__text
+   		{
+   			font-size: 4em;
+   			text-transform: uppercase;
+   			font-weight: 700;
+   		}
+   	}
 }

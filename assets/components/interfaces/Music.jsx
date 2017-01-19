@@ -35,7 +35,7 @@ export default class Music extends Component {
         })
         MIDI.programChange(0, 118);
         MIDI.setVolume(0, 0);
-        self.state.player.loadFile( "./musics/2/drumDroomTest.mid", self.launchGame.bind(self),null,function() {console.log("nope")} );
+        self.state.player.loadFile( "http://www.matthieubessol.com/soundfont/drumdelamuerte.mid", self.launchGame.bind(self),null,function() {console.log("nope")} );
       }
     })
 
