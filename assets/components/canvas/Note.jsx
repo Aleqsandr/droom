@@ -26,7 +26,7 @@ export default class Note extends Component {
   startAnimation(note) {
     note.to({
         y:window.innerHeight,
-        duration: this.props.velocity / 60
+        duration: this.props.velocity * 2 / 120
     });
   }
 

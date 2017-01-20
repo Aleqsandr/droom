@@ -70,7 +70,7 @@ export default class Music extends Component {
 
     setTimeout(function() {
       self.state.musicMP3.play();
-    },this.state.velocity/60*1000 - utils.pxToTime(50));
+    },(this.state.velocity * 2000 / 120) - utils.pxToTime(50));
 
 
     this.state.player.addListener(function(data){

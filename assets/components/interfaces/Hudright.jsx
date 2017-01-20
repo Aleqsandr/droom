@@ -5,7 +5,6 @@ import Wow from '../canvas/Wow.jsx';
 
 let prevTime = 0;
 
-
 // App component - represents the whole game window
 export default class HudRight extends Component {
   constructor(props) {
