@@ -50,6 +50,12 @@ $montserrat: 'Montserrat', sans-serif;
 
 }
 
+@keyframes wowin
+{
+  from {transform: scale(0.1)}
+  to {transform: scale(1)}
+}
+
 .hud {
     position:relative;
 
@@ -120,6 +126,16 @@ $montserrat: 'Montserrat', sans-serif;
    			font-size: 4em;
    			text-transform: uppercase;
    			font-weight: 700;
+        transform: scale(.2);
+        transition: 0s;
+
+        &.wow__text--wowin
+        {
+          transition:0.2s;
+          transform: scale(1);
+          /* animation: wowin .1s forwards; */
+        }
    		}
+
    	}
 }

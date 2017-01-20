@@ -12,32 +12,33 @@ export default class BaseReceiver extends Component {
 
   render() {
 
-    return (
-      <Group width={this.props.size} height={this.props.size} x={this.props.x + 25} note={this.props.note} keyCode={this.props.keyCode}>
-             <Rect
-                 ref="rect"
-                 width={this.props.size}
-                 height={this.props.size}
-                 x={0}
-                 offset= {{
-                             x: 25,
-                             y: 25}}
-                 fill={this.props.color}
-             />
+    // return (
+    //   <Group width={this.props.size} height={this.props.size} x={this.props.x + 25} note={this.props.note} keyCode={this.props.keyCode}>
+    //          <Rect
+    //              ref="rect"
+    //              width={this.props.size}
+    //              height={this.props.size}
+    //              x={0}
+    //              offset= {{
+    //                   x: 25,
+    //                   y: 25}}
+    //              fill={this.props.color}
+    //          />
 
-             <Text
-               text={this.props.letter}
-               fontSize={30}
-               x={this.props.size/2 - 5}
-               y={this.props.size/2 - 30/2}
-               offset= {{
-                             x: 25,
-                             y: 25}}
-               fontFamily="Calibri"
-               fill="white" />
-           </Group>
+    //          <Text
+    //            text={this.props.letter}
+    //            fontSize={30}
+    //            x={this.props.size/2 - 5}
+    //            y={this.props.size/2 - 30/2}
+    //            offset= {{
+    //                          x: 25,
+    //                          y: 25}}
+    //            fontFamily="Calibri"
+    //            fill="white" />
+    //        </Group>
 
-    )
+    // )
+
     var node = null;
     switch(this.props.note) {
       case 46 :
@@ -78,16 +79,17 @@ export default class BaseReceiver extends Component {
     }
     return (
       <Group width={this.props.size} height={this.props.size} x={this.props.x + 25} y={this.props.size*0.5} note={this.props.note} keyCode={this.props.keyCode}>
+
         {node}
 
         <Text
           text={this.props.letter}
           fontSize={30}
           x={this.props.size/2 - 5}
-          y={this.props.size/2 - 30/2}
+          y={-this.props.size + 10}
           offset= {{
-            x: 25,
-            y: this.props.size
+            x: this.props.size*0.5,
+            y: this.props.size*0.5
           }}
           fontFamily="Calibri"
           fill="red" />

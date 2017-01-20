@@ -21,7 +21,6 @@ export default class Notes extends Component {
       notes:[],
       key:null,
       timeOfCollision:utils.pxToTime(75)
-      //core:null,
     };
   }
 
@@ -34,6 +33,7 @@ export default class Notes extends Component {
     if(data.note === 42)
       note = 49;
     noteValues.push(note);
+
     //notes.push(<Note newP={this.state.newp} key={time} noteIO={this.props.noteIO} currentNote={note} timeCreation={Date.now()} size={size} x={0} timeToFall={this.state.timeToFall} keyCode={this.props.keyCode} group={this.state.group} isKeyboard={this.props.isKeyboard} hasToAnim={true}/>);
     if(note == 36 && !this.props.isKeyboard)
       isKick = true;
@@ -52,6 +52,7 @@ export default class Notes extends Component {
         keyCode={this.props.keyCode} 
         group={this.state.group} 
         isKeyboard={this.props.isKeyboard}
+        hasToAnim={true}
     />);
 
     this.setState({
@@ -230,7 +231,7 @@ export default class Notes extends Component {
     let size = 50, padding = 25;
     return (
       <Layer>
-        <Group y={0} x={-25} ref="notesContainer">
+        <Group y={size*0.5} x={-size*0.5} ref="notesContainer">
           {notes}
         </Group>
       </Layer>

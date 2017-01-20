@@ -3,9 +3,25 @@
 @import 'hudleft.scss';
 @import 'hudright.scss';
 
+@import url('https://fonts.googleapis.com/css?family=Montserrat:400,700');
+
+$montserrat: 'Montserrat', sans-serif;
+
+@keyframes colorize
+{
+	0% {color: #FFC733;}
+	25% {color: #44E894;}
+	50% {color: #557CE8;}
+	75% {color: #E84A41;}
+	100% {color: #FFC733;}
+}
+
 html,
 body{
   margin: 0;
+  background-image: url(../images/bg.jpg);
+  background-size: cover;
+  background-position: center center;
 }
 
 .game-window{
@@ -14,6 +30,19 @@ body{
 
 .konvajs-content {
 
+}
+
+.loading
+{
+	position: absolute;
+	left: 50%;
+	top: 50%;
+	transform: translateX(-50%) translateY(-50%);
+	font-family: $montserrat;
+	font-size: 10em;
+	font-style: italic;
+	font-weight: 700;
+	animation: colorize 2s infinite;
 }
 
 .container {
