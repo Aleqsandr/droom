@@ -85,14 +85,14 @@ export default class BaseReceiver extends Component {
         <Text
           text={this.props.letter}
           fontSize={30}
-          x={this.props.size/2 - 5}
+          x={this.props.size/2 - 8}
           y={-this.props.size + 10}
           offset= {{
             x: this.props.size*0.5,
             y: this.props.size*0.5
           }}
           fontFamily="Calibri"
-          fill="red" />
+          fill="#FFC733" />
       </Group>
     );
   }
