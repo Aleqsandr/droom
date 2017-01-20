@@ -26,22 +26,22 @@ export default class Wow extends Component {
     if(time<0)
     {
       this.setState({text:"really ?! -_-"});
-      wow.style.color = 'red';
+      wow.style.color = '#FFC733';
     }
     else if(time<50)
     {
       this.setState({text:"wow"});
-      wow.style.color = 'pink';
+      wow.style.color = '#FF0FF6';
     }
     else if(time<100)
     {
       this.setState({text:"good"});
-      wow.style.color = 'lightgreen';
+      wow.style.color = '#0D871E';
     }
     else if(time<200)
     {
       this.setState({text:"ok"});
-      wow.style.color = 'blue';
+      wow.style.color = '#36B2D6';
     }
     else
     {
