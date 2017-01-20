@@ -13,26 +13,27 @@ export default class Tom extends Component {
     if(this.props.y)
         y = this.props.y;
 
-    return (
+    return(
       <Group
-        width={this.props.size}
+        width={window.innerWidth}
         height={this.props.size}
         x={this.props.x}
         ref="note"
-        y={-this.props.size + y}
+        y={-this.props.size}
         offset={{
           x:this.props.size*0.5,
           y:this.props.size*0.5
         }}
       >
+
         <Rect
             fill="#000000"
             x={8}
             y={8}
             width={this.props.size*0.66}
             height={this.props.size*0.66}
-
         />
+
       </Group>
     );
   }
