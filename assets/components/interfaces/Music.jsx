@@ -89,7 +89,7 @@ export default class Music extends Component {
       return <EndMusic score={this.state.score}/>
 
     if(!this.state.finishStarter)
-      return (<div className="Music-container"><div className="compteur">Loading...</div></div>);
+      return (<div className="Music-container"><div className="loading">Loading...</div></div>);
     else {
       return (
         <App
