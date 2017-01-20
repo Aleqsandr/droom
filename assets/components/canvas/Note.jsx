@@ -1,6 +1,12 @@
 import React, { Component } from 'react';
 import {Layer, Rect, Stage, Group} from 'react-konva';
 
+import Charleston from './notes/Charleston.jsx';
+import Kick from './notes/Kick.jsx';
+import Snare from './notes/Snare.jsx';
+import Symbal from './notes/Symbal.jsx';
+import Tom from './notes/Tom.jsx';
+
 // App component - represents the whole app
 export default class Note extends Component {
   constructor(props) {
@@ -13,23 +19,15 @@ export default class Note extends Component {
   }
 
   componentDidMount() {
-    this.startAnimation();
     this.getCorrectGroup();
+    this.startAnimation(this.refs.note)
   }
 
-  startAnimation() {
-    let note = this.refs.note;
+  startAnimation(note) {
     note.to({
         y:window.innerHeight,
         duration: this.props.velocity / 60
     });
-  }
-
-  componentWillReceiveProps(nextProps) {
-    this.setState({
-      group:nextProps.group
-    });
-    this.checkCollision(nextProps);
   }
 
   getCorrectGroup() {
@@ -43,33 +41,52 @@ export default class Note extends Component {
   }
 
   render() {
-    if(this.props.isKick && !this.props.isKeyboard) {
-      return(
-        <Group
-          width={window.innerWidth}
-          height={this.props.size}
-          x={this.state.x}
-          ref="note"
-          y={-this.props.size}>
-          <Rect
-              fill={this.props.color}
-              width={window.innerWidth}
-              height={4}
-              y={this.props.size*0.5}
-          />
-        </Group>
-      )
-    }
-
     return (
       <Rect
-          ref="note"
-          width={this.props.size}
-          height={this.props.size}
-          x={this.state.x}
-          y={-this.props.size}
-          fill={this.props.color}
-      />
-    );
+        ref="note"
+        width={this.props.size}
+        height={this.props.size}
+        x={this.state.x}
+        y={-this.props.size}
+        fill="red"
+    />)
+
+    switch(this.props.currentNote) {
+      case 46 :
+        return ( <Charleston hasToAnim={this.props.hasToAnim} startAnimation={this.startAnimation.bind(this)} x={this.state.x} y={-this.props.size} size={this.props.size} /> );
+        break;
+
+      case 49 :
+        return ( <Snare hasToAnim={this.props.hasToAnim} startAnimation={this.startAnimation.bind(this)} x={this.state.x} y={-this.props.size} size={this.props.size} />);
+        break;
+
+      case 38 :
+        return ( <Symbal hasToAnim={this.props.hasToAnim} startAnimation={this.startAnimation.bind(this)} x={this.state.x} y={-this.props.size} size={this.props.size} />);
+        break;
+
+      case 48 :
+        return ( <Tom hasToAnim={this.props.hasToAnim} startAnimation={this.startAnimation.bind(this)} x={this.state.x} y={-this.props.size} size={this.props.size} />);
+        break;
+
+      case 36 :
+        return ( <Kick hasToAnim={this.props.hasToAnim} startAnimation={this.startAnimation.bind(this)} isKeyboard={this.props.isKeyboard} x={this.state.x} y={-this.props.size} size={this.props.size} />);
+        break;
+
+      case 45 :
+        return ( <Tom hasToAnim={this.props.hasToAnim} startAnimation={this.startAnimation.bind(this)} isKeyboard={this.props.isKeyboard} x={this.state.x} y={-this.props.size} size={this.props.size} />);
+        break;
+
+      case 43 :
+        return ( <Tom hasToAnim={this.props.hasToAnim} startAnimation={this.startAnimation.bind(this)} x={this.state.x} y={-this.props.size} size={this.props.size} />);
+        break;
+
+      case 51 :
+        return ( <Symbal hasToAnim={this.props.hasToAnim} startAnimation={this.startAnimation.bind(this)} x={this.state.x} y={-this.props.size} size={this.props.size} />);
+        break;
+
+      default :
+        return ( <Tom hasToAnim={this.props.hasToAnim} startAnimation={this.startAnimation.bind(this)} x={this.state.x} y={-this.props.size} size={this.props.size} />);
+        break;
+    }
   }
 }

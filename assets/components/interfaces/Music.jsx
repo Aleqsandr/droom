@@ -30,7 +30,6 @@ export default class Music extends Component {
       soundfontUrl: "/soundfont/",
       instrument: "synth_drum",
       onsuccess:function() {
-        
         MIDI.programChange(0, 118);
         MIDI.setVolume(0, 0);
         MIDI.Player.BPM = 120;
@@ -67,14 +66,13 @@ export default class Music extends Component {
 
   handleFinishCompteur() {
     var self = this;
-    
     this.state.player.start();
 
     setTimeout(function() {
       self.state.musicMP3.play();
     },this.state.velocity/60*1000 - utils.pxToTime(50));
 
-    
+
     this.state.player.addListener(function(data){
       // play the note
 
@@ -98,9 +96,9 @@ export default class Music extends Component {
           shouldAnim={this.state.shouldAnim}
           data={this.state.data}
           canStart={this.handleFinishCompteur.bind(this)}
-          onEndMusic={this.onEndMusic.bind(this)} 
+          onEndMusic={this.onEndMusic.bind(this)}
           velocity={this.state.velocity}
-        />    
+        />
       );
     }
   }
