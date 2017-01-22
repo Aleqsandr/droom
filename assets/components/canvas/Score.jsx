@@ -68,7 +68,6 @@ export default class Score extends Component {
       }
       prevTime = nextProps.timingNote;
     } else {
-      console.log("else", prevTime)
       prevTime = nextProps.timingNote;
       if(nextProps.timingNote>0 && nextProps.timingNote <= 300){
         switch(this.state.streak) {

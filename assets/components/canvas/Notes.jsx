@@ -120,44 +120,54 @@ export default class Notes extends Component {
 
   checkKey(key){
     let current = 0;
-    if(key === 83){
-      current = [46, 0];
-      this.setState({key:46});
-    }
-    if(key === 68){
-      current = [49, 1];
-      this.setState({key:49});
-    }
-    if(key === 70){
-      current = [38, 2];
-      this.setState({key:38});
-    }
-    if(key === 71){
-      current = [48, 3];
-      this.setState({key:48});
-    }
-    if(key === 72){
-      current = [36, 4];
-      this.setState({key:36});
-    }
-    if(key === 74){
-      current = [45, 5];
-      this.setState({key:45});
-    }
-    if(key === 75){
-      current = [43, 6];
-      this.setState({key:43});
-    }
-    if(key === 76){
-      current = [51, 7];
-      this.setState({key:51});
-    }
+    let keyCheck = false;
 
-    for (var i = this.refs.notesContainer.getChildren().length - 1; i >= 0; i--) {
+    switch (key) {
+      case 83:
+        current = [46, 0];
+        this.setState({key:46});
+        break;
+      case 68:
+        current = [49, 1];
+        this.setState({key:49});
+        break;
+      case 70:
+        current = [38, 2];
+        this.setState({key:38});
+        break;
+      case 71:
+        current = [48, 3];
+        this.setState({key:48});
+        break;
+      case 72:
+        current = [36, 4];
+        this.setState({key:36});
+        break;
+      case 74:
+        current = [45, 5];
+        this.setState({key:45});
+        break;
+      case 75:
+        current = [43, 6];
+        this.setState({key:43});
+        break;
+      case 76:
+        current = [43, 6];
+        this.setState({key:43});
+        break;
+      default:
+        let keyCheck = true;
+        break;
+    }
+    
+    if(keyCheck != false){
+      for (var i = this.refs.notesContainer.getChildren().length - 1; i >= 0; i--) {  
         this.checkCollision(this.refs.notesContainer.getChildren()[i],current,i);
-    }
+      }
 
-    this.animKick(current[1]);
+      this.animKick(current[1]);
+    }
+  
   }
 
   checkCollision(el,valNote,i) {
