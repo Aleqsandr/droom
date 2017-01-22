@@ -37,20 +37,20 @@ export default class Notes extends Component {
     //notes.push(<Note newP={this.state.newp} key={time} noteIO={this.props.noteIO} currentNote={note} timeCreation={Date.now()} size={size} x={0} timeToFall={this.state.timeToFall} keyCode={this.props.keyCode} group={this.state.group} isKeyboard={this.props.isKeyboard} hasToAnim={true}/>);
     if(note == 36 && !this.props.isKeyboard)
       isKick = true;
-    notes.push(<Note 
-        velocity={this.props.velocity} 
-        newP={this.state.newp} 
-        isKick={isKick} 
-        key={time} 
-        noteIO={this.props.noteIO} 
-        currentNote={note} 
-        timeCreation={Date.now()} 
-        size={size} 
-        x={0} 
-        color="#ff0000" 
-        timeToFall={this.state.timeToFall} 
-        keyCode={this.props.keyCode} 
-        group={this.state.group} 
+    notes.push(<Note
+        velocity={this.props.velocity}
+        newP={this.state.newp}
+        isKick={isKick}
+        key={time}
+        noteIO={this.props.noteIO}
+        currentNote={note}
+        timeCreation={Date.now()}
+        size={size}
+        x={0}
+        color="#ff0000"
+        timeToFall={this.state.timeToFall}
+        keyCode={this.props.keyCode}
+        group={this.state.group}
         isKeyboard={this.props.isKeyboard}
         hasToAnim={true}
     />);
@@ -100,22 +100,24 @@ export default class Notes extends Component {
     this.state.group.getChildren()[id].getChildren()[0].to({
       scaleX: 1,
       scaleY: 1,
-      duration: 0,
+      duration: 0
     });
 
-    this.state.group.getChildren()[id].getChildren()[0].to({
-      scaleX: 1.3,
-      scaleY: 1.3,
-      duration: time/100,
-    });
+    setTimeout(function() {
+      self.state.group.getChildren()[id].getChildren()[0].to({
+        scaleX: 1.3,
+        scaleY: 1.3,
+        duration: 0.1
+      });
+    }, 5);
 
     setTimeout(function() {
       self.state.group.getChildren()[id].getChildren()[0].to({
         scaleX: 1,
         scaleY: 1,
-        duration: time/100
+        duration: 0.1
       });
-    },time*2);
+    }, 105);
   }
 
   checkKey(key){
@@ -238,10 +240,18 @@ export default class Notes extends Component {
   }*/
 
   render() {
-    let size = 50, padding = 25;
+    let size = 50, padding = 25, diff = 0;
+    if(!this.props.isKeyboard) {
+      diff = -1;
+    }
+
+    let totalWidth = size*(8+diff)+padding*(7+diff),
+        left = window.innerWidth*0.5 - totalWidth;
+
+
     return (
       <Layer>
-        <Group y={size*0.5} x={-size*0.5} ref="notesContainer">
+        <Group y={size*0.5} x={-size*0.5 + left*0.5} ref="notesContainer">
           {notes}
         </Group>
       </Layer>
