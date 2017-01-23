@@ -196,13 +196,12 @@ export default class Notes extends Component {
         this.props.getTimingNoteSuccess(diff);
 
         let self = this, time =50;
-        this.state.group.getChildren()[valNote[1]].getChildren()[0].stroke("#ccedff");
-        this.state.group.getChildren()[valNote[1]].getChildren()[0].strokeWidth(5);
-        setTimeout(function() {
-          self.state.group.getChildren()[valNote[1]].getChildren()[0].strokeWidth(0);
-        },100)
-
+        this.state.group.getChildren()[valNote[1]].getChildren()[0].getChildren()[0].stroke("#ccedff");
+        this.state.group.getChildren()[valNote[1]].getChildren()[0].getChildren()[0].strokeWidth(5);
         this.props.getTimingNoteSuccess(diff);
+        setTimeout(function() {
+          self.state.group.getChildren()[valNote[1]].getChildren()[0].getChildren()[0].strokeWidth(0);
+        },100)
         //this.incrementScore();
 
         return;
