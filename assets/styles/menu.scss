@@ -1,0 +1,174 @@
+@import url('https://fonts.googleapis.com/css?family=Montserrat:400,700');
+
+$montserrat: 'Montserrat', sans-serif;
+
+.library
+{
+	width: 100vw;
+	height: 100vh;
+
+	.user
+	{
+		font-family: $montserrat;
+		color: white;
+		font-weight: 700;
+		font-size: 1.5em;
+		text-transform: uppercase;
+		position: fixed;
+		width: auto;
+		height: 50px;
+		background-color: black;
+		left: 40px;
+		top: 40px;
+
+		& > *
+		{
+			display: inline-block;
+		}
+
+		.isconnected
+		{
+			height: 100%;
+			width: 10px;
+			background: #55FF22;
+		}
+
+		.avatar
+		{
+			height: 50px;
+			width: 50px;
+
+			&__img
+			{
+				width: 100%;
+				height: 100%;
+				background-image: url(../images/usernametriangle.png);
+				background-size: cover;
+				transform: rotate(0deg);
+				transition: .2s;
+
+				&--isopen
+				{
+					transform: rotate(90deg);
+				}
+			}
+		}
+
+		.logout
+		{
+			height: 50px;
+			width: 50px;
+			position: absolute;
+			left: 10px;
+			background: black;
+			transition: .2s;
+
+			&__img
+			{
+				position: absolute;
+				width: 50%;
+				height: 50%;
+				top: 50%;
+				left: 50%;
+				transform: translateX(-50%) translateY(-50%);
+				transition: .2s;
+				background-image: url(../images/logout.png);
+				background-size: cover;
+
+				&--invisible
+				{
+					opacity: 0;
+				}
+			}
+
+			&--lower
+			{
+				transform: translateY(100%);
+			}
+		}
+
+		.username
+		{
+			margin: 0;
+			position: absolute;
+			height: 100%;
+			width: auto;
+			background: rgba(0, 0, 0, .3);
+
+			&__text
+			{
+				margin: 0;
+				position: relative;
+				top: 50%;
+				transform: translateY(-50%);
+				padding: 0 18px;
+			}
+		}
+	}
+
+	&__logo
+	{
+		position: fixed;
+		right: 40px;
+		top: 40px;
+		width: 250px;
+		height: 125px;
+		background-image: url(../images/mainlogoblack.gif);
+		background-size: cover;
+	}
+
+	&__slider
+	{
+		font-family: $montserrat;
+		font-weight: 900;
+		font-style: italic;
+		font-size: 3em;
+		position: absolute;
+		width: 100%;
+		height: 75%;
+		bottom: 0;
+
+		&__tracks
+		{
+			position: relative;
+			width: 40%;
+			height: 100%;
+			left: 40px;
+
+			.sectiontitle
+			{
+				position: relative;
+				top: 15px;
+				left: 15px;
+				margin: 0 0 25px 0;
+			}
+
+			.trackelement
+			{
+				width: 100%;
+				height: 80px;
+				background: green;
+
+				.repeat, .live
+				{
+					position: relative;
+					float: right;
+					width: auto;
+					height: 100%;
+					background: purple;
+					font-size: 0.4em;
+					padding: 0 20px;
+
+					p
+					{
+						text-align: center;
+						margin: 0;
+						position: relative;
+						top: 50%;
+						transform: translateY(-50%);
+					}
+				}
+			}
+		}
+	}
+}
