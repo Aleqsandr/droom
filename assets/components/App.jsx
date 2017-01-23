@@ -104,6 +104,10 @@ export default class App extends Component {
     this.props.onEndMusic(score);
   }
 
+  onPauseMusic() {
+    this.props.onPauseMusic();
+  }
+
   render() {
     return (
       <div className="container" ref="container">
@@ -126,7 +130,12 @@ export default class App extends Component {
             />
           </Stage>
         </main>
-        <HudRight velocity={this.props.velocity} timingNote={this.state.timingNote} onEndMusic={this.onEndMusic.bind(this)}/>
+        <HudRight
+          velocity={this.props.velocity}
+          timingNote={this.state.timingNote}
+          onEndMusic={this.onEndMusic.bind(this)}
+          handlePause={this.onPauseMusic.bind(this)}
+        />
       </div>
     );
   }
