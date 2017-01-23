@@ -26,10 +26,11 @@ export default class Score extends Component {
   }
 
   componentWillReceiveProps(nextProps) {
-    const INTERVAL = (this.props.velocity / 60 * 1000 * 300 ) / 2000;
+    const INTERVAL = (this.props.velocity / 60 * 1000 * 200 ) / 2000;
+    console.log(INTERVAL)
     if(prevTime) {
       if(nextProps.timingNote != prevTime){
-        if(nextProps.timingNote>0 && nextProps.timingNote <= 300){
+        if(nextProps.timingNote>0 && nextProps.timingNote <= INTERVAL){
           switch(this.state.streak) {
             case 3:
                 this.setState({multiplier:2});
@@ -69,7 +70,7 @@ export default class Score extends Component {
       prevTime = nextProps.timingNote;
     } else {
       prevTime = nextProps.timingNote;
-      if(nextProps.timingNote>0 && nextProps.timingNote <= 300){
+      if(nextProps.timingNote>0 && nextProps.timingNote <= INTERVAL){
         switch(this.state.streak) {
           case 3:
               this.setState({multiplier:2});
