@@ -37,6 +37,10 @@ export default class HudRight extends Component {
     }
   }
 
+  handlePause() {
+    this.props.handlePause();
+  }
+
   render() {
     return (
         <div className="hud hud--right">
@@ -50,9 +54,9 @@ export default class HudRight extends Component {
           </div>
           <div className="hud__bottom">
             <div className="gamemenu">
-              <a href="#"><div className="button"><p>PAUSE</p></div></a><br/>
-              <a href="#"><div className="button"><p>SETTINGS</p></div></a><br/>
-              <a href="#"><div className="button"><p>LOG OUT</p></div></a><br/>
+              <div className="button" onClick={this.handlePause.bind(this)}><p>PAUSE</p></div><br/>
+              <div className="button"><p>SETTINGS</p></div><br/>
+              <div className="button"><p>LOG OUT</p></div><br/>
             </div>
           </div>
         </div>
