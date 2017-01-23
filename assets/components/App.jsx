@@ -25,7 +25,6 @@ export default class App extends Component {
       shouldAnim:false,
       timeKick:null,
       timingNote:0,
-
       isKeyboard:false
       //scoreUpdate:null
     };
@@ -135,6 +134,8 @@ export default class App extends Component {
           timingNote={this.state.timingNote}
           onEndMusic={this.onEndMusic.bind(this)}
           handlePause={this.onPauseMusic.bind(this)}
+          isPlaying={this.props.isPlaying}
+          finishStarter={this.state.finishStarter}
         />
       </div>
     );

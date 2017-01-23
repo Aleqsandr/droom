@@ -176,6 +176,7 @@ export default class Notes extends Component {
   }
 
   checkCollision(el,valNote,i) {
+    console.log(valNote)
 
     let current = Date.now(),
         impactTime = times[i]+ utils.bpmToMs(this.props.velocity) - this.state.timeOfCollision;

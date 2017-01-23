@@ -22,7 +22,7 @@ export default class Music extends Component {
       velocity:null,
       startTime:null,
       pauseTime:null,
-      isPlaying:false
+      isPlaying:false,
     };
   }
 
@@ -73,14 +73,18 @@ export default class Music extends Component {
       this.state.player.pause();
       this.setState({isPlaying:false})
     } else {
-      this.state.musicMP3.play();
+      var self = this;
       this.state.player.currentTime = 0;
       this.state.player.resume();
       this.setState({isPlaying:true})
+      setTimeout(function() {
+        self.state.musicMP3.play();
+      },(this.state.velocity * 2000 / 120) - utils.pxToTime(this.state.velocity,50));
     }
   }
 
   handleFinishCompteur() {
+
     var self = this;
     this.state.player.start();
 
@@ -94,7 +98,6 @@ export default class Music extends Component {
       // play the note
 
       MIDI.setVolume(0, 0);
-      console.log(self.state.player.currentTime);
 
       if(data.message == 144 || data.now == 125.5){ // NoteOn
         self.setState({data:data, shouldAnim:false})
@@ -117,6 +120,7 @@ export default class Music extends Component {
           onEndMusic={this.onEndMusic.bind(this)}
           onPauseMusic={this.onPauseMusic.bind(this)}
           velocity={this.state.velocity}
+          isPlaying={this.state.isPlaying}
         />
       );
     }
