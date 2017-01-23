@@ -35,13 +35,13 @@ export default class Music extends Component {
       onsuccess:function() {
         MIDI.programChange(0, 118);
         MIDI.setVolume(0, 0);
-        MIDI.Player.BPM = 120;
+        MIDI.Player.BPM = 150;
         self.setState({
           player:MIDI.Player,
-          musicMP3 : new Howl({src: ['./musics/2/testDroom2.wav']}),
+          musicMP3 : new Howl({src: ['./musics/3/song3.wav']}),
           velocity: MIDI.Player.BPM
         })
-        self.state.player.loadFile( "./musics/2/drumDroomTest.mid", self.launchGame.bind(self),null,function() {console.log("nope")} );
+        self.state.player.loadFile( "./musics/3/song3.mid", self.launchGame.bind(self),null,function() {console.log("nope")} );
       }
     })
 
