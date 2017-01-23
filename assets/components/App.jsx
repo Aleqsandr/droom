@@ -26,7 +26,7 @@ export default class App extends Component {
       timeKick:null,
       timingNote:0,
 
-      isKeyboard:true
+      isKeyboard:false
       //scoreUpdate:null
     };
   }

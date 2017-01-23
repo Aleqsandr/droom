@@ -50,9 +50,9 @@ export default class Score extends Component {
             score:this.state.score+10*this.state.multiplier,
             fails:this.state.fails+2
           });
-          console.log("wow")
+          // console.log("wow")
         } else{
-          console.log("nope")
+          // console.log("nope")
 
           this.setState({
             streak:0,

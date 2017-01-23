@@ -14,8 +14,16 @@ var useful = {
         }
     },
 
-    pxToTime(px){
-      return 3000*px/window.innerHeight
+    pxToTime(time, px){
+        let realTime = time
+        if(time===0)
+            realTime = 3000;
+
+      return realTime*px/window.innerHeight
+    },
+
+    bpmToS(bpm) {
+        return (bpm/60)*1000
     }
 }
 
