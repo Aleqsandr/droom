@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import Compteur from '../canvas/Compteur.jsx';
 import Score from '../canvas/Score.jsx';
+import PauseMenu from './PauseMenu.jsx';
 import Wow from '../canvas/Wow.jsx';
 
 let prevTime = 0;
@@ -59,6 +60,7 @@ export default class HudRight extends Component {
               <div className="button"><p>LOG OUT</p></div><br/>
             </div>
           </div>
+          <PauseMenu finishPause={this.props.handlePause.bind(this)} isPlaying={this.props.isPlaying} finishStarter={this.props.finishStarter}/>
         </div>
     )
   }
