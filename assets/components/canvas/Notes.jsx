@@ -34,25 +34,20 @@ export default class Notes extends Component {
       note = 49;
     noteValues.push(note);
 
-    //notes.push(<Note newP={this.state.newp} key={time} noteIO={this.props.noteIO} currentNote={note} timeCreation={Date.now()} size={size} x={0} timeToFall={this.state.timeToFall} keyCode={this.props.keyCode} group={this.state.group} isKeyboard={this.props.isKeyboard} hasToAnim={true}/>);
-    if(note == 36 && !this.props.isKeyboard)
-      isKick = true;
     notes.push(<Note
-        velocity={this.props.velocity}
-        newP={this.state.newp}
-        isKick={isKick}
-        key={time}
-        noteIO={this.props.noteIO}
-        currentNote={note}
-        timeCreation={Date.now()}
-        size={size}
-        x={0}
-        color="#ff0000"
-        timeToFall={this.state.timeToFall}
-        keyCode={this.props.keyCode}
-        group={this.state.group}
-        isKeyboard={this.props.isKeyboard}
-        hasToAnim={true}
+      velocity={this.props.velocity}
+      newP={this.state.newp}
+      key={time}
+      noteIO={this.props.noteIO}
+      currentNote={note}
+      timeCreation={Date.now()}
+      size={size}
+      x={0}
+      timeToFall={this.state.timeToFall}
+      keyCode={this.props.keyCode}
+      group={this.state.group}
+      isKeyboard={this.props.isKeyboard}
+      hasToAnim={true}
     />);
 
     this.setState({
@@ -126,50 +121,58 @@ export default class Notes extends Component {
 
     switch (key) {
       case 83:
+        keyCheck = true;
         current = [46, 0];
         this.setState({key:46});
         break;
       case 68:
+        keyCheck = true;
         current = [49, 1];
         this.setState({key:49});
         break;
       case 70:
+        keyCheck = true;
         current = [38, 2];
         this.setState({key:38});
         break;
       case 71:
+        keyCheck = true;
         current = [48, 3];
         this.setState({key:48});
         break;
       case 72:
+        keyCheck = true;
         current = [36, 4];
         this.setState({key:36});
         break;
       case 74:
+        keyCheck = true;
         current = [45, 5];
         this.setState({key:45});
         break;
       case 75:
+        keyCheck = true;
         current = [43, 6];
         this.setState({key:43});
         break;
       case 76:
+        keyCheck = true;
         current = [43, 6];
         this.setState({key:43});
         break;
       default:
-        let keyCheck = true;
+        keyCheck = false;
         break;
     }
-    
+
     if(keyCheck != false){
-      for (var i = this.refs.notesContainer.getChildren().length - 1; i >= 0; i--) {  
+      for (var i = this.refs.notesContainer.getChildren().length - 1; i >= 0; i--) {
         this.checkCollision(this.refs.notesContainer.getChildren()[i],current,i);
       }
 
       this.animKick(current[1]);
     }
-  
+
   }
 
   checkCollision(el,valNote,i) {
