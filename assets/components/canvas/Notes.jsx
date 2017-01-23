@@ -157,7 +157,7 @@ export default class Notes extends Component {
         break;
       case 76:
         keyCheck = true;
-        current = [43, 6];
+        current = [51, 7];
         this.setState({key:43});
         break;
       default:
