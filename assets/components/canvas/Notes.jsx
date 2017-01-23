@@ -20,7 +20,7 @@ export default class Notes extends Component {
       newp:0,
       notes:[],
       key:null,
-      timeOfCollision:utils.pxToTime(75)
+      timeOfCollision:utils.pxToTime(utils.bpmToS(this.props.velocity),75)
     };
   }
 
@@ -178,15 +178,15 @@ export default class Notes extends Component {
   checkCollision(el,valNote,i) {
 
     let current = Date.now(),
-
-    impactTime = times[i]+ this.props.velocity/60*1000 - this.state.timeOfCollision;
+        impactTime = times[i]+ utils.bpmToS(this.props.velocity) - this.state.timeOfCollision;
 
     MIDI.setVolume(0,70);
     MIDI.noteOn(0, valNote[0], 70, 0);
 
     let diff = Math.abs(current - impactTime);
 
-    if(diff < utils.pxToTime(70) && noteValues[i] == valNote[0]) {
+    if(diff < utils.pxToTime(utils.bpmToS(this.props.velocity),70) && noteValues[i] == valNote[0]) {
+        console.log("wow");
         // Success.
         times.splice(i, 1);
         notes.splice(i, 1);
@@ -207,7 +207,7 @@ export default class Notes extends Component {
         return;
     }
 
-    if(times[i]+(this.state.timeToFall)*1000 + utils.pxToTime(75) < current) {
+    if(times[i]+(this.props.velocity/60*1000) + utils.pxToTime(this.props.velocity/60*1000,75) < current) {
         // Destroy. Failure
         times.splice(i, 1);
         notes.splice(i, 1);
