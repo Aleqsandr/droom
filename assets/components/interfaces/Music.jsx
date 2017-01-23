@@ -19,7 +19,10 @@ export default class Music extends Component {
       score:null,
       isFinish:false,
       musicMP3:null,
-      velocity:null
+      velocity:null,
+      startTime:null,
+      pauseTime:null,
+      isPlaying:false,
     };
   }
 
@@ -32,13 +35,13 @@ export default class Music extends Component {
       onsuccess:function() {
         MIDI.programChange(0, 118);
         MIDI.setVolume(0, 0);
-        MIDI.Player.BPM = 120;
+        MIDI.Player.BPM = 150;
         self.setState({
           player:MIDI.Player,
-          musicMP3 : new Howl({src: ['./musics/2/testDroom2.wav']}),
+          musicMP3 : new Howl({src: ['./musics/3/song3.wav']}),
           velocity: MIDI.Player.BPM
         })
-        self.state.player.loadFile( "./musics/2/drumDroomTest.mid", self.launchGame.bind(self),null,function() {console.log("nope")} );
+        self.state.player.loadFile( "./musics/3/song3.mid", self.launchGame.bind(self),null,function() {console.log("nope")} );
       }
     })
 
@@ -64,14 +67,32 @@ export default class Music extends Component {
     this.state.musicMP3.stop();
   }
 
+  onPauseMusic() {
+    if(this.state.isPlaying) {
+      this.state.musicMP3.pause();
+      this.state.player.pause();
+      this.setState({isPlaying:false})
+    } else {
+      var self = this;
+      this.state.player.currentTime = 0;
+      this.state.player.resume();
+      this.setState({isPlaying:true})
+      setTimeout(function() {
+        self.state.musicMP3.play();
+      },(this.state.velocity * 2000 / 120) - utils.pxToTime(this.state.velocity,50));
+    }
+  }
+
   handleFinishCompteur() {
+
     var self = this;
     this.state.player.start();
 
     setTimeout(function() {
       self.state.musicMP3.play();
-    },(this.state.velocity * 2000 / 120) - utils.pxToTime(this.state.velocity,50));
+    }, utils.bpmToMs(this.state.velocity) - utils.pxToTime(utils.bpmToMs(this.state.velocity),50));
 
+    this.setState({isPlaying:true});
 
     this.state.player.addListener(function(data){
       // play the note
@@ -86,7 +107,7 @@ export default class Music extends Component {
 
   render() {
     if(this.state.isFinish)
-      return <EndMusic score={this.state.score}/>
+      return (<EndMusic score={this.state.score}/>)
 
     if(!this.state.finishStarter)
       return (<div className="Music-container"><div className="loading">Loading...</div></div>);
@@ -97,7 +118,9 @@ export default class Music extends Component {
           data={this.state.data}
           canStart={this.handleFinishCompteur.bind(this)}
           onEndMusic={this.onEndMusic.bind(this)}
+          onPauseMusic={this.onPauseMusic.bind(this)}
           velocity={this.state.velocity}
+          isPlaying={this.state.isPlaying}
         />
       );
     }

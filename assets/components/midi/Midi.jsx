@@ -63,14 +63,15 @@ export default class Midi extends Component {
   }
 
   onMIDIMessage(event) {
-    this.props.getNoteNumber(event.data);
+    if(event.data[2] != 64)
+      this.props.getNoteNumber(event.data);
   }
 
   onStateChange(event) {
     var port = event.port,
-            state = port.state,
-            name = port.name,
-            type = port.type;
+        state = port.state,
+        name = port.name,
+        type = port.type;
     if (type == "input") console.log("name", name, "port", port, "state", state);
   }
 
