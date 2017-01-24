@@ -45,11 +45,11 @@ export default class BaseReceiver extends Component {
         node = ( <Charleston y={this.props.size} hasToAnim={false} x={0} size={this.props.size} /> );
         break;
 
-      case 49 :
+      case 38 :
         node = ( <Snare y={this.props.size} hasToAnim={false} x={0} size={this.props.size} />);
         break;
 
-      case 38 :
+      case 49 :
         node = ( <Symbal y={this.props.size} hasToAnim={false} x={0} size={this.props.size} />);
         break;
 

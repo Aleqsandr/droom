@@ -127,12 +127,12 @@ export default class Notes extends Component {
         break;
       case 68:
         keyCheck = true;
-        current = [49, 1];
+        current = [38, 1];
         this.setState({key:49});
         break;
       case 70:
         keyCheck = true;
-        current = [38, 2];
+        current = [49, 2];
         this.setState({key:38});
         break;
       case 71:
