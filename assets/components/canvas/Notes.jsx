@@ -20,7 +20,7 @@ export default class Notes extends Component {
       newp:0,
       notes:[],
       key:null,
-      timeOfCollision: utils.pxToTime(utils.bpmToMs(this.props.velocity),50)
+      timeOfCollision: utils.pxToTime(utils.bpmToMs(this.props.velocity),75)
     };
   }
 
@@ -158,7 +158,7 @@ export default class Notes extends Component {
       case 76:
         keyCheck = true;
         current = [51, 7];
-        this.setState({key:43});
+        this.setState({key:51});
         break;
       default:
         keyCheck = false;
@@ -182,7 +182,7 @@ export default class Notes extends Component {
         impactTime = times[i]+ utils.bpmToMs(this.props.velocity) - this.state.timeOfCollision;
 
     MIDI.setVolume(0,70);
-    MIDI.noteOn(0, valNote[0], 70, 0);
+    MIDI.noteOn(0, valNote[0], 20, 0);
 
     let diff = Math.abs(current - impactTime);
 
