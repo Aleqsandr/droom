@@ -133,7 +133,9 @@ export default class Music extends Component {
       MIDI.setVolume(0, 0);
 
       if(data.message == 144 || data.now == 100.5){ // NoteOn
-        self.setState({data:data, shouldAnim:false})
+        //self.state.data.push(data);
+        self.setState({data:data, shouldAnim:false});
+        //console.log(self.state.data)
       }
     });
   }
