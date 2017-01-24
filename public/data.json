@@ -1,0 +1,227 @@
+{
+  "project": [
+    {
+      "id":0,
+      "name": "TAG Heuer",
+      "nameUrl": "1",
+      "baseline": "A new design for a new Youtube Channel",
+      "cover": "/images/TagHeuer/Projet01_Cover.jpg",
+      "what":"Youtube Channel",
+      "role":"Art Direction, UI Design & Webdesign",
+      "year":"2013 - 2014",
+      "client":"TAG Heuer",
+      "agency":"Wise Digital",
+      "images":[
+        {
+          "url":"/images/TagHeuer/Projet01_01.jpg",
+          "type":1
+        },
+        {
+          "url":"/images/TagHeuer/Projet01_02.jpg",
+          "type":1
+        },
+        {
+          "url1":"/images/TagHeuer/Projet01_03_A.jpg",
+          "url2":"/images/TagHeuer/Projet01_03_B.jpg",
+          "url3":"/images/TagHeuer/Projet01_03_C.jpg",
+          "type":12
+        },
+        {
+          "url":"/images/TagHeuer/Projet01_04_FullWidth.jpg",
+          "type":"full"
+        },
+        {
+          "url":"/images/TagHeuer/Projet01_05.jpg",
+          "type":1
+        },
+        {
+          "url1":"/images/TagHeuer/Projet01_06_A.jpg",
+          "url2":"/images/TagHeuer/Projet01_06_B.jpg",
+          "type":2
+        },
+        {
+          "url":"/images/TagHeuer/Projet01_07.jpg",
+          "type":1
+        },
+        {
+          "url":"/images/TagHeuer/Projet01_08.jpg",
+          "type":1
+        },
+        {
+          "url1":"/images/TagHeuer/Projet01_09_A.jpg",
+          "url2":"/images/TagHeuer/Projet01_09_B.jpg",
+          "type":2
+        }
+      ]
+    },
+    {
+      "id":1,
+      "name": "Isipca",
+      "nameUrl": "2",
+      "baseline": "Just do it",
+      "cover": "/images/Isipca/Projet2_Cover.jpg",
+      "what":"Showcase Website - RFP",
+      "role":"Art Direction, UI Design & Webdesign",
+      "year":"2015",
+      "client":"CNC",
+      "agency":"Wise Digital",
+      "images":[
+        {
+          "url":"/images/Isipca/Projet2_1.jpg",
+          "type":1
+        },
+        {
+          "url":"/images/Isipca/Projet2_2.jpg",
+          "type":1
+        },
+        {
+          "url":"/images/Isipca/Projet2_3.jpg",
+          "type":1
+        },
+        {
+          "url":"/images/Isipca/Projet2_4_Full.jpg",
+          "type":"full"
+        },
+        {
+          "url":"/images/Isipca/Projet2_5.jpg",
+          "type":1
+        },
+        {
+          "url":"/images/Isipca/Projet2_6.jpg",
+          "type":1
+        },
+        {
+          "url":"/images/Isipca/Projet2_7.jpg",
+          "type":1
+        }
+      ]
+    },
+    {
+      "id":2,
+      "name": "Coeur de Blé",
+      "nameUrl": "3",
+      "baseline": "Don't crack under pressure",
+      "cover": "/images/CoeurDeBle/Projet4_Cover.jpg",
+      "what":"E-commerce Website",
+      "role":"Art Direction & Webdesign",
+      "year":"2014",
+      "client":"Coeur de Blé",
+      "agency":"Wise Digital",
+      "images":[
+        {
+          "url":"/images/CoeurDeBle/Projet4_01.jpg",
+          "type":1
+        },
+        {
+          "url":"/images/CoeurDeBle/Projet4_02.jpg",
+          "type":1
+        },
+        {
+          "url":"/images/CoeurDeBle/Projet4_03.jpg",
+          "type":"full"
+        },
+        {
+          "url":"/images/CoeurDeBle/Projet4_04.jpg",
+          "type":1
+        },
+        {
+          "url":"/images/CoeurDeBle/Projet4_05.jpg",
+          "type":1
+        },
+        {
+          "url":"/images/CoeurDeBle/Projet4_06.jpg",
+          "type":1
+        }
+      ]
+    },
+    {
+      "id":3,
+      "name": "Théâtre des Champs-Elysées",
+      "nameUrl": "4",
+      "baseline": "Don't crack under pressure",
+      "cover": "/images/TCE/Projet3_Cover.jpg",
+      "what":"Showcase Website",
+      "role":"Webdesign",
+      "year":"2015",
+      "client":"Théâtre des Champs-Elysées",
+      "agency":"Wise Digital",
+      "images":[
+        {
+          "url":"/images/TCE/Projet3_1.jpg",
+          "type":1
+        },
+        {
+          "url":"/images/TCE/Projet3_2.jpg",
+          "type":1
+        },
+        {
+          "url":"/images/TCE/Projet3_3.jpg",
+          "type":1
+        },
+        {
+          "url":"/images/TCE/Projet3_4.jpg",
+          "type":1
+        },
+        {
+          "url":"/images/TCE/Projet3_5.jpg",
+          "type":1
+        },
+        {
+          "url":"/images/TCE/Projet3_6.jpg",
+          "type":1
+        },
+        {
+          "url":"/images/TCE/Projet3_7.jpg",
+          "type":1
+        },
+        {
+          "url":"/images/TCE/Projet3_8.jpg",
+          "type":1
+        }
+      ]
+    },
+    {
+      "id":4,
+      "name": "Etabli London",
+      "nameUrl": "",
+      "baseline": "Don't crack under pressure",
+      "cover": "/images/EtabliLondon/Projet5_Cover.jpg",
+      "what":"Will Be Ready Soon",
+      "role":"Art Direction, UI Design",
+      "year":"2013 - 2014",
+      "client":"Tag Heuer",
+      "agency":"Wise Digital",
+      "images":[
+        {
+          "url1":"https://placeholdit.imgix.net/~text?txtsize=52&bg=441100&txt=550%C3%97550&w=550&h=550",
+          "url2":"https://placeholdit.imgix.net/~text?txtsize=52&bg=441100&txt=550%C3%97550&w=550&h=550",
+          "type":2
+        },
+        {
+          "url":"https://placeholdit.imgix.net/~text?txtsize=52&bg=441100&txt=550%C3%97550&w=550&h=550",
+          "type":1
+        },
+        {
+          "url":"https://placeholdit.imgix.net/~text?txtsize=52&bg=441100&txt=550%C3%97550&w=550&h=550",
+          "type":"full"
+        },
+        {
+          "url1":"https://placeholdit.imgix.net/~text?txtsize=52&bg=441100&txt=550%C3%97550&w=550&h=550",
+          "url2":"https://placeholdit.imgix.net/~text?txtsize=52&bg=441100&txt=550%C3%97550&w=550&h=550",
+          "type":2
+        },
+        {
+          "url1":"https://placeholdit.imgix.net/~text?txtsize=52&bg=441100&txt=550%C3%97550&w=550&h=550",
+          "url2":"https://placeholdit.imgix.net/~text?txtsize=52&bg=441100&txt=550%C3%97550&w=550&h=550",
+          "url3":"https://placeholdit.imgix.net/~text?txtsize=52&bg=441100&txt=550%C3%97550&w=550&h=550",
+          "type":3
+        },
+        {
+          "url":"https://placeholdit.imgix.net/~text?txtsize=52&bg=441100&txt=550%C3%97550&w=550&h=550",
+          "type":1
+        }
+      ]
+    }
+  ]
+
+}
