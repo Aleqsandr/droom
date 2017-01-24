@@ -23,6 +23,7 @@ export default class Music extends Component {
       startTime:null,
       pauseTime:null,
       isPlaying:false,
+      rewindTime:5000,
     };
   }
 
@@ -68,18 +69,32 @@ export default class Music extends Component {
   }
 
   onPauseMusic() {
+    // Launche pause.
     if(this.state.isPlaying) {
       this.state.musicMP3.pause();
       this.state.player.pause();
       this.setState({isPlaying:false})
     } else {
+    // Resume music, -5s.
       var self = this;
       this.setState({isPlaying:true})
-      this.state.player.currentTime = 0;
-      this.state.player.resume();
-      setTimeout(function() {
-        self.state.musicMP3.play();
-      },(utils.bpmToMs(this.state.velocity)));
+      console.log("player : ",this.state.player.currentTime)
+        console.log("mp3 : ", self.state.musicMP3.seek())
+      if(this.state.player.currentTime <= this.state.rewindTime) {
+        this.state.player.currentTime = 0;
+        this.state.player.resume();
+        setTimeout(function() {
+          self.state.musicMP3.play();
+        },(utils.bpmToMs(this.state.velocity)));
+      } else {
+        console.log("player : ",this.state.player.currentTime)
+        console.log("mp3 : ", self.state.musicMP3.seek())
+        this.state.player.currentTime = this.state.player.currentTime - this.state.rewindTime;
+        this.state.player.resume();
+        setTimeout(function() {
+          self.state.musicMP3.seek(self.state.musicMP3.seek() - (self.state.rewindTime*0.001));
+        },(utils.bpmToMs(this.state.velocity)));
+      }
     }
   }
 
@@ -96,7 +111,6 @@ export default class Music extends Component {
 
     this.state.player.addListener(function(data){
       // play the note
-
       MIDI.setVolume(0, 0);
 
       if(data.message == 144 || data.now == 125.5){ // NoteOn
