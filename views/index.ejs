@@ -2,6 +2,7 @@
 
 <% if (sails.config.environment === 'development') { %>
     <script src="http://localhost:8080/dist/bundle.js"></script>
+    <script src="/WebMIDIAPI.min.js"></script>
 <% } else { %>
     <script src="<%= bundle %>"></script>
 <% } %>
