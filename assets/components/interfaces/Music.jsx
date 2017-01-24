@@ -74,12 +74,12 @@ export default class Music extends Component {
       this.setState({isPlaying:false})
     } else {
       var self = this;
+      this.setState({isPlaying:true})
       this.state.player.currentTime = 0;
       this.state.player.resume();
-      this.setState({isPlaying:true})
       setTimeout(function() {
         self.state.musicMP3.play();
-      },(this.state.velocity * 2000 / 120) - utils.pxToTime(this.state.velocity,50));
+      },(utils.bpmToMs(this.state.velocity)));
     }
   }
 

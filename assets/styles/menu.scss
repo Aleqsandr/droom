@@ -6,6 +6,7 @@ $montserrat: 'Montserrat', sans-serif;
 {
 	width: 100vw;
 	height: 100vh;
+	background-image: url(../images/librarybg.jpg);
 
 	.user
 	{
@@ -122,18 +123,25 @@ $montserrat: 'Montserrat', sans-serif;
 		font-family: $montserrat;
 		font-weight: 900;
 		font-style: italic;
-		font-size: 3em;
 		position: absolute;
 		width: 100%;
 		height: 75%;
 		bottom: 0;
+		color: white;
 
 		&__tracks
 		{
 			position: relative;
-			width: 40%;
+			width: 100%;
 			height: 100%;
 			left: 40px;
+
+			.trackwrapper
+			{
+				height: 75%;
+				width: 100%;
+				overflow-y: scroll;
+			}
 
 			.sectiontitle
 			{
@@ -141,22 +149,51 @@ $montserrat: 'Montserrat', sans-serif;
 				top: 15px;
 				left: 15px;
 				margin: 0 0 25px 0;
+				font-size: 3em;
 			}
 
 			.trackelement
 			{
-				width: 100%;
-				height: 80px;
-				background: green;
+				width: 600px;
+				height: auto;
+				display: flex;
+				margin-top: 5px;
+
+				&__left
+				{
+					padding: 10px;
+					flex: 9.2;
+					box-sizing: border-box;
+					border: 3px inset black;
+					background-color: rgba(255, 255, 255, .5);
+					color: black;
+				}
+
+				&__right
+				{
+					flex: 5;
+				}
+
+				.repeat
+				{
+					background: rgba(245, 110, 80, .5);
+				}
+
+				.live
+				{
+					background: rgba(44, 270, 165, .5);
+				}
 
 				.repeat, .live
 				{
+					box-sizing: border-box;
+					margin-left: 5px;
+					border: 3px inset black;
 					position: relative;
 					float: right;
 					width: auto;
 					height: 100%;
-					background: purple;
-					font-size: 0.4em;
+					font-size: 1em;
 					padding: 0 20px;
 
 					p
@@ -167,6 +204,31 @@ $montserrat: 'Montserrat', sans-serif;
 						top: 50%;
 						transform: translateY(-50%);
 					}
+				}
+
+				.tracktitle
+				{
+					margin: 0;
+					font-size: 1.4em;
+				}
+
+				.trackartist
+				{
+					text-transform: uppercase;
+					letter-spacing: 2px;
+					margin: 0;
+					font-style: normal;
+					font-size: 0.8em;
+					margin-top: 3px;
+				}
+
+				.trackyear, .trackdifficulty
+				{
+					display: inline-block;
+					letter-spacing: 2px;
+					margin: 0;
+					font-style: normal;
+					font-size: 0.8em;
 				}
 			}
 		}
