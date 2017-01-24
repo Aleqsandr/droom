@@ -27,7 +27,6 @@ export default class Score extends Component {
 
   componentWillReceiveProps(nextProps) {
     const INTERVAL = (this.props.velocity / 60 * 1000 * 200 ) / 2000;
-    console.log(INTERVAL)
     if(prevTime) {
       if(nextProps.timingNote != prevTime){
         if(nextProps.timingNote>0 && nextProps.timingNote <= INTERVAL){

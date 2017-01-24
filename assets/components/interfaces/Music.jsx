@@ -105,16 +105,17 @@ export default class Music extends Component {
     this.state.player.start();
 
     setTimeout(function() {
-      // self.state.musicMP3.play();
-    }, utils.bpmToMs(this.state.velocity) - utils.pxToTime(utils.bpmToMs(this.state.velocity),50));
+       self.state.musicMP3.play();
+    }, utils.bpmToMs(this.state.velocity) - utils.pxToTime(utils.bpmToMs(this.state.velocity),65));
 
     this.setState({isPlaying:true});
 
     this.state.player.addListener(function(data){
+      console.log(data)
       // play the note
       MIDI.setVolume(0, 0);
 
-      if(data.message == 144 || data.now == 125.5){ // NoteOn
+      if(data.message == 144 || data.now == 100.5){ // NoteOn
         self.setState({data:data, shouldAnim:false})
       }
     });
