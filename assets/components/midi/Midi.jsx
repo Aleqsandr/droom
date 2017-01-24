@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-//require('web-midi-api');
+//import web from "../../modules/WebMIDIAPI.min.js";
 
 
 function onMIDIMessage(message) {

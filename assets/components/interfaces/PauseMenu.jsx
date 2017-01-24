@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import {Link} from 'react-router';
 
 export default class PauseMenu extends Component {
 
@@ -16,6 +17,7 @@ export default class PauseMenu extends Component {
             <div className="pause__content">
               <div className="pause__title">Pause</div>
               <div className="button" onClick={this.handlePause.bind(this)}><p>RESUME</p></div><br/>
+              <Link to="/menu"><div className="button"><p>MENU</p></div></Link>
             </div>
           </div>
         </div>

@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import {Link} from 'react-router';
 
 export default class Track extends Component
 {
@@ -26,8 +27,8 @@ export default class Track extends Component
                     </div>
                 </div>
                 <div className="trackelement__right">
-                    <div className="repeat"><p>REPEAT</p></div>
-                    <div className="live"><p>LIVE</p></div>
+                    <Link to="/app"><div className="repeat"><p>REPEAT</p></div></Link>
+                    <a href="#"><div className="live"><p>LIVE</p></div></a>
                 </div>
             </div>
         );
