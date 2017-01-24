@@ -93,6 +93,7 @@ export default class Music extends Component {
         this.state.player.resume();
         setTimeout(function() {
           self.state.musicMP3.seek(self.state.musicMP3.seek() - (self.state.rewindTime*0.001));
+          self.state.musicMP3.play();
         },(utils.bpmToMs(this.state.velocity)));
       }
     }
@@ -104,7 +105,7 @@ export default class Music extends Component {
     this.state.player.start();
 
     setTimeout(function() {
-      self.state.musicMP3.play();
+      // self.state.musicMP3.play();
     }, utils.bpmToMs(this.state.velocity) - utils.pxToTime(utils.bpmToMs(this.state.velocity),50));
 
     this.setState({isPlaying:true});
