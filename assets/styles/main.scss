@@ -26,6 +26,7 @@ body{
   background-position: center center;
   height:100vh;
   width: 100%;
+  overflow:hidden;
 }
 
 .game-window{
@@ -60,3 +61,51 @@ body{
         flex: 2;
     }
 }
+
+.end {
+    position:absolute;
+    left:50%;
+    top:50%;
+    transform:translate(-50%,-50%);
+    text-align:center;
+
+    &__title {
+        font-family: "Montserrat", sans-serif;
+        font-weight: 900;
+        font-size: 4em;
+    }
+
+    &__score {
+        font-family: "Montserrat", sans-serif;
+        font-weight: 800;
+        font-size: 3em;
+    }
+}
+
+
+.button{
+        font-family: $montserrat;
+        margin-top: 5px;
+        display: inline-block;
+        background: black;
+        color: white;
+        font-weight: 700;
+        width: 150px;
+        height: 35px;
+        text-align: center;
+        transition: .25s;
+        cursor:pointer;
+
+        &:hover{
+            background: #FFC733;
+            color: black;
+        }
+
+        p{
+            margin: 0;
+            position: relative;
+            top: 50%;
+            transform: translateY(-50%);
+        }
+
+    }

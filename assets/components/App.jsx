@@ -107,6 +107,10 @@ export default class App extends Component {
     this.props.onPauseMusic();
   }
 
+  scoreUpdate(score) {
+    this.props.getScore(score);
+  }
+
   render() {
     return (
       <div className="container" ref="container">
@@ -136,6 +140,7 @@ export default class App extends Component {
           handlePause={this.onPauseMusic.bind(this)}
           isPlaying={this.props.isPlaying}
           finishStarter={this.state.finishStarter}
+          scoreUpdate={this.scoreUpdate.bind(this)}
         />
       </div>
     );

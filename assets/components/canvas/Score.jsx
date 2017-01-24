@@ -21,6 +21,10 @@ export default class Score extends Component {
     };
   }
 
+  componentDidUpdate(nextProps) {
+    this.props.scoreUpdate(this.state.score);
+  }
+
   handleEndMusic() {
     this.props.onEndMusic(this.state.score);
   }
@@ -50,10 +54,7 @@ export default class Score extends Component {
             score:this.state.score+10*this.state.multiplier,
             fails:this.state.fails+2
           });
-          // console.log("wow")
         } else{
-          // console.log("nope")
-
           this.setState({
             streak:0,
             score:this.state.score-5,

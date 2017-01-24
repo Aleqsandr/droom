@@ -15,8 +15,9 @@ export default class HudRight extends Component {
       timingNote:null
     };
   }
-  scoreUpdate(){
-    this.props.scoreUpdate();
+
+  scoreUpdate(score){
+    this.props.scoreUpdate(score);
   }
 
   handleEndMusic(score) {
