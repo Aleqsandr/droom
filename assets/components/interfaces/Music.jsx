@@ -78,17 +78,15 @@ export default class Music extends Component {
     // Resume music, -5s.
       var self = this;
       this.setState({isPlaying:true})
-      console.log("player : ",this.state.player.currentTime)
-        console.log("mp3 : ", self.state.musicMP3.seek())
       if(this.state.player.currentTime <= this.state.rewindTime) {
+        MIDI.setVolume(0, 0);
         this.state.player.currentTime = 0;
         this.state.player.resume();
         setTimeout(function() {
           self.state.musicMP3.play();
         },(utils.bpmToMs(this.state.velocity)));
       } else {
-        console.log("player : ",this.state.player.currentTime)
-        console.log("mp3 : ", self.state.musicMP3.seek())
+        MIDI.setVolume(0, 0);
         this.state.player.currentTime = this.state.player.currentTime - this.state.rewindTime;
         this.state.player.resume();
         setTimeout(function() {
