@@ -23,6 +23,7 @@ export default class Music extends Component {
       startTime:null,
       pauseTime:null,
       isPlaying:false,
+      rewindTime:5000,
     };
   }
 
@@ -68,18 +69,33 @@ export default class Music extends Component {
   }
 
   onPauseMusic() {
+    // Launche pause.
     if(this.state.isPlaying) {
       this.state.musicMP3.pause();
       this.state.player.pause();
       this.setState({isPlaying:false})
     } else {
+    // Resume music, -5s.
       var self = this;
-      this.state.player.currentTime = 0;
-      this.state.player.resume();
       this.setState({isPlaying:true})
-      setTimeout(function() {
-        self.state.musicMP3.play();
-      },(this.state.velocity * 2000 / 120) - utils.pxToTime(this.state.velocity,50));
+      console.log("player : ",this.state.player.currentTime)
+        console.log("mp3 : ", self.state.musicMP3.seek())
+      if(this.state.player.currentTime <= this.state.rewindTime) {
+        this.state.player.currentTime = 0;
+        this.state.player.resume();
+        setTimeout(function() {
+          self.state.musicMP3.play();
+        },(utils.bpmToMs(this.state.velocity)));
+      } else {
+        console.log("player : ",this.state.player.currentTime)
+        console.log("mp3 : ", self.state.musicMP3.seek())
+        this.state.player.currentTime = this.state.player.currentTime - this.state.rewindTime;
+        this.state.player.resume();
+        setTimeout(function() {
+          self.state.musicMP3.seek(self.state.musicMP3.seek() - (self.state.rewindTime*0.001));
+          self.state.musicMP3.play();
+        },(utils.bpmToMs(this.state.velocity)));
+      }
     }
   }
 
@@ -89,18 +105,20 @@ export default class Music extends Component {
     this.state.player.start();
 
     setTimeout(function() {
-      self.state.musicMP3.play();
-    }, utils.bpmToMs(this.state.velocity) - utils.pxToTime(utils.bpmToMs(this.state.velocity),50));
+       self.state.musicMP3.play();
+    }, utils.bpmToMs(this.state.velocity) - utils.pxToTime(utils.bpmToMs(this.state.velocity),65));
 
     this.setState({isPlaying:true});
 
     this.state.player.addListener(function(data){
+      
       // play the note
-
       MIDI.setVolume(0, 0);
 
-      if(data.message == 144 || data.now == 125.5){ // NoteOn
-        self.setState({data:data, shouldAnim:false})
+      if(data.message == 144 || data.now == 100.5){ // NoteOn
+        //self.state.data.push(data);
+        self.setState({data:data, shouldAnim:false});
+        //console.log(self.state.data)
       }
     });
   }

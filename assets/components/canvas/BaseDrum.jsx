@@ -22,8 +22,8 @@ export default class BaseDrum extends Component {
       <Layer>
         <Group ref="groupReceiver" y={window.innerHeight - size} x={left*0.5}>
           <BaseReceiver letter="S" x={0} size={size} color="#BDBDBD" note={46} />
-          <BaseReceiver letter="D" x={size*1+padding} size={size} color="#FFCA28" note={49} />
-          <BaseReceiver letter="F" x={size*2+padding*2} size={size} color="#9CCC65" note={38} />
+          <BaseReceiver letter="D" x={size*1+padding} size={size} color="#FFCA28" note={38} />
+          <BaseReceiver letter="F" x={size*2+padding*2} size={size} color="#9CCC65" note={49} />
           <BaseReceiver letter="G" x={size*3+padding*3} size={size} color="#FF7043" note={48} />
           <BaseReceiver letter="H" x={size*4+padding*4 + size*10*diff} size={size} color="#26A69A" note={36} />
           <BaseReceiver letter="J" x={size*(5+diff)+padding*(5+diff)} size={size} color="#5C6BC0" note={45} />

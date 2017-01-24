@@ -6,7 +6,6 @@ export default class Charleston extends Component {
 
   componentDidMount() {
     if(this.props.hasToAnim){
-      console.log("wow")
       this.props.startAnimation(this.refs.note);
     }
   }

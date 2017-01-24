@@ -20,7 +20,7 @@ export default class Notes extends Component {
       newp:0,
       notes:[],
       key:null,
-      timeOfCollision: utils.pxToTime(utils.bpmToMs(this.props.velocity),50)
+      timeOfCollision: utils.pxToTime(utils.bpmToMs(this.props.velocity),75)
     };
   }
 
@@ -127,12 +127,12 @@ export default class Notes extends Component {
         break;
       case 68:
         keyCheck = true;
-        current = [49, 1];
+        current = [38, 1];
         this.setState({key:49});
         break;
       case 70:
         keyCheck = true;
-        current = [38, 2];
+        current = [49, 2];
         this.setState({key:38});
         break;
       case 71:
@@ -158,7 +158,7 @@ export default class Notes extends Component {
       case 76:
         keyCheck = true;
         current = [51, 7];
-        this.setState({key:43});
+        this.setState({key:51});
         break;
       default:
         keyCheck = false;
@@ -176,13 +176,12 @@ export default class Notes extends Component {
   }
 
   checkCollision(el,valNote,i) {
-    console.log(valNote)
 
     let current = Date.now(),
         impactTime = times[i]+ utils.bpmToMs(this.props.velocity) - this.state.timeOfCollision;
 
-    MIDI.setVolume(0,70);
-    MIDI.noteOn(0, valNote[0], 70, 0);
+    MIDI.setVolume(0,35);
+    MIDI.noteOn(0, valNote[0], 20, 0);
 
     let diff = Math.abs(current - impactTime);
 
