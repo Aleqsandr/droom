@@ -55,11 +55,11 @@ export default class Note extends Component {
         return ( <Charleston hasToAnim={this.props.hasToAnim} startAnimation={this.startAnimation.bind(this)} x={this.state.x+this.props.size*0.5} y={-this.props.size*0.5} size={this.props.size} /> );
         break;
 
-      case 49 :
+      case 38 :
         return ( <Snare hasToAnim={this.props.hasToAnim} startAnimation={this.startAnimation.bind(this)} x={this.state.x+this.props.size*0.5} y={-this.props.size*0.5} size={this.props.size} />);
         break;
 
-      case 38 :
+      case 49 :
         return ( <Symbal hasToAnim={this.props.hasToAnim} startAnimation={this.startAnimation.bind(this)} x={this.state.x+this.props.size*0.5} y={-this.props.size*0.5} size={this.props.size} />);
         break;
 
