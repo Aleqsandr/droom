@@ -25,6 +25,7 @@ export default class Notes extends Component {
   }
 
   addNewNote(data) {
+    console.log(data)
     if(!data) return;
     let size = 50, padding = 25;
     var time = Date.now();
@@ -57,10 +58,12 @@ export default class Notes extends Component {
   }
 
   componentWillReceiveProps(nextProps) {
+    console.log(nextProps)
     if(nextProps.data){
-      this.setState({prevData:nextProps.data.now})
-      if(nextProps.data.now != this.state.prevData){
-        this.addNewNote(nextProps.data)
+      if(nextProps.shouldAnim != true){
+        let thisNote = nextProps.data;
+        this.addNewNote(thisNote);
+        thisNote = null;
       }
     }
     this.setState({group:nextProps.group});

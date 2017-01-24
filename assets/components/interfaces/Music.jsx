@@ -124,18 +124,18 @@ export default class Music extends Component {
 
     setTimeout(function() {
        self.state.musicMP3.play();
-    }, utils.bpmToMs(this.state.velocity) - utils.pxToTime(utils.bpmToMs(this.state.velocity),66));
+    }, utils.bpmToMs(this.state.velocity) - utils.pxToTime(utils.bpmToMs(this.state.velocity),73));
 
     this.setState({isPlaying:true});
 
     this.state.player.addListener(function(data){
       // play the note
       MIDI.setVolume(0, 0);
-
+      let prevData = data;
       if(data.message == 144 || data.now == 100.5){ // NoteOn
-        //self.state.data.push(data);
-        self.setState({data:data, shouldAnim:false});
-        //console.log(self.state.data)
+        // if the app is crashing, you better remove that following if statement line
+        if(data.now != prevData.now && data.message != prevData.message && data.note != prevData.now)
+          self.setState({data:data, shouldAnim:false});
       }
     });
   }
