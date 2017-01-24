@@ -176,12 +176,11 @@ export default class Notes extends Component {
   }
 
   checkCollision(el,valNote,i) {
-    console.log(valNote)
 
     let current = Date.now(),
         impactTime = times[i]+ utils.bpmToMs(this.props.velocity) - this.state.timeOfCollision;
 
-    MIDI.setVolume(0,70);
+    MIDI.setVolume(0,35);
     MIDI.noteOn(0, valNote[0], 20, 0);
 
     let diff = Math.abs(current - impactTime);
