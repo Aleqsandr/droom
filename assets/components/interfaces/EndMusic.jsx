@@ -1,7 +1,13 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router';
 
-export default class EndMusic extends Component {
+export default class EndMusic extends Component
+{
+    constructor(props)
+    {
+        super(props);
+        console.log(this.props.score.score);
+    }
 
   render() {
     return (
