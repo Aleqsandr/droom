@@ -58,6 +58,13 @@ export default class Notes extends Component {
   }
 
   componentWillReceiveProps(nextProps) {
+    if(!nextProps.isPlaying){
+
+      notes = [];
+      times = [];
+      noteValues = [];
+      return;
+    }
     if(nextProps.data){
       if(nextProps.shouldAnim != true){
         let thisNote = nextProps.data;
@@ -191,7 +198,6 @@ export default class Notes extends Component {
     let diff = Math.abs(current - impactTime);
 
     if(diff < utils.pxToTime(utils.bpmToMs(this.props.velocity),70) && noteValues[i] == valNote[0]) {
-      console.log("success")
         // Success.
         times.splice(i, 1);
         notes.splice(i, 1);
@@ -225,7 +231,14 @@ export default class Notes extends Component {
   }
 
   handleDiff(val) {
-    this.props.getTimingNoteSuccess(val);
+    if(this.props.isPlaying && notes.length>0){
+      this.props.getTimingNoteSuccess(val)
+    }
+    else {
+      notes = [];
+      times = [];
+      noteValues = [];
+    }
   }
 
   render() {

@@ -36,6 +36,7 @@ export default class Score extends Component {
   }
 
   componentWillReceiveProps(nextProps) {
+    if(!nextProps.isPlaying)return;
     const INTERVAL = (this.props.velocity / 60 * 1000 * 200 ) / 2000;
     if(prevTime) {
       if(nextProps.timingNote != prevTime || nextProps.timingNote == utils.pxToTime(utils.bpmToMs(this.props.velocity),70)){
@@ -65,10 +66,10 @@ export default class Score extends Component {
             streak:0,
             score:this.state.score-5,
             multiplier:1,
-            fails:this.state.fails-10
+            fails:this.state.fails-5
           })
 
-          if(this.state.fails - 10 <= 0) {
+          if(this.state.fails - 5 <= 0) {
             this.handleEndMusic();
           }
         }
@@ -100,11 +101,11 @@ export default class Score extends Component {
       }else {
         this.setState({
           streak:0,
-          multiplier:1,        
+          multiplier:1,
         })
 
         if(nextProps.timingNote !== 0) {
-          this.setState({fails:this.state.fails-10})
+          this.setState({fails:this.state.fails-5})
         }
       }
     }

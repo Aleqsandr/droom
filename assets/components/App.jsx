@@ -92,14 +92,6 @@ export default class App extends Component {
     })
   }
 
-  /*getScoreUpdate(val){
-      console.log(val)
-      if (val !== 'undefined' || val !== 'null'){
-        this.setState({scoreUpdate: val});
-        console.log(this.state.scoreUpdate)
-      }
-  }*/
-
   onEndMusic(score) {
     this.props.onEndMusic(score);
   }
@@ -116,7 +108,7 @@ export default class App extends Component {
     return (
       <div className="container" ref="container">
         <Midi getNoteNumber={this.getNoteNumber.bind(this)}/>
-        <HudLeft finishCompteur={this.finishCompteur.bind(this)} timingNote={this.state.timingNote}/>
+        <HudLeft track={this.props.track} finishCompteur={this.finishCompteur.bind(this)} timingNote={this.state.timingNote}/>
         <main>
           <Stage width={this.state.width*0.5} height={this.state.height}>
             <BaseDrum handleGroup={this.handleGroup.bind(this)} isKeyboard={this.state.isKeyboard}/>
@@ -128,6 +120,7 @@ export default class App extends Component {
               group={this.state.group}
               timingNote={this.state.timingNote}
               data={this.props.data}
+              isPlaying={this.props.isPlaying}
               getTimingNoteSuccess={this.getTimingNoteSuccess.bind(this)}
               //getScoreUpdate={this.getScoreUpdate.bind(this)}
               isKeyboard={this.state.isKeyboard}
@@ -143,6 +136,7 @@ export default class App extends Component {
           isPlaying={this.props.isPlaying}
           finishStarter={this.state.finishStarter}
           scoreUpdate={this.scoreUpdate.bind(this)}
+          shouldCheck={this.state.shouldCheck}
         />
       </div>
     );

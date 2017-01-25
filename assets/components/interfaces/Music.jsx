@@ -12,6 +12,11 @@ let scoreFinal = 0;
 export default class Music extends Component {
   constructor(props) {
     super(props);
+    let id = parseInt(this.props.id) || 0, newData = this.props.data.tracks[id];
+    if(!newData.length){
+      this.props.data.tracks[0];
+      id = 2;
+    }
 
     this.state = {
       finishStarter:false,
@@ -27,6 +32,9 @@ export default class Music extends Component {
       isPlaying:false,
       rewindTime:5000,
       score:null,
+      track:newData,
+      id:id,
+      shouldCheck:true,
     };
   }
 
@@ -43,15 +51,14 @@ export default class Music extends Component {
         self.setState({
           player:MIDI.Player,
           musicMP3 : new Howl({
-            src: ['./musics/3/song.mp3'],
+            src: ['./musics/'+self.state.id+'/song.mp3'],
             onend : () => {
-              console.log("start end")
               self.handleEnd()
             }
           }),
           velocity: MIDI.Player.BPM
         })
-        self.state.player.loadFile( "./musics/3/song.mid", self.launchGame.bind(self),null,function() {console.log("nope")} );
+        self.state.player.loadFile( "./musics/"+self.state.id+"/song.mid", self.launchGame.bind(self),null,function() {console.log("nope")} );
       }
     })
   }
@@ -97,7 +104,7 @@ export default class Music extends Component {
     if(this.state.isPlaying) {
       this.state.musicMP3.pause();
       this.state.player.pause();
-      this.setState({isPlaying:false})
+      this.setState({isPlaying:false,shouldCheck:false})
     } else {
     // Resume music, -5s.
       var self = this;
@@ -107,17 +114,25 @@ export default class Music extends Component {
         this.state.player.currentTime = 0;
         this.state.player.resume();
         setTimeout(function() {
-          self.state.musicMP3.play();
+          if(self.state.isPlaying)
+            self.state.musicMP3.play();
         },(utils.bpmToMs(this.state.velocity)));
       } else {
         MIDI.setVolume(0, 0);
         this.state.player.currentTime = this.state.player.currentTime - this.state.rewindTime;
         this.state.player.resume();
         setTimeout(function() {
+          if(!self.state.isPlaying)return;
           self.state.musicMP3.seek(self.state.musicMP3.seek() - (self.state.rewindTime*0.001));
           self.state.musicMP3.play();
         },(utils.bpmToMs(this.state.velocity)));
       }
+
+      setTimeout(function() {
+        self.setState({
+          shouldCheck:true
+        })
+      },this.state.velocity * 2000 / 120)
     }
   }
 
@@ -127,7 +142,8 @@ export default class Music extends Component {
     this.state.player.start();
 
     setTimeout(function() {
-       self.state.musicMP3.play();
+      if(self.state.isPlaying)
+        self.state.musicMP3.play();
     }, utils.bpmToMs(this.state.velocity) - utils.pxToTime(utils.bpmToMs(this.state.velocity),73));
 
     this.setState({isPlaying:true});
@@ -163,6 +179,8 @@ export default class Music extends Component {
           velocity={this.state.velocity}
           isPlaying={this.state.isPlaying}
           getScore={this.getScore.bind(this)}
+          track={this.state.track}
+          shouldCheck={this.state.shouldCheck}
         />
       );
     }

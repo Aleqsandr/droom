@@ -6,6 +6,7 @@ import { Router, Route, Link, browserHistory, IndexRoute, IndexRedirect } from '
 
 import Home from 'components/pages/Home';
 import Music from 'components/interfaces/Music';
+import GameHandler from 'components/interfaces/GameHandler';
 import NotFound from 'components/notFound/NotFound';
 import About from 'components/pages/About';
 import Menu from 'components/pages/Menu';
@@ -14,21 +15,28 @@ export default class Routes extends Component{
     constructor(props) {
       super(props);
 
-      this.state = {};
+      this.state = {
+        id:null
+      };
     }
 
-    getMusicId() {
-
+    sendMusicId(id) {
+        console.log(id);
+        this.setState({
+            id:id
+        })
     }
 
     render(){
         return (
             <Router history={browserHistory}>
-              <Route path="/" component={Home} />
-              <Route path="/app" component={Music} />
-              <Route path="/menu" component={Menu} />
-              <Route path="/about" component={About} />
-              <Route path="/*" component={NotFound} />
+              <Route path="/" component={GameHandler}>
+                <IndexRoute component={Home}/>
+                <Route path="/app" component={Music} />
+                <Route path="/menu" component={Menu} />
+                <Route path="/about" component={About} />
+                <Route path='*' component={NotFound} />
+              </Route>
             </Router>
         );
     }
