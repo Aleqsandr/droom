@@ -131,10 +131,7 @@ export default class Music extends Component {
     this.state.player.addListener(function(data){
       // play the note
       MIDI.setVolume(0, 0);
-
       if(data.message == 144 || data.now == 100.5){ // NoteOn
-        // if the app is crashing, you better remove that following if statement line
-
           self.setState({data:data, shouldAnim:false});
       }
     });

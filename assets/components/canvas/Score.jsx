@@ -41,17 +41,17 @@ export default class Score extends Component {
       if(nextProps.timingNote != prevTime || nextProps.timingNote === utils.pxToTime(utils.bpmToMs(this.props.velocity),70)){
         if(nextProps.timingNote>0 && nextProps.timingNote <= INTERVAL){
           switch(this.state.streak) {
-            case 3:
+            case 9:
                 this.setState({multiplier:2});
                 break;
-            case 5:
-                this.setState({multiplier:3});
-                break;
-            case 7:
+            case 19:
                 this.setState({multiplier:4});
                 break;
-            case 10:
-                this.setState({multiplier:5});
+            case 29:
+                this.setState({multiplier:6});
+                break;
+            case 49:
+                this.setState({multiplier:10});
                 break;
           }
 
