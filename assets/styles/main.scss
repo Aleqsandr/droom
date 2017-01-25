@@ -18,6 +18,13 @@ $montserrat: 'Montserrat', sans-serif;
 	100% {color: #FFC733;}
 }
 
+@keyframes bounce
+{
+    0% {transform: scale(1)}
+    50% {transform: scale(1.05)}
+    100% {transform: scale(1)}
+}
+
 html,
 body{
   margin: 0;
@@ -71,15 +78,26 @@ body{
     text-align:center;
 
     &__title {
-        font-family: "Montserrat", sans-serif;
-        font-weight: 900;
-        font-size: 4em;
+        font-family: $montserrat;
+        font-weight: 700;
+        font-size: 8em;
+        text-transform: uppercase;
+        line-height: 1em;
+        margin-bottom: 20px;
+        animation: bounce 2s infinite;
     }
 
     &__score {
         font-family: "Montserrat", sans-serif;
-        font-weight: 800;
-        font-size: 3em;
+        font-weight: 700;
+        font-size: 1.5em;
+        text-transform: uppercase;
+        letter-spacing: 2px;
+    }
+
+    .button
+    {
+        margin-top: 25px;
     }
 }
 
