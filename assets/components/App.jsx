@@ -87,7 +87,7 @@ export default class App extends Component {
 
   getTimingNoteSuccess(val) {
     this.setState({
-      timingNote:val
+      timingNote:val,
     })
   }
 

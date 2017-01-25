@@ -28,7 +28,6 @@ export default class Charleston extends Component {
         }}
       >
         <Circle
-            ref="note"
             width={this.props.size - widthStroke*0.5}
             height={this.props.size - widthStroke*0.5}
             offset={{
@@ -59,7 +58,6 @@ export default class Charleston extends Component {
         }}
       >
         <Circle
-            ref="note"
             width={this.props.size - widthStroke*0.5}
             height={this.props.size - widthStroke*0.5}
             offset={{

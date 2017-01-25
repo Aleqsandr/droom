@@ -23,10 +23,20 @@ export default class Note extends Component {
   }
 
   startAnimation(note) {
+    let self = this;
     note.to({
         y:window.innerHeight,
-        duration: this.props.velocity * 2 / 120
+        duration: this.props.velocity * 2 / 120,
+        onFinish: function() {
+            self.checkFailure(note.getChildren());
+        }
     });
+  }
+
+  checkFailure(note) {
+    if(note.length){
+      this.props.failNote();
+    }
   }
 
   getCorrectGroup() {

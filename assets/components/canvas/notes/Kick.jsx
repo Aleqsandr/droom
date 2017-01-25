@@ -53,7 +53,6 @@ export default class Kick extends Component {
       >
 
         <Rect
-            ref="note"
             width={this.props.size}
             height={this.props.size}
             fill="black" />

@@ -25,7 +25,6 @@ export default class Notes extends Component {
   }
 
   addNewNote(data) {
-    console.log(data)
     if(!data) return;
     let size = 50, padding = 25;
     var time = Date.now();
@@ -49,6 +48,7 @@ export default class Notes extends Component {
       group={this.state.group}
       isKeyboard={this.props.isKeyboard}
       hasToAnim={true}
+      failNote={this.handleFailure.bind(this)}
     />);
 
     this.setState({
@@ -58,7 +58,6 @@ export default class Notes extends Component {
   }
 
   componentWillReceiveProps(nextProps) {
-    console.log(nextProps)
     if(nextProps.data){
       if(nextProps.shouldAnim != true){
         let thisNote = nextProps.data;
@@ -189,7 +188,6 @@ export default class Notes extends Component {
     let diff = Math.abs(current - impactTime);
 
     if(diff < utils.pxToTime(utils.bpmToMs(this.props.velocity),70) && noteValues[i] == valNote[0]) {
-        console.log("wow");
         // Success.
         times.splice(i, 1);
         notes.splice(i, 1);
@@ -205,8 +203,7 @@ export default class Notes extends Component {
         setTimeout(function() {
           self.state.group.getChildren()[valNote[1]].getChildren()[0].getChildren()[0].strokeWidth(0);
         },100)
-        //this.incrementScore();
-
+        this.props.getTimingNoteSuccess(diff);
         return;
     }
 
@@ -216,33 +213,14 @@ export default class Notes extends Component {
         notes.splice(i, 1);
         noteValues.splice(i, 1);
         el.destroy();
-
     }
-    this.props.getTimingNoteSuccess(diff);
     return;
 
   }
 
-  /*incrementScore() {
-
-    let tmp = this.state.score;
-    tmp += 10;
-
-    this.setState({score: tmp});
-
-    this.props.getScoreUpdate(this.state.score);
+  handleFailure() {
+    this.props.getTimingNoteSuccess(utils.pxToTime(utils.bpmToMs(this.props.velocity),70));
   }
-
-  decrementScore() {
-
-    let tmp = this.state.score;
-    tmp -= 2;
-
-    this.setState({score: tmp});
-
-    this.props.getScoreUpdate(this.state.score);
-
-  }*/
 
   render() {
     let size = 50, padding = 25, diff = 0;
