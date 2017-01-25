@@ -57,6 +57,7 @@ export default class Music extends Component {
   }
 
   handleEnd() {
+    this.stopAllMusics();
     this.setState({
       isFinish:true,
       score:scoreFinal
@@ -75,6 +76,7 @@ export default class Music extends Component {
   }
 
   onEndMusic(score) {
+    this.stopAllMusics();
     this.setState({
       score:scoreFinal,
       isFinish:true
@@ -83,9 +85,11 @@ export default class Music extends Component {
 
   getScore(score){
     scoreFinal = score;
-    // this.setState({
-    //   score:score
-    // })
+  }
+
+  stopAllMusics() {
+    this.state.musicMP3.unload();
+    this.state.player.stop();
   }
 
   onPauseMusic() {
