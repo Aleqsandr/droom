@@ -23,7 +23,12 @@ export default class Score extends Component {
   }
 
   componentDidUpdate(nextProps) {
-    this.props.scoreUpdate(this.state.score);
+    let scores = {
+      "score":this.state.score,
+      "streak":this.state.streak,
+      "vanessabar":utils.checkColor(this.state.fails)
+    }
+    this.props.scoreUpdate(scores);
   }
 
   handleEndMusic() {

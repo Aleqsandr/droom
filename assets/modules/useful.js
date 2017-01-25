@@ -16,7 +16,7 @@ var useful = {
 
     pxToTime(time, px){
         let realTime = time
-        
+
         if(time===0)
             realTime = 3000;
 
@@ -24,11 +24,19 @@ var useful = {
     },
 
     bpmToMs(bpm) {
-        return bpm * 2000 / 120 
+        return bpm * 2000 / 120
     },
 
     bpmToS(bpm) {
         return this.bpmToMs(bpm) / 1000
+    },
+
+    checkColor(val) {
+        if(val<0)
+            return 0;
+        else if(val>255)
+            return 255;
+        return val;
     }
 }
 
