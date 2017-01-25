@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import VanessaBar from '../canvas/VanessaBar.jsx';
+import utils from "../../modules/useful.js";
 
 var prevTime = null, toCheck = true;
 
@@ -32,7 +33,7 @@ export default class Score extends Component {
   componentWillReceiveProps(nextProps) {
     const INTERVAL = (this.props.velocity / 60 * 1000 * 200 ) / 2000;
     if(prevTime) {
-      if(nextProps.timingNote != prevTime){
+      if(nextProps.timingNote != prevTime || nextProps.timingNote === utils.pxToTime(utils.bpmToMs(this.props.velocity),70)){
         if(nextProps.timingNote>0 && nextProps.timingNote <= INTERVAL){
           switch(this.state.streak) {
             case 3:

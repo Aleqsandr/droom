@@ -3,6 +3,7 @@ import Compteur from '../canvas/Compteur.jsx';
 import Score from '../canvas/Score.jsx';
 import PauseMenu from './PauseMenu.jsx';
 import Wow from '../canvas/Wow.jsx';
+import utils from "../../modules/useful.js";
 
 let prevTime = 0;
 
@@ -25,7 +26,7 @@ export default class HudRight extends Component {
   }
   componentWillReceiveProps(nextProps) {
     if(prevTime){
-      if(prevTime != nextProps.timingNote){
+      if(prevTime != nextProps.timingNote || nextProps.timingNote === utils.pxToTime(utils.bpmToMs(this.props.velocity),70)){
         prevTime = nextProps.timingNote;
         this.setState({
           timingNote:nextProps.timingNote
