@@ -30,5 +30,9 @@ module.exports.routes = {
     action: 'index',
     skipAssets: true,
   },
-
+  'GET /song/find': {
+    controller: 'SongController',
+    action: 'find',
+    skipAssets: true,
+  }
 };

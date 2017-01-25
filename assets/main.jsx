@@ -16,6 +16,5 @@ render(
     <Route path="/app" component={Music} />
     <Route path="/menu" component={Menu} />
     <Route path="/about" component={About} />
-    <Route path="/*" component={NotFound} />
   </Router>, document.getElementById('app')
 );
