@@ -38,8 +38,8 @@ export default class Score extends Component {
   componentWillReceiveProps(nextProps) {
     const INTERVAL = (this.props.velocity / 60 * 1000 * 200 ) / 2000;
     if(prevTime) {
-      if(nextProps.timingNote != prevTime || nextProps.timingNote === utils.pxToTime(utils.bpmToMs(this.props.velocity),70)){
-        if(nextProps.timingNote>0 && nextProps.timingNote <= INTERVAL){
+      if(nextProps.timingNote != prevTime || nextProps.timingNote == utils.pxToTime(utils.bpmToMs(this.props.velocity),70)){
+        if(nextProps.timingNote>0 && nextProps.timingNote <= INTERVAL && nextProps.timingNote != utils.pxToTime(utils.bpmToMs(this.props.velocity),70)){
           switch(this.state.streak) {
             case 9:
                 this.setState({multiplier:2});
@@ -76,7 +76,7 @@ export default class Score extends Component {
       prevTime = nextProps.timingNote;
     } else {
       prevTime = nextProps.timingNote;
-      if(nextProps.timingNote>0 && nextProps.timingNote <= INTERVAL){
+      if(nextProps.timingNote>0 && nextProps.timingNote <= INTERVAL && nextProps.timingNote != utils.pxToTime(utils.bpmToMs(this.props.velocity),70)){
         switch(this.state.streak) {
           case 3:
               this.setState({multiplier:2});
@@ -97,11 +97,10 @@ export default class Score extends Component {
           score:this.state.score+10*this.state.multiplier,
           fails:this.state.fails+2
         })
-      }
-      else {
+      }else {
         this.setState({
           streak:0,
-          multiplier:1,
+          multiplier:1,        
         })
 
         if(nextProps.timingNote !== 0) {

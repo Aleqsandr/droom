@@ -203,7 +203,6 @@ export default class Notes extends Component {
         setTimeout(function() {
           self.state.group.getChildren()[valNote[1]].getChildren()[0].getChildren()[0].strokeWidth(0);
         },100)
-        this.props.getTimingNoteSuccess(diff);
         return;
     }
 
