@@ -48,7 +48,7 @@ export default class Notes extends Component {
       group={this.state.group}
       isKeyboard={this.props.isKeyboard}
       hasToAnim={true}
-      failNote={this.handleFailure.bind(this)}
+      failNote={this.handleDiff.bind(this)}
     />);
 
     this.setState({
@@ -66,7 +66,8 @@ export default class Notes extends Component {
       }
     }
     this.setState({group:nextProps.group});
-    if(nextProps.group && prevTime != nextProps.timeKick){
+    console.log(nextProps.timeKick)
+    if(nextProps.group && prevTime != nextProps.timeKick || this.props.timingNote == utils.pxToTime(utils.bpmToMs(this.props.velocity),70)){
       prevTime = nextProps.timeKick;
       if(this.props.isKeyboard)
         this.checkKey(nextProps.keyCode);
@@ -109,6 +110,8 @@ export default class Notes extends Component {
     }, 5);
 
     setTimeout(function() {
+      if(!self.state.group)return;
+      if(!self.state.group.getChildren()[id])return;
       self.state.group.getChildren()[id].getChildren()[0].to({
         scaleX: 1,
         scaleY: 1,
@@ -194,7 +197,7 @@ export default class Notes extends Component {
         noteValues.splice(i, 1);
         el.destroy();
 
-        this.props.getTimingNoteSuccess(diff);
+        this.handleDiff(diff);
 
         let self = this, time =50;
         this.state.group.getChildren()[valNote[1]].getChildren()[0].getChildren()[0].stroke("#ccedff");
@@ -217,8 +220,9 @@ export default class Notes extends Component {
 
   }
 
-  handleFailure() {
-    this.props.getTimingNoteSuccess(utils.pxToTime(utils.bpmToMs(this.props.velocity),70));
+  handleDiff(val) {
+    console.log("val");
+    this.props.getTimingNoteSuccess(val);
   }
 
   render() {
