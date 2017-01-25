@@ -6,6 +6,7 @@ import Kick from './notes/Kick.jsx';
 import Snare from './notes/Snare.jsx';
 import Symbal from './notes/Symbal.jsx';
 import Tom from './notes/Tom.jsx';
+import utils from '../../modules/useful.js'
 
 // App component - represents the whole app
 export default class Note extends Component {
@@ -35,7 +36,7 @@ export default class Note extends Component {
 
   checkFailure(note) {
     if(note.length){
-      this.props.failNote();
+      this.props.failNote(utils.pxToTime(utils.bpmToMs(this.props.velocity),70));
     }
   }
 
