@@ -66,9 +66,8 @@ export default class Notes extends Component {
       }
     }
     this.setState({group:nextProps.group});
-    console.log(nextProps.timeKick)
-    if(nextProps.group && prevTime != nextProps.timeKick || this.props.timingNote == utils.pxToTime(utils.bpmToMs(this.props.velocity),70)){
-      prevTime = nextProps.timeKick;
+    if(nextProps.group && prevTime != nextProps.timeKick){
+        prevTime = nextProps.timeKick;
       if(this.props.isKeyboard)
         this.checkKey(nextProps.keyCode);
       else
@@ -102,6 +101,8 @@ export default class Notes extends Component {
     });
 
     setTimeout(function() {
+      if(!self.state.group)return;
+      if(!self.state.group.getChildren()[id])return;
       self.state.group.getChildren()[id].getChildren()[0].to({
         scaleX: 1.3,
         scaleY: 1.3,
@@ -177,7 +178,6 @@ export default class Notes extends Component {
 
       this.animKick(current[1]);
     }
-
   }
 
   checkCollision(el,valNote,i) {
@@ -191,19 +191,21 @@ export default class Notes extends Component {
     let diff = Math.abs(current - impactTime);
 
     if(diff < utils.pxToTime(utils.bpmToMs(this.props.velocity),70) && noteValues[i] == valNote[0]) {
+      console.log("success")
         // Success.
         times.splice(i, 1);
         notes.splice(i, 1);
         noteValues.splice(i, 1);
         el.destroy();
-
-        this.handleDiff(diff);
-
+        // this.handleDiff(diff);
         let self = this, time =50;
         this.state.group.getChildren()[valNote[1]].getChildren()[0].getChildren()[0].stroke("#ccedff");
         this.state.group.getChildren()[valNote[1]].getChildren()[0].getChildren()[0].strokeWidth(5);
         this.props.getTimingNoteSuccess(diff);
         setTimeout(function() {
+          if(!self.state.group) return;
+          if(!self.state.group.getChildren()[valNote[1]]) return;
+          if(!self.state.group.getChildren()[valNote[1]].getChildren()[0])return;
           self.state.group.getChildren()[valNote[1]].getChildren()[0].getChildren()[0].strokeWidth(0);
         },100)
         return;
@@ -216,12 +218,13 @@ export default class Notes extends Component {
         noteValues.splice(i, 1);
         el.destroy();
     }
+
+    this.handleDiff(diff);
     return;
 
   }
 
   handleDiff(val) {
-    console.log("val");
     this.props.getTimingNoteSuccess(val);
   }
 

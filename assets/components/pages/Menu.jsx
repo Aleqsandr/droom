@@ -1,6 +1,44 @@
 import React, { Component } from 'react';
 import {Link} from 'react-router';
-import Track from '../canvas/Track.jsx';
+import TrackList from '../canvas/TrackList.jsx';
+
+var data = {
+  "tracks": [
+    {
+      "id":0,
+      "name": "We Bros",
+      "artist": "WU LYF",
+      "year": "2013",
+      "difficulty":3,
+
+    },
+    {
+      "id":1,
+      "name": "Killing in the name of",
+      "artist": "Rage against the machine",
+      "year": "1992",
+      "difficulty":2,
+
+    },
+    {
+      "id":2,
+      "name": "We Bros",
+      "artist": "WU LYF",
+      "year": "2013",
+      "difficulty":3,
+
+    },
+    {
+      "id":3,
+      "name": "We Bros",
+      "artist": "WU LYF",
+      "year": "2013",
+      "difficulty":2,
+
+    }
+  ]
+}
+
 
 // App component - represents the whole app
 export default class Menu extends Component
@@ -51,21 +89,7 @@ export default class Menu extends Component
             		</div>
             	</div>
             	<div className="library__logo"></div>
-            	<div className="library__slider">
-            		<div className="library__slider__tracks">
-            			<p className="sectiontitle">TRACKS</p>
-            			<div className="trackwrapper">
-	            			<Track/>
-	            			<Track/>
-	            			<Track/>
-	            			<Track/>
-	            			<Track/>
-	            			<Track/>
-	            			<Track/>
-	            		</div>
-            		</div>
-            		
-            	</div>
+            	<TrackList data={data}/>
             </div>
         )
     }

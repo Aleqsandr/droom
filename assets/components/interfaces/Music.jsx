@@ -43,7 +43,7 @@ export default class Music extends Component {
         self.setState({
           player:MIDI.Player,
           musicMP3 : new Howl({
-            src: ['./musics/3/song3.wav'],
+            src: ['./musics/3/song.mp3'],
             onend : () => {
               console.log("start end")
               self.handleEnd()
@@ -51,7 +51,7 @@ export default class Music extends Component {
           }),
           velocity: MIDI.Player.BPM
         })
-        self.state.player.loadFile( "./musics/3/song3.mid", self.launchGame.bind(self),null,function() {console.log("nope")} );
+        self.state.player.loadFile( "./musics/3/song.mid", self.launchGame.bind(self),null,function() {console.log("nope")} );
       }
     })
   }
