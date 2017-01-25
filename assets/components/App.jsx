@@ -126,6 +126,7 @@ export default class App extends Component {
               keyCode={this.state.keyCode}
               noteIO={this.state.note}
               group={this.state.group}
+              timingNote={this.state.timingNote}
               data={this.props.data}
               getTimingNoteSuccess={this.getTimingNoteSuccess.bind(this)}
               //getScoreUpdate={this.getScoreUpdate.bind(this)}

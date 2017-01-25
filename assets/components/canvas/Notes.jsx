@@ -66,7 +66,8 @@ export default class Notes extends Component {
       }
     }
     this.setState({group:nextProps.group});
-    if(nextProps.group && prevTime != nextProps.timeKick){
+    console.log(nextProps.timeKick)
+    if(nextProps.group && prevTime != nextProps.timeKick || this.props.timingNote == utils.pxToTime(utils.bpmToMs(this.props.velocity),70)){
       prevTime = nextProps.timeKick;
       if(this.props.isKeyboard)
         this.checkKey(nextProps.keyCode);
@@ -110,6 +111,7 @@ export default class Notes extends Component {
 
     setTimeout(function() {
       if(!self.state.group)return;
+      if(!self.state.group.getChildren()[id])return;
       self.state.group.getChildren()[id].getChildren()[0].to({
         scaleX: 1,
         scaleY: 1,
@@ -219,7 +221,7 @@ export default class Notes extends Component {
   }
 
   handleDiff(val) {
-    console.log("okokok")
+    console.log("val");
     this.props.getTimingNoteSuccess(val);
   }
 
