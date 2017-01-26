@@ -15,7 +15,7 @@ export default class Track extends Component{
                     </div>
                 </div>
                 <div className="trackelement__right">
-                    <Link to="/app"><div className="repeat"><p>REPEAT</p></div></Link>
+                    <Link to="/app"><div className="repeat"><p>STUDIO</p></div></Link>
                     <a href="#"><div className="live"><p>LIVE</p></div></a>
                 </div>
             </div>

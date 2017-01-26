@@ -79,7 +79,7 @@ export default class Menu extends Component
             	<div className="user">
             		<div className="isconnected"></div>
             		<div className="logout">
-            			<a href="#"><div className="logout__img logout__img--invisible" ref="logout"></div></a>
+            			<Link to="/"><div className="logout__img logout__img--invisible" ref="logout"></div></Link>
             		</div>
             		<div className="avatar">
             			<a href="#"><div className="avatar__img" onClick={this.usernamein.bind(this)} ref="triangle"></div></a>
