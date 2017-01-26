@@ -34,6 +34,17 @@ var data = {
       "difficulty":2,
 
     }
+  ],
+
+  "users":[
+    {
+      "username":"test",
+      "password":"password"
+    },
+    {
+      "username":"droomy",
+      "password":"droomyp"
+    }
   ]
 }
 
