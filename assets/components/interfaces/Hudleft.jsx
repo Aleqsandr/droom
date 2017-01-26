@@ -26,7 +26,7 @@ export default class HudLeft extends Component {
             </div>
           </div>
           <div className="hud__bottom">
-            <Wow timingNote={this.props.timingNote}/>
+            <Wow timingNote={this.props.timingNote} isPlaying={this.props.isPlaying} shouldCheck={this.props.shouldCheck}/>
           </div>
         </div>
     )

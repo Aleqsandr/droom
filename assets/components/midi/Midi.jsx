@@ -63,8 +63,20 @@ export default class Midi extends Component {
   }
 
   onMIDIMessage(event) {
-    if(event.data[2] != 64)
+    if(event.data[2] != 64){
+      if(event.data[1] == 40)
+        event.data[1] = 38;
+      else if(event.data[1] == 50)
+        event.data[1] = 48;
+      else if(event.data[1] == 47)
+        event.data[1] = 45;
+      else if(event.data[1] == 58)
+        event.data[1] = 43;
+      else if(event.data[1] == 4)
+        event.data[1] = 46;
+
       this.props.getNoteNumber(event.data);
+    }
   }
 
   onStateChange(event) {

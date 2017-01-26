@@ -12,11 +12,10 @@ let scoreFinal = 0;
 export default class Music extends Component {
   constructor(props) {
     super(props);
-    let id = parseInt(this.props.id) || 0, newData = this.props.data.tracks[id];
-    if(!newData.length){
-      this.props.data.tracks[0];
-      id = 2;
-    }
+
+    let isLive = false;
+    if(this.props.params.type == "live")
+      isLive = true;
 
     this.state = {
       finishStarter:false,
@@ -32,10 +31,15 @@ export default class Music extends Component {
       isPlaying:false,
       rewindTime:5000,
       score:null,
-      track:newData,
-      id:id,
+      track:this.props.data.tracks[this.props.params.id],
+      id:this.props.params.id,
       shouldCheck:true,
+      isLive:isLive
     };
+  }
+
+  componentWillMount() {
+    utils.goFullScreen();
   }
 
   componentDidMount() {
@@ -51,14 +55,14 @@ export default class Music extends Component {
         self.setState({
           player:MIDI.Player,
           musicMP3 : new Howl({
-            src: ['./musics/'+self.state.id+'/song.mp3'],
+            src: ['/musics/'+self.state.id+'/song.mp3'],
             onend : () => {
               self.handleEnd()
             }
           }),
           velocity: MIDI.Player.BPM
         })
-        self.state.player.loadFile( "./musics/"+self.state.id+"/song.mid", self.launchGame.bind(self),null,function() {console.log("nope")} );
+        self.state.player.loadFile( "/musics/"+self.state.id+"/song.mid", self.launchGame.bind(self),null,function() {console.log("nope")} );
       }
     })
   }
@@ -153,13 +157,14 @@ export default class Music extends Component {
 
   render() {
     if(this.state.isFinish)
-      return (<EndMusic score={this.state.score}/>)
+      return (<EndMusic score={this.state.score} isLive={this.state.isLive}/>)
 
     if(!this.state.finishStarter)
       return (<div className="Music-container"><div className="loading">Loading...</div></div>);
     else {
       return (
         <App
+          isLive={this.state.isLive}
           shouldAnim={this.state.shouldAnim}
           data={this.state.data}
           canStart={this.handleFinishCompteur.bind(this)}

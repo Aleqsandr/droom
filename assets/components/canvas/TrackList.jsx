@@ -4,14 +4,10 @@ import Track from './Track.jsx';
 
 export default class TrackList extends Component{
 
-    sendMusicId(id) {
-        this.props.sendMusicId(id);
-    }
-
     render(){
         let self = this;
         let nodes = this.props.data.tracks.map(function(track,i) {
-          return(<Track dataTrack={track} key={i} sendMusicId={self.sendMusicId.bind(self)}/>);
+          return(<Track dataTrack={track} key={i}/>);
         });
         console.log(nodes)
         return (

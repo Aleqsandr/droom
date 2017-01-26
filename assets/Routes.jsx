@@ -12,27 +12,13 @@ import About from 'components/pages/About';
 import Menu from 'components/pages/Menu';
 
 export default class Routes extends Component{
-    constructor(props) {
-      super(props);
-
-      this.state = {
-        id:null
-      };
-    }
-
-    sendMusicId(id) {
-        console.log(id);
-        this.setState({
-            id:id
-        })
-    }
 
     render(){
         return (
             <Router history={browserHistory}>
               <Route path="/" component={GameHandler}>
                 <IndexRoute component={Home}/>
-                <Route path="/app" component={Music} />
+                <Route path="/app/:id/:type" component={Music} />
                 <Route path="/menu" component={Menu} />
                 <Route path="/about" component={About} />
                 <Route path='*' component={NotFound} />

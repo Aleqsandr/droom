@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import {Link} from 'react-router';
 import TrackList from '../canvas/TrackList.jsx';
+import utils from '../../modules/useful.js';
 
 // App component - represents the whole app
 export default class Menu extends Component
@@ -30,8 +31,8 @@ export default class Menu extends Component
 		})
 	}
 
-    sendMusicId(id) {
-        this.props.sendMusicId(id);
+    componentWillMount() {
+        utils.exitFullScreen();
     }
 
     render(){
@@ -50,7 +51,7 @@ export default class Menu extends Component
             		</div>
             	</div>
             	<div className="library__logo"></div>
-            	<TrackList data={this.props.data} sendMusicId={this.sendMusicId.bind(this)}/>
+            	<TrackList data={this.props.data}/>
             </div>
         )
     }
