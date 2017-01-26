@@ -58,7 +58,8 @@ export default class App extends Component {
       keyCode: e.keyCode,
       shouldAnim:true,
       timeKick:Date.now(),
-      isKeyboard:true
+      isKeyboard:true,
+
     });
   }
 
@@ -69,7 +70,8 @@ export default class App extends Component {
         velocity : note[2],
         shouldAnim:true,
         timeKick:Date.now(),
-        isKeyboard:false
+        isKeyboard:false,
+
       });
     }
   }
@@ -83,22 +85,17 @@ export default class App extends Component {
 
   componentWillReceiveProps(nextProps) {
     this.setState({shouldAnim:nextProps.shouldAnim})
+    if(!nextProps.isPlaying)
+      this.setState({timeKick:null,keyCode:null})
   }
 
   getTimingNoteSuccess(val) {
+    if(!this.props.shouldCheck)return;
     this.setState({
       timingNote:val,
       shouldAnim:true
     })
   }
-
-  /*getScoreUpdate(val){
-      console.log(val)
-      if (val !== 'undefined' || val !== 'null'){
-        this.setState({scoreUpdate: val});
-        console.log(this.state.scoreUpdate)
-      }
-  }*/
 
   onEndMusic(score) {
     this.props.onEndMusic(score);
@@ -116,7 +113,7 @@ export default class App extends Component {
     return (
       <div className="container" ref="container">
         <Midi getNoteNumber={this.getNoteNumber.bind(this)}/>
-        <HudLeft finishCompteur={this.finishCompteur.bind(this)} timingNote={this.state.timingNote}/>
+        <HudLeft track={this.props.track} finishCompteur={this.finishCompteur.bind(this)} timingNote={this.state.timingNote} isPlaying={this.props.isPlaying} shouldCheck={this.props.shouldCheck}/>
         <main>
           <Stage width={this.state.width*0.5} height={this.state.height}>
             <BaseDrum handleGroup={this.handleGroup.bind(this)} isKeyboard={this.state.isKeyboard}/>
@@ -128,10 +125,12 @@ export default class App extends Component {
               group={this.state.group}
               timingNote={this.state.timingNote}
               data={this.props.data}
+              isPlaying={this.props.isPlaying}
               getTimingNoteSuccess={this.getTimingNoteSuccess.bind(this)}
               //getScoreUpdate={this.getScoreUpdate.bind(this)}
               isKeyboard={this.state.isKeyboard}
               velocity={this.props.velocity}
+              shouldCheck={this.props.shouldCheck}
             />
           </Stage>
         </main>
@@ -143,6 +142,8 @@ export default class App extends Component {
           isPlaying={this.props.isPlaying}
           finishStarter={this.state.finishStarter}
           scoreUpdate={this.scoreUpdate.bind(this)}
+          shouldCheck={this.props.shouldCheck}
+          isLive={this.props.isLive}
         />
       </div>
     );
