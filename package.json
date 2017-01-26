@@ -48,6 +48,7 @@
     "react-router": "^2.3.0",
     "sails": "~0.12.2",
     "sails-disk": "~0.10.9",
+    "sails-mongo": "^0.12.2",
     "web-midi-api": "^1.4.4",
     "webpack": "^1.13.0"
   },

@@ -87,8 +87,7 @@ export default class Home extends Component {
             <form className="signupcontainer__signup__form">
               <input type="text" placeholder="USERNAME" /><br />
               <input type="password" placeholder="PASSWORD" /><br />
-              <input type="text" placeholder="EMAIL" /><br />
-              <input type="number" placeholder="YOUR AGE" /><br /><br />
+              <input type="mail" placeholder="EMAIL" /><br />
               <input className="submit" type="submit" value="I SIGN UP" action="#"/><br />
             </form>
           </div>

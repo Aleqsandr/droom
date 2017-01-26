@@ -11,7 +11,7 @@ module.exports = {
    */
   create: function (req, res) {
     return res.json({
-      todo: 'Not implemented yet!'
+      todo: 'song/create is not implemented yet!'
     });
   },
 
@@ -36,8 +36,12 @@ module.exports = {
    * SongController.find()
    */
   find: function (req, res) {
+    var query = sails.models.song.find().exec(function(err, list){
+      sails.log(list)
+    });
+
     return res.json({
-      todo: 'Not implemented yet!'
+      query: query
     });
   },
 
