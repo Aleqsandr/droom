@@ -10,6 +10,7 @@ export default class Wow extends Component {
   }
 
   componentDidUpdate(el,il) {
+    if(!this.props.isPlaying || !this.props.shouldCheck)return;
     let wow = document.body.querySelector(".wow__text");
     wow.classList.remove("wow__text--wowin");
     setTimeout(function(){
@@ -18,8 +19,8 @@ export default class Wow extends Component {
 
   }
 
-  componentWillReceiveProps(nextProps)
-  {
+  componentWillReceiveProps(nextProps){
+    if(nextProps.isPlaying == false)return;
     let time = nextProps.timingNote;
     let wow = document.body.querySelector(".wow__text");
     if(time===0) return;

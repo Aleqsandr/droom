@@ -13,6 +13,10 @@ export default class Music extends Component {
   constructor(props) {
     super(props);
 
+    let isLive = false;
+    if(this.props.params.type == "live")
+      isLive = true;
+
     this.state = {
       finishStarter:false,
       player:null,
@@ -27,7 +31,15 @@ export default class Music extends Component {
       isPlaying:false,
       rewindTime:5000,
       score:null,
+      track:this.props.data.tracks[this.props.params.id],
+      id:this.props.params.id,
+      shouldCheck:true,
+      isLive:isLive
     };
+  }
+
+  componentWillMount() {
+    utils.goFullScreen();
   }
 
   componentDidMount() {
@@ -43,20 +55,20 @@ export default class Music extends Component {
         self.setState({
           player:MIDI.Player,
           musicMP3 : new Howl({
-            src: ['./musics/3/song3.wav'],
+            src: ['/musics/'+self.state.id+'/song.mp3'],
             onend : () => {
-              console.log("start end")
               self.handleEnd()
             }
           }),
           velocity: MIDI.Player.BPM
         })
-        self.state.player.loadFile( "./musics/3/song3.mid", self.launchGame.bind(self),null,function() {console.log("nope")} );
+        self.state.player.loadFile( "/musics/"+self.state.id+"/song.mid", self.launchGame.bind(self),null,function() {console.log("nope")} );
       }
     })
   }
 
   handleEnd() {
+    this.stopAllMusics();
     this.setState({
       isFinish:true,
       score:scoreFinal
@@ -75,6 +87,7 @@ export default class Music extends Component {
   }
 
   onEndMusic(score) {
+    this.stopAllMusics();
     this.setState({
       score:scoreFinal,
       isFinish:true
@@ -83,9 +96,11 @@ export default class Music extends Component {
 
   getScore(score){
     scoreFinal = score;
-    // this.setState({
-    //   score:score
-    // })
+  }
+
+  stopAllMusics() {
+    this.state.musicMP3.unload();
+    this.state.player.stop();
   }
 
   onPauseMusic() {
@@ -93,27 +108,23 @@ export default class Music extends Component {
     if(this.state.isPlaying) {
       this.state.musicMP3.pause();
       this.state.player.pause();
-      this.setState({isPlaying:false})
+      this.setState({isPlaying:false,shouldCheck:false,data:null})
     } else {
     // Resume music, -5s.
-      var self = this;
-      this.setState({isPlaying:true})
-      if(this.state.player.currentTime <= this.state.rewindTime) {
-        MIDI.setVolume(0, 0);
-        this.state.player.currentTime = 0;
-        this.state.player.resume();
-        setTimeout(function() {
-          self.state.musicMP3.play();
-        },(utils.bpmToMs(this.state.velocity)));
-      } else {
-        MIDI.setVolume(0, 0);
+        var self = this;
         this.state.player.currentTime = this.state.player.currentTime - this.state.rewindTime;
+        this.setState({isPlaying:true,data:null})
+        MIDI.setVolume(0, 0);
         this.state.player.resume();
+        this.state.musicMP3.seek(utils.checkTime( self.state.musicMP3.seek() - (self.state.rewindTime*0.001) ));
         setTimeout(function() {
-          self.state.musicMP3.seek(self.state.musicMP3.seek() - (self.state.rewindTime*0.001));
-          self.state.musicMP3.play();
-        },(utils.bpmToMs(this.state.velocity)));
-      }
+          if(self.state.isPlaying){
+            self.state.musicMP3.play();
+            self.setState({
+              shouldCheck:true
+            })
+          }
+        },(utils.bpmToMs(this.state.velocity)) - utils.pxToTime(utils.bpmToMs(this.state.velocity),70));
     }
   }
 
@@ -123,11 +134,13 @@ export default class Music extends Component {
     this.state.player.start();
 
     setTimeout(function() {
-       self.state.musicMP3.play();
+      if(self.state.isPlaying)
+        self.state.musicMP3.play();
     }, utils.bpmToMs(this.state.velocity) - utils.pxToTime(utils.bpmToMs(this.state.velocity),73));
 
     this.setState({isPlaying:true});
 
+    let i= 0;
     this.state.player.addListener(function(data){
       // play the note
       MIDI.setVolume(0, 0);
@@ -144,13 +157,14 @@ export default class Music extends Component {
 
   render() {
     if(this.state.isFinish)
-      return (<EndMusic score={this.state.score}/>)
+      return (<EndMusic score={this.state.score} isLive={this.state.isLive}/>)
 
     if(!this.state.finishStarter)
       return (<div className="Music-container"><div className="loading">Loading...</div></div>);
     else {
       return (
         <App
+          isLive={this.state.isLive}
           shouldAnim={this.state.shouldAnim}
           data={this.state.data}
           canStart={this.handleFinishCompteur.bind(this)}
@@ -159,6 +173,8 @@ export default class Music extends Component {
           velocity={this.state.velocity}
           isPlaying={this.state.isPlaying}
           getScore={this.getScore.bind(this)}
+          track={this.state.track}
+          shouldCheck={this.state.shouldCheck}
         />
       );
     }

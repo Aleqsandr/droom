@@ -1,30 +1,27 @@
 import React, { Component } from 'react';
 import {Link} from 'react-router';
-import Track from '../canvas/Track.jsx';
+import TrackList from '../canvas/TrackList.jsx';
+import utils from '../../modules/useful.js';
 
 // App component - represents the whole app
 export default class Menu extends Component
 {
-	constructor(props)
-	{
+	constructor(props){
    		super(props);
     	this.state = {
       		"it": 0,
     	};
   	}
 
-	usernamein()
-	{
+	usernamein(){
 		let logout = document.body.querySelector(".logout");
 		let logout__img = document.body.querySelector(".logout__img");
-		if (this.state.it % 2 == 0)
-		{
+		if (this.state.it % 2 == 0){
 			this.refs.triangle.classList.add("avatar__img--isopen");
 			logout.classList.add("logout--lower");
 			logout__img.classList.remove("logout__img--invisible");
 		}
-		else
-		{
+		else{
 			this.refs.triangle.classList.remove("avatar__img--isopen");
 			logout.classList.remove("logout--lower");
 			logout__img.classList.add("logout__img--invisible");
@@ -34,14 +31,17 @@ export default class Menu extends Component
 		})
 	}
 
-    render()
-    {
+    componentWillMount() {
+        utils.exitFullScreen();
+    }
+
+    render(){
         return (
             <div className="library">
             	<div className="user">
             		<div className="isconnected"></div>
             		<div className="logout">
-            			<a href="#"><div className="logout__img logout__img--invisible" ref="logout"></div></a>
+            			<Link to="/"><div className="logout__img logout__img--invisible" ref="logout"></div></Link>
             		</div>
             		<div className="avatar">
             			<a href="#"><div className="avatar__img" onClick={this.usernamein.bind(this)} ref="triangle"></div></a>
@@ -51,21 +51,7 @@ export default class Menu extends Component
             		</div>
             	</div>
             	<div className="library__logo"></div>
-            	<div className="library__slider">
-            		<div className="library__slider__tracks">
-            			<p className="sectiontitle">TRACKS</p>
-            			<div className="trackwrapper">
-	            			<Track/>
-	            			<Track/>
-	            			<Track/>
-	            			<Track/>
-	            			<Track/>
-	            			<Track/>
-	            			<Track/>
-	            		</div>
-            		</div>
-            		
-            	</div>
+            	<TrackList data={this.props.data}/>
             </div>
         )
     }

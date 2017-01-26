@@ -4,6 +4,7 @@ import Score from '../canvas/Score.jsx';
 import PauseMenu from './PauseMenu.jsx';
 import Wow from '../canvas/Wow.jsx';
 import utils from "../../modules/useful.js";
+import {Link} from "react-router";
 
 let prevTime = 0;
 
@@ -25,6 +26,7 @@ export default class HudRight extends Component {
     this.props.onEndMusic(score);
   }
   componentWillReceiveProps(nextProps) {
+    if(!nextProps.shouldCheck) return;
     if(prevTime){
       if(prevTime != nextProps.timingNote || nextProps.timingNote === utils.pxToTime(utils.bpmToMs(this.props.velocity),70)){
         prevTime = nextProps.timingNote;
@@ -45,6 +47,21 @@ export default class HudRight extends Component {
   }
 
   render() {
+    if(!this.props.isLive) {
+      return (
+          <div className="hud hud--right">
+            <div className="hud__top">
+            </div>
+            <div className="hud__bottom">
+              <div className="gamemenu">
+                <div className="button" onClick={this.handlePause.bind(this)}><p>PAUSE</p></div><br/>
+                <Link to="/menu" className="button"><p>MENU</p></Link><br/>
+              </div>
+            </div>
+            <PauseMenu finishPause={this.props.handlePause.bind(this)} isPlaying={this.props.isPlaying} finishStarter={this.props.finishStarter}/>
+          </div>
+      )
+    }
     return (
         <div className="hud hud--right">
           <div className="hud__top">
@@ -53,13 +70,14 @@ export default class HudRight extends Component {
               timingNote={this.state.timingNote}
               onEndMusic={this.handleEndMusic.bind(this)}
               velocity={this.props.velocity}
+              isPlaying={this.props.isPlaying}
+              shouldCheck={this.props.shouldCheck}
             />
           </div>
           <div className="hud__bottom">
             <div className="gamemenu">
               <div className="button" onClick={this.handlePause.bind(this)}><p>PAUSE</p></div><br/>
-              <div className="button"><p>SETTINGS</p></div><br/>
-              <div className="button"><p>LOG OUT</p></div><br/>
+              <Link to="/menu" className="button"><p>MENU</p></Link><br/>
             </div>
           </div>
           <PauseMenu finishPause={this.props.handlePause.bind(this)} isPlaying={this.props.isPlaying} finishStarter={this.props.finishStarter}/>
