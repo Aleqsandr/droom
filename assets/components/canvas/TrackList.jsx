@@ -13,7 +13,7 @@ export default class TrackList extends Component{
         return (
             <div className="library__slider">
                 <div className="library__slider__tracks">
-                    <p className="sectiontitle">TRACKS</p>
+                    <div className="sectiontitle">TRACKS</div>
                     <div className="trackwrapper">
                         {nodes}
                     </div>
