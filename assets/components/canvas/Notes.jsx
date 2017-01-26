@@ -5,7 +5,7 @@ import update from 'react-addons-update';
 import MIDI from 'midi.js';
 import utils from "../../modules/useful.js";
 
-var player, notes = [], times = [], noteValues = [], prevTime= 0;
+var player, notes = [], times = [], noteValues = [], prevTime= 0, prevCheck=true;
 // App component - represents the whole app
 export default class Notes extends Component {
   constructor(props) {
@@ -30,10 +30,7 @@ export default class Notes extends Component {
     var time = Date.now();
     times.push(time)
     let note = data.note, isKick=false;
-    if(data.note === 42)
-      note = 49;
     noteValues.push(note);
-
     notes.push(<Note
       velocity={this.props.velocity}
       newP={this.state.newp}
@@ -59,17 +56,22 @@ export default class Notes extends Component {
 
   componentWillReceiveProps(nextProps) {
     if(!nextProps.isPlaying){
-
       notes = [];
       times = [];
       noteValues = [];
+      prevTime = 0;
       return;
     }
     if(nextProps.data){
-      if(nextProps.shouldAnim != true){
+      if(!nextProps.shouldAnim){
+        if(prevCheck == false && nextProps.shouldCheck == true){
+          prevCheck = true;
+          return;
+        }
         let thisNote = nextProps.data;
         this.addNewNote(thisNote);
         thisNote = null;
+        prevCheck = nextProps.shouldCheck;
       }
     }
     this.setState({group:nextProps.group});
@@ -182,7 +184,6 @@ export default class Notes extends Component {
       for (var i = this.refs.notesContainer.getChildren().length - 1; i >= 0; i--) {
         this.checkCollision(this.refs.notesContainer.getChildren()[i],current,i);
       }
-
       this.animKick(current[1]);
     }
   }
@@ -231,6 +232,7 @@ export default class Notes extends Component {
   }
 
   handleDiff(val) {
+    if(!this.props.shouldCheck)return;
     if(this.props.isPlaying && notes.length>0){
       this.props.getTimingNoteSuccess(val)
     }
@@ -238,6 +240,7 @@ export default class Notes extends Component {
       notes = [];
       times = [];
       noteValues = [];
+      prevTime = null;
     }
   }
 

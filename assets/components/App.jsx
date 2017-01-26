@@ -58,7 +58,8 @@ export default class App extends Component {
       keyCode: e.keyCode,
       shouldAnim:true,
       timeKick:Date.now(),
-      isKeyboard:true
+      isKeyboard:true,
+
     });
   }
 
@@ -69,7 +70,8 @@ export default class App extends Component {
         velocity : note[2],
         shouldAnim:true,
         timeKick:Date.now(),
-        isKeyboard:false
+        isKeyboard:false,
+
       });
     }
   }
@@ -83,9 +85,12 @@ export default class App extends Component {
 
   componentWillReceiveProps(nextProps) {
     this.setState({shouldAnim:nextProps.shouldAnim})
+    if(!nextProps.isPlaying)
+      this.setState({timeKick:null,keyCode:null})
   }
 
   getTimingNoteSuccess(val) {
+    if(!this.props.shouldCheck)return;
     this.setState({
       timingNote:val,
       shouldAnim:true
@@ -125,6 +130,7 @@ export default class App extends Component {
               //getScoreUpdate={this.getScoreUpdate.bind(this)}
               isKeyboard={this.state.isKeyboard}
               velocity={this.props.velocity}
+              shouldCheck={this.props.shouldCheck}
             />
           </Stage>
         </main>
@@ -136,7 +142,7 @@ export default class App extends Component {
           isPlaying={this.props.isPlaying}
           finishStarter={this.state.finishStarter}
           scoreUpdate={this.scoreUpdate.bind(this)}
-          shouldCheck={this.state.shouldCheck}
+          shouldCheck={this.props.shouldCheck}
         />
       </div>
     );

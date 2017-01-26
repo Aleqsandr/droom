@@ -37,6 +37,12 @@ var useful = {
         else if(val>255)
             return 255;
         return val;
+    },
+
+    checkTime(val) {
+        if(val < 0)
+            return 0;
+        return val;
     }
 }
 

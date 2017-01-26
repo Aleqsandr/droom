@@ -104,35 +104,23 @@ export default class Music extends Component {
     if(this.state.isPlaying) {
       this.state.musicMP3.pause();
       this.state.player.pause();
-      this.setState({isPlaying:false,shouldCheck:false})
+      this.setState({isPlaying:false,shouldCheck:false,data:null})
     } else {
     // Resume music, -5s.
-      var self = this;
-      this.setState({isPlaying:true})
-      if(this.state.player.currentTime <= this.state.rewindTime) {
-        MIDI.setVolume(0, 0);
-        this.state.player.currentTime = 0;
-        this.state.player.resume();
-        setTimeout(function() {
-          if(self.state.isPlaying)
-            self.state.musicMP3.play();
-        },(utils.bpmToMs(this.state.velocity)));
-      } else {
-        MIDI.setVolume(0, 0);
+        var self = this;
         this.state.player.currentTime = this.state.player.currentTime - this.state.rewindTime;
+        this.setState({isPlaying:true,data:null})
+        MIDI.setVolume(0, 0);
         this.state.player.resume();
+        this.state.musicMP3.seek(utils.checkTime( self.state.musicMP3.seek() - (self.state.rewindTime*0.001) ));
         setTimeout(function() {
-          if(!self.state.isPlaying)return;
-          self.state.musicMP3.seek(self.state.musicMP3.seek() - (self.state.rewindTime*0.001));
-          self.state.musicMP3.play();
-        },(utils.bpmToMs(this.state.velocity)));
-      }
-
-      setTimeout(function() {
-        self.setState({
-          shouldCheck:true
-        })
-      },this.state.velocity * 2000 / 120)
+          if(self.state.isPlaying){
+            self.state.musicMP3.play();
+            self.setState({
+              shouldCheck:true
+            })
+          }
+        },(utils.bpmToMs(this.state.velocity)) - utils.pxToTime(utils.bpmToMs(this.state.velocity),70));
     }
   }
 
@@ -148,6 +136,7 @@ export default class Music extends Component {
 
     this.setState({isPlaying:true});
 
+    let i= 0;
     this.state.player.addListener(function(data){
       // play the note
       MIDI.setVolume(0, 0);

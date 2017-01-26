@@ -25,7 +25,8 @@ export default class HudRight extends Component {
     this.props.onEndMusic(score);
   }
   componentWillReceiveProps(nextProps) {
-    if(prevTime && nextProps.shouldCheck){
+    if(!nextProps.shouldCheck) return;
+    if(prevTime){
       if(prevTime != nextProps.timingNote || nextProps.timingNote === utils.pxToTime(utils.bpmToMs(this.props.velocity),70)){
         prevTime = nextProps.timingNote;
         this.setState({
@@ -54,6 +55,7 @@ export default class HudRight extends Component {
               onEndMusic={this.handleEndMusic.bind(this)}
               velocity={this.props.velocity}
               isPlaying={this.props.isPlaying}
+              shouldCheck={this.props.shouldCheck}
             />
           </div>
           <div className="hud__bottom">

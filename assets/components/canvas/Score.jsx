@@ -23,6 +23,7 @@ export default class Score extends Component {
   }
 
   componentDidUpdate(nextProps) {
+    if(!this.props.shouldCheck)return;
     let scores = {
       "score":this.state.score,
       "streak":this.state.streak,
@@ -36,6 +37,8 @@ export default class Score extends Component {
   }
 
   componentWillReceiveProps(nextProps) {
+    let savePrev = prevTime;
+    if(!nextProps.shouldCheck)return;
     if(!nextProps.isPlaying)return;
     const INTERVAL = (this.props.velocity / 60 * 1000 * 200 ) / 2000;
     if(prevTime) {
