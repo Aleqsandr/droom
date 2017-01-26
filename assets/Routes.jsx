@@ -19,7 +19,7 @@ export default class Routes extends Component{
               <Route path="/" component={GameHandler}>
                 <IndexRoute component={Home}/>
                 <Route path="/app/:id/:type" component={Music} />
-                <Route path="/menu" component={Menu} />
+                <Route path="/menu/:username" component={Menu} />
                 <Route path="/about" component={About} />
                 <Route path='*' component={NotFound} />
               </Route>

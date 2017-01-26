@@ -71,7 +71,6 @@ export default class App extends Component {
         shouldAnim:true,
         timeKick:Date.now(),
         isKeyboard:false,
-
       });
     }
   }

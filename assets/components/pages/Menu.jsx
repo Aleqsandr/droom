@@ -47,7 +47,7 @@ export default class Menu extends Component
             			<a href="#"><div className="avatar__img" onClick={this.usernamein.bind(this)} ref="triangle"></div></a>
             		</div>
             		<div className="username">
-            			<p className="username__text">CHERRIER77</p>
+            			<p className="username__text">{this.props.params.username}</p>
             		</div>
             	</div>
             	<div className="library__logo"></div>

@@ -8,7 +8,6 @@ var data = {
       "artist": "WU LYF",
       "year": "2013",
       "difficulty":3,
-
     },
     {
       "id":1,

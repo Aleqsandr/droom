@@ -73,9 +73,7 @@ export default class Home extends Component {
       console.log(users[i].password , this.state.passwordSignIn)
       if(users[i].username == this.state.usernameSignIn && users[i].password == this.state.passwordSignIn){
         console.log(this.transitionTo)
-        browserHistory.push('/menu')
-      } else {
-        console.log("false")
+        browserHistory.push('/menu/'+users[i].username)
       }
     }
 
