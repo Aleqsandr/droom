@@ -109,7 +109,7 @@ export default class Home extends Component {
               <input type="password" placeholder="PASSWORD" value={this.state.passwordSignIn} onChange={this.handleChangePasswordLogIn.bind(this)}/><br />
               <input className="submit" type="submit" value="GO" action="#"/><br />
               <Link to="#"><p className="signupbutton" onClick={this.signupin}>Don&rsquo;t have an account yet ? Sign up here</p></Link><br />
-              <Link to="/menu"><p>Play as Guest000121 (no score)</p></Link>
+              <Link to="/menu"><p>Play as Droomy (guest with no score)</p></Link>
             </form>
           </div>
         </div>
