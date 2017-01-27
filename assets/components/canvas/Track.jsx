@@ -11,7 +11,7 @@ export default class Track extends Component{
             stars.push(<Star key={i}/>)
         }
 
-        let repeatUrl = "/app/"+ this.props.dataTrack.id + "/repeat",
+        let repeatUrl = "/app/"+ this.props.dataTrack.id + "/studio",
             liveUrl   = "/app/"+ this.props.dataTrack.id + "/live";
         return (
             <div className="trackelement">
@@ -24,7 +24,7 @@ export default class Track extends Component{
                     </div>
                 </div>
                 <div className="trackelement__right" onClick={utils.goFullScreen}>
-                    <Link to={repeatUrl}><div className="repeat"><p>REPEAT</p></div></Link>
+                    <Link to={repeatUrl}><div className="repeat"><p>STUDIO</p></div></Link>
                     <Link to={liveUrl}><div className="live"><p>LIVE</p></div></Link>
                 </div>
             </div>

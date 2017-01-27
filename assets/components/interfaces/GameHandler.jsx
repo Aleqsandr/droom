@@ -4,9 +4,9 @@ var data = {
   "tracks": [
     {
       "id":0,
-      "name": "We Bros",
-      "artist": "WU LYF",
-      "year": "2013",
+      "name": "Ways (noisiv cover)",
+      "artist": "Triathalon",
+      "year": "2016",
       "difficulty":3,
     },
     {
@@ -19,16 +19,16 @@ var data = {
     },
     {
       "id":2,
-      "name": "We Bros",
-      "artist": "WU LYF",
-      "year": "2013",
-      "difficulty":3,
+      "name": "Sprite",
+      "artist": "Droom Team",
+      "year": "2017",
+      "difficulty":2,
 
     },
     {
       "id":3,
       "name": "We Bros",
-      "artist": "WU LYF",
+      "artist": "Atomic Boom",
       "year": "2013",
       "difficulty":2,
 

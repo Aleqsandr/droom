@@ -4,6 +4,8 @@ import utils from "../../modules/useful.js";
 
 var prevTime = null, toCheck = true;
 
+let bestStreak = 0;
+
 // App component - represents the whole app
 export default class Score extends Component {
 
@@ -24,9 +26,13 @@ export default class Score extends Component {
 
   componentDidUpdate(nextProps) {
     if(!this.props.shouldCheck)return;
+    if(this.state.streak > bestStreak)
+      bestStreak = this.state.streak;
+
+    console.log()
     let scores = {
       "score":this.state.score,
-      "streak":this.state.streak,
+      "streak":bestStreak,
       "vanessabar":utils.checkColor(this.state.fails)
     }
     this.props.scoreUpdate(scores);
