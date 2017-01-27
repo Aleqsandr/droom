@@ -4,8 +4,8 @@ var data = {
   "tracks": [
     {
       "id":0,
-      "name": "Spaceship",
-      "artist": "NOISIV",
+      "name": "Ways (noisiv cover)",
+      "artist": "Triathalon",
       "year": "2016",
       "difficulty":3,
     },
