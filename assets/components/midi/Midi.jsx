@@ -1,6 +1,8 @@
 import React, { Component } from 'react';
 //import web from "../../modules/WebMIDIAPI.min.js";
 
+let prevData = null;
+
 
 function onMIDIMessage(message) {
     data = message.data; // this gives us our [command/channel, note, velocity] data.
@@ -63,18 +65,19 @@ export default class Midi extends Component {
   }
 
   onMIDIMessage(event) {
-    if(event.data[2] != 64){
-      if(event.data[1] == 40)
-        event.data[1] = 38;
-      else if(event.data[1] == 50)
-        event.data[1] = 48;
-      else if(event.data[1] == 47)
-        event.data[1] = 45;
-      else if(event.data[1] == 58)
-        event.data[1] = 43;
-      else if(event.data[1] == 4)
-        event.data[1] = 46;
-
+    if(event.data[2] != 64 && event.data[1] && event.data[2]!=0 ){
+        if(event.data[1] == 40)
+          event.data[1] = 38;
+        else if(event.data[1] == 50)
+          event.data[1] = 48;
+        else if(event.data[1] == 47)
+          event.data[1] = 45;
+        else if(event.data[1] == 58)
+          event.data[1] = 43;
+        else if(event.data[1] == 4 || event.data[1] == 26 ){
+          event.data[1] = 46;
+        }
+        console.log(event.data[1])
       this.props.getNoteNumber(event.data);
     }
   }
