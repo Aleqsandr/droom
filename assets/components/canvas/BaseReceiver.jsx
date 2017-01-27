@@ -77,13 +77,18 @@ export default class BaseReceiver extends Component {
         node = ( <Tom y={this.props.size} hasToAnim={false} x={0} size={this.props.size} />);
         break;
     }
+
+    let letter = "";
+    if(this.props.isKeyboard)
+      letter = this.props.letter;
+
     return (
       <Group width={this.props.size} height={this.props.size} x={this.props.x + 25} y={this.props.size*0.5} note={this.props.note} keyCode={this.props.keyCode}>
 
         {node}
 
         <Text
-          text={this.props.letter}
+          text={letter}
           fontSize={30}
           x={this.props.size/2 - 8}
           y={-this.props.size + 10}

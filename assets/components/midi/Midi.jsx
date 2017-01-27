@@ -65,6 +65,7 @@ export default class Midi extends Component {
   }
 
   onMIDIMessage(event) {
+    console.log(event.data[1])
     if(event.data[2] != 64 && event.data[1] && event.data[2]!=0 ){
         if(event.data[1] == 40)
           event.data[1] = 38;
@@ -74,10 +75,11 @@ export default class Midi extends Component {
           event.data[1] = 45;
         else if(event.data[1] == 58)
           event.data[1] = 43;
+        else if(event.data[1] == 53)
+          event.data[1] = 51;
         else if(event.data[1] == 4 || event.data[1] == 26 ){
           event.data[1] = 46;
         }
-        console.log(event.data[1])
       this.props.getNoteNumber(event.data);
     }
   }

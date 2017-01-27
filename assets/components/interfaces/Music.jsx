@@ -51,7 +51,8 @@ export default class Music extends Component {
       onsuccess:function() {
         MIDI.programChange(0, 118);
         MIDI.setVolume(0, 0);
-        MIDI.Player.BPM = 150;
+        console.log(parseInt(self.state.track.bpm))
+        MIDI.Player.BPM = parseInt(self.state.track.bpm);
         self.setState({
           player:MIDI.Player,
           musicMP3 : new Howl({
@@ -136,7 +137,7 @@ export default class Music extends Component {
     setTimeout(function() {
       if(self.state.isPlaying)
         self.state.musicMP3.play();
-    }, utils.bpmToMs(this.state.velocity) - utils.pxToTime(utils.bpmToMs(this.state.velocity),70));
+    }, utils.bpmToMs(this.state.velocity) - utils.pxToTime(utils.bpmToMs(this.state.velocity),80));
 
     this.setState({isPlaying:true});
 

@@ -8,6 +8,7 @@ var data = {
       "artist": "Triathalon",
       "year": "2016",
       "difficulty":3,
+      "bpm":98
     },
     {
       "id":1,
@@ -15,6 +16,7 @@ var data = {
       "artist": "Rage against the machine",
       "year": "1992",
       "difficulty":2,
+      "bpm":150
 
     },
     {
@@ -23,6 +25,7 @@ var data = {
       "artist": "Droom Team",
       "year": "2017",
       "difficulty":2,
+      "bpm":150
 
     },
     {
@@ -31,6 +34,7 @@ var data = {
       "artist": "Atomic Boom",
       "year": "2013",
       "difficulty":2,
+      "bpm":150
 
     }
   ],
