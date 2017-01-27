@@ -23,8 +23,8 @@ export default class Track extends Component{
                         <p className="trackdifficulty">{stars}</p>
                     </div>
                 </div>
-                <div className="trackelement__right" onClick={utils.goFullScreen()}>
-                    <Link to={repeatUrl}><div className="repeat"><p>STUDIO</p></div></Link>
+                <div className="trackelement__right" onClick={utils.goFullScreen}>
+                    <Link to={repeatUrl}><div className="repeat"><p>REPEAT</p></div></Link>
                     <Link to={liveUrl}><div className="live"><p>LIVE</p></div></Link>
                 </div>
             </div>

@@ -10,6 +10,10 @@
 
 $montserrat: 'Montserrat', sans-serif;
 
+a {
+    text-decoration: none !important;
+}
+
 @keyframes colorize
 {
 	0% {color: #FFC733;}

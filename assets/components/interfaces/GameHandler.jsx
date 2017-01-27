@@ -8,7 +8,6 @@ var data = {
       "artist": "WU LYF",
       "year": "2013",
       "difficulty":3,
-
     },
     {
       "id":1,
@@ -33,6 +32,17 @@ var data = {
       "year": "2013",
       "difficulty":2,
 
+    }
+  ],
+
+  "users":[
+    {
+      "username":"test",
+      "password":"password"
+    },
+    {
+      "username":"droomy",
+      "password":"droomyp"
     }
   ]
 }
