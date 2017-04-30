@@ -10,6 +10,7 @@ import GameHandler from 'components/interfaces/GameHandler';
 import NotFound from 'components/notFound/NotFound';
 import About from 'components/pages/About';
 import Menu from 'components/pages/Menu';
+import Freemode from 'components/pages/Freemode';
 
 export default class Routes extends Component{
 
@@ -21,6 +22,7 @@ export default class Routes extends Component{
                 <Route path="/app/:id/:type" component={Music} />
                 <Route path="/menu" component={Menu} />
                 <Route path="/about" component={About} />
+                <Route path="/freemode" component={Freemode} />
                 <Route path='*' component={NotFound} />
               </Route>
             </Router>

@@ -8,6 +8,12 @@ $montserrat: 'Montserrat', sans-serif;
 	height: 100vh;
 	background-image: url(../images/librarybg.jpg);
 
+	&__left {
+		position: absolute;
+		left: 40px;
+		top: 40px;
+	}
+
 	.user
 	{
 		font-family: $montserrat;
@@ -15,12 +21,8 @@ $montserrat: 'Montserrat', sans-serif;
 		font-weight: 700;
 		font-size: 1.5em;
 		text-transform: uppercase;
-		position: fixed;
-		width: auto;
 		height: 50px;
 		background-color: black;
-		left: 40px;
-		top: 40px;
 
 		& > *
 		{
@@ -254,6 +256,22 @@ $montserrat: 'Montserrat', sans-serif;
 			background: yellow;
 			display: inline-block;
 			left: 45%;
+		}
+	}
+
+	.freemode {
+		font-family: $montserrat;
+		color: white;
+		font-weight: 700;
+		position:absolute;
+		left:250px;
+		top:15px;
+		text-transform: uppercase;
+		display:inline-block;
+
+
+		&__text {
+			color:white;
 		}
 	}
 }

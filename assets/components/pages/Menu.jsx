@@ -38,18 +38,23 @@ export default class Menu extends Component
     render(){
         return (
             <div className="library">
-            	<div className="user">
-            		<div className="isconnected"></div>
-            		<div className="logout">
-            			<Link to="/"><div className="logout__img logout__img--invisible" ref="logout"></div></Link>
-            		</div>
-            		<div className="avatar">
-            			<a href="#"><div className="avatar__img" onClick={this.usernamein.bind(this)} ref="triangle"></div></a>
-            		</div>
-            		<div className="username">
-            			<p className="username__text">DROOMY</p>
-            		</div>
-            	</div>
+                <div className="library__left">
+                	<div className="user">
+                		<div className="isconnected"></div>
+                		<div className="logout">
+                			<Link to="/"><div className="logout__img logout__img--invisible" ref="logout"></div></Link>
+                		</div>
+                		<div className="avatar">
+                			<a href="#"><div className="avatar__img" onClick={this.usernamein.bind(this)} ref="triangle"></div></a>
+                		</div>
+                		<div className="username">
+                			<p className="username__text">DROOMY</p>
+                		</div>
+                	</div>
+                    <div className="freemode">
+                        <Link to="/freemode" className="freemode__text">Freemode</Link>
+                    </div>
+                </div>
             	<div className="library__logo"></div>
             	<TrackList data={this.props.data}/>
             </div>

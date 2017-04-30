@@ -72,6 +72,10 @@ var useful = {
         } else if (document.webkitCancelFullScreen) {
           document.webkitCancelFullScreen();
         }
+    },
+
+    randBetween(min,max) {
+        return Math.floor(Math.random() * max) + min
     }
 }
 

@@ -1,8 +1,10 @@
 import React, { Component } from 'react';
+import {Link} from "react-router"
 import {Layer, Rect, Stage, Group} from 'react-konva';
 import BaseDrum from './canvas/BaseDrum.jsx';
 import Notes from './canvas/Notes.jsx';
 import Midi from './midi/Midi.jsx';
+import FreeNote from './canvas/FreeNote.jsx';
 import HudLeft from "./interfaces/Hudleft.jsx";
 import HudRight from "./interfaces/Hudright.jsx";
 import VanessaBar from "./canvas/VanessaBar.jsx";
@@ -59,7 +61,6 @@ export default class App extends Component {
       shouldAnim:true,
       timeKick:Date.now(),
       isKeyboard:true,
-
     });
   }
 
@@ -89,6 +90,7 @@ export default class App extends Component {
   }
 
   getTimingNoteSuccess(val) {
+    if(this.props.isFreemode)return
     if(!this.props.shouldCheck)return;
     this.setState({
       timingNote:val,
@@ -112,38 +114,69 @@ export default class App extends Component {
     return (
       <div className="container" ref="container">
         <Midi getNoteNumber={this.getNoteNumber.bind(this)}/>
-        <HudLeft track={this.props.track} finishCompteur={this.finishCompteur.bind(this)} timingNote={this.state.timingNote} isPlaying={this.props.isPlaying} shouldCheck={this.props.shouldCheck}/>
-        <main>
-          <Stage width={this.state.width*0.5} height={this.state.height}>
-            <BaseDrum handleGroup={this.handleGroup.bind(this)} isKeyboard={this.state.isKeyboard}/>
-            <Notes
-              timeKick={this.state.timeKick}
-              shouldAnim={this.state.shouldAnim}
-              keyCode={this.state.keyCode}
-              noteIO={this.state.note}
-              group={this.state.group}
-              timingNote={this.state.timingNote}
-              data={this.props.data}
-              isPlaying={this.props.isPlaying}
-              getTimingNoteSuccess={this.getTimingNoteSuccess.bind(this)}
-              //getScoreUpdate={this.getScoreUpdate.bind(this)}
-              isKeyboard={this.state.isKeyboard}
-              velocity={this.props.velocity}
-              shouldCheck={this.props.shouldCheck}
-            />
-          </Stage>
-        </main>
-        <HudRight
-          velocity={this.props.velocity}
-          timingNote={this.state.timingNote}
-          onEndMusic={this.onEndMusic.bind(this)}
-          handlePause={this.onPauseMusic.bind(this)}
-          isPlaying={this.props.isPlaying}
-          finishStarter={this.state.finishStarter}
-          scoreUpdate={this.scoreUpdate.bind(this)}
-          shouldCheck={this.props.shouldCheck}
-          isLive={this.props.isLive}
-        />
+        {!this.props.isFreemode ? (
+          <HudLeft
+            track={this.props.track}
+            finishCompteur={this.finishCompteur.bind(this)}
+            timingNote={this.state.timingNote}
+            isPlaying={this.props.isPlaying}
+            shouldCheck={this.props.shouldCheck}/>
+        ) : (<div/>)}
+        {!this.props.isFreemode ? (
+          <main>
+            <Stage width={this.state.width*0.5} height={this.state.height}>
+              <BaseDrum handleGroup={this.handleGroup.bind(this)} isKeyboard={this.state.isKeyboard}/>
+              <Notes
+                timeKick={this.state.timeKick}
+                shouldAnim={this.state.shouldAnim}
+                keyCode={this.state.keyCode}
+                noteIO={this.state.note}
+                group={this.state.group}
+                timingNote={this.state.timingNote}
+                data={this.props.data}
+                isPlaying={this.props.isPlaying}
+                getTimingNoteSuccess={this.getTimingNoteSuccess.bind(this)}
+                //getScoreUpdate={this.getScoreUpdate.bind(this)}
+                isKeyboard={this.state.isKeyboard}
+                velocity={this.props.velocity}
+                shouldCheck={this.props.shouldCheck}
+              />
+            </Stage>
+          </main>
+          ) : (
+            <main>
+              <Stage width={this.state.width} height={this.state.height}>
+                <FreeNote
+                  noteIO={this.state.note}
+                  keyCode={this.state.keyCode}
+                  data={this.props.data}
+                  isKeyboard={this.state.isKeyboard}
+                  velocity={50}
+                />
+              </Stage>
+            </main>
+          )}
+        {!this.props.isFreemode ? (
+          <HudRight
+            velocity={this.props.velocity}
+            timingNote={this.state.timingNote}
+            onEndMusic={this.onEndMusic.bind(this)}
+            handlePause={this.onPauseMusic.bind(this)}
+            isPlaying={this.props.isPlaying}
+            finishStarter={this.state.finishStarter}
+            scoreUpdate={this.scoreUpdate.bind(this)}
+            shouldCheck={this.props.shouldCheck}
+            isLive={this.props.isLive}
+          />
+        ) : (
+          <div className="hud hud--right hud--freemode">
+            <div className="hud__bottom">
+              <div className="gamemenu">
+                <Link to="/menu" className="button"><p>MENU</p></Link><br/>
+              </div>
+            </div>
+          </div>
+        )}
       </div>
     );
   }

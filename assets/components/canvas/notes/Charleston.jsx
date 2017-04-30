@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import {Circle,Rect, Group} from 'react-konva';
+import utils from "../../../modules/useful.js";
 
 // App component - represents the whole app
 export default class Charleston extends Component {
@@ -14,14 +15,21 @@ export default class Charleston extends Component {
     let widthStroke = 4,
         y = 0;
 
+    let newY=-this.props.size, newX = this.props.x;
+    if(this.props.isFreemode){
+      let rndY = utils.randBetween(-350, 350);
+      let rndX = utils.randBetween(-350, 350);
+      newY=rndY + window.innerHeight*0.5 + this.props.size + this.props.size*0.5
+      newX=rndX + window.innerWidth*0.5 + this.props.size + this.props.size*0.5
+    }
 
     return (
       <Group
         width={window.innerWidth}
         height={this.props.size}
-        x={this.props.x}
+        x={newX}
         ref="note"
-        y={-this.props.size}
+        y={newY}
         offset={{
           x:this.props.size*0.5,
           y:this.props.size*0.5

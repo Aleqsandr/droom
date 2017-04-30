@@ -12,6 +12,15 @@ $montserrat: 'Montserrat', sans-serif;
         position:relative;
     }
 
+    &--freemode {
+
+        .gamemenu{
+            position:absolute;
+            right:0;
+            top:50px;
+        }
+    }
+
     &__top
     {
 		.score
