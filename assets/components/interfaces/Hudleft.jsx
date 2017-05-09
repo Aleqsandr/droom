@@ -21,8 +21,14 @@ export default class HudLeft extends Component {
             <Compteur finish={this.finishCompteur.bind(this)}/>
             <div className="hud__music">
               <div className="tracktitle">{this.props.track.name}</div>
-              <div className="trackartist">{this.props.track.artist}</div>
-              <div className="trackyear">{this.props.track.year} &#8212; {stars}</div>
+              {!this.props.isPractice ? (
+                <div>
+                  <div className="trackartist">{this.props.track.artist}</div>
+                  <div className="trackyear">{this.props.track.year} &#8212; {stars}</div>
+                </div>
+              ) : (
+                <div className="trackyear">{stars}</div>
+              )}
             </div>
           </div>
           <div className="hud__bottom">

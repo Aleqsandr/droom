@@ -13,9 +13,16 @@ export default class Music extends Component {
   constructor(props) {
     super(props);
 
-    let isLive = false;
-    if(this.props.params.type == "live")
+    let isLive = false,
+        isPractice = false;
+    let track = this.props.data.tracks[this.props.params.id]
+    if(this.props.params.type == "live" || "practice")
       isLive = true;
+
+    if(this.props.params.type=="practice"){
+      track = this.props.data.practice[this.props.params.id]
+      isPractice=true;
+    }
 
     this.state = {
       finishStarter:false,
@@ -31,10 +38,11 @@ export default class Music extends Component {
       isPlaying:false,
       rewindTime:5000,
       score:null,
-      track:this.props.data.tracks[this.props.params.id],
+      track:track,
       id:this.props.params.id,
       shouldCheck:true,
-      isLive:isLive
+      isLive:isLive,
+      isPractice:isPractice
     };
   }
 
@@ -48,22 +56,31 @@ export default class Music extends Component {
     MIDI.loadPlugin({
       soundfontUrl: "/soundfont/",
       instrument: "synth_drum",
-      onsuccess:function() {
+      onsuccess:() => {
         MIDI.programChange(0, 118);
         MIDI.setVolume(0, 0);
-        console.log(parseInt(self.state.track.bpm))
         MIDI.Player.BPM = parseInt(self.state.track.bpm);
-        self.setState({
-          player:MIDI.Player,
-          musicMP3 : new Howl({
-            src: ['/musics/'+self.state.id+'/song.mp3'],
-            onend : () => {
-              self.handleEnd()
-            }
-          }),
-          velocity: MIDI.Player.BPM
-        })
-        self.state.player.loadFile( "/musics/"+self.state.id+"/song.mid", self.launchGame.bind(self),null,function() {console.log("nope")} );
+
+        if(!this.state.isPractice){
+          self.setState({
+            player:MIDI.Player,
+            musicMP3 : new Howl({
+              src: ['/musics/'+self.state.id+'/song.mp3'],
+              onend : () => {
+                self.handleEnd()
+              }
+            }),
+            velocity: MIDI.Player.BPM
+          })
+          self.state.player.loadFile( "/musics/"+self.state.id+"/song.mid", self.launchGame.bind(self),null,function() {console.log("nope")} );
+        } else {
+          self.setState({
+            player:MIDI.Player,
+            musicMP3 : null,
+            velocity: MIDI.Player.BPM
+          })
+          self.state.player.loadFile( "/patterns/"+self.state.id+"/song.mid", self.launchGame.bind(self),null,function() {console.log("nope")} );
+        }
       }
     })
   }
@@ -100,7 +117,8 @@ export default class Music extends Component {
   }
 
   stopAllMusics() {
-    this.state.musicMP3.unload();
+    if(this.state.musicMP3)
+      this.state.musicMP3.unload();
     this.state.player.stop();
   }
 
@@ -134,31 +152,52 @@ export default class Music extends Component {
     var self = this;
     this.state.player.start();
 
-    setTimeout(function() {
-      if(self.state.isPlaying)
-        self.state.musicMP3.play();
+    setTimeout(() => {
+      if(this.state.isPlaying && !this.state.isPractice)
+        this.state.musicMP3.play();
     }, utils.bpmToMs(this.state.velocity) - utils.pxToTime(utils.bpmToMs(this.state.velocity),80));
 
     this.setState({isPlaying:true});
 
     let i= 0;
-    this.state.player.addListener(function(data){
+    let start = Date.now();
+    this.state.player.addListener((data) => {
+      if(this.state.isPractice) {
+        if(Date.now() > start+data.end) {
+          start = Date.now();
+          this.state.player.currentTime = 0;
+          this.state.player.resume();
+        }
+        this.checkStreak();
+      }
       // play the note
       MIDI.setVolume(0, 0);
       if(data.message == 144 || data.now == 100.5){ // NoteOn
-          self.setState({data:data, shouldAnim:false});
+          this.setState({data:data, shouldAnim:false});
       }
-    });
+    })
+  }
+
+  checkStreak(){
+    if(scoreFinal.streak>0 && scoreFinal.streak/this.state.track.nbNotes >= 3) {
+      MIDI.Player.removeListener();
+      this.state.player.stop();
+      this.setState({
+        isFinish:true,
+        score:scoreFinal
+      })
+    }
   }
 
   componentWillUnmount() {
-    this.state.musicMP3.unload();
+    if(this.state.musicMP3)
+      this.state.musicMP3.unload();
     this.state.player.stop();
   }
 
   render() {
     if(this.state.isFinish)
-      return (<EndMusic score={this.state.score} isLive={this.state.isLive}/>)
+      return (<EndMusic score={this.state.score} isLive={this.state.isLive} isPractice={this.state.isPractice} idSong={parseInt(this.props.params.id)} nbTracks={this.props.data.practice.length}/>)
 
     if(!this.state.finishStarter)
       return (<div className="Music-container"><div className="loading">Loading...</div></div>);
@@ -166,6 +205,7 @@ export default class Music extends Component {
       return (
         <App
           isLive={this.state.isLive}
+          isPractice={this.state.isPractice}
           shouldAnim={this.state.shouldAnim}
           data={this.state.data}
           canStart={this.handleFinishCompteur.bind(this)}

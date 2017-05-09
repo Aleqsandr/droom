@@ -161,6 +161,11 @@ $montserrat: 'Montserrat', sans-serif;
 				display: flex;
 				margin-top: 5px;
 
+				&__wrapper {
+					display:flex;
+					height:100%;
+				}
+
 				&__left
 				{
 					padding: 10px;
@@ -174,6 +179,10 @@ $montserrat: 'Montserrat', sans-serif;
 				&__right
 				{
 					flex: 5;
+
+					&--practice {
+						flex:1;
+					}
 				}
 
 				.repeat
@@ -265,6 +274,22 @@ $montserrat: 'Montserrat', sans-serif;
 		font-weight: 700;
 		position:absolute;
 		left:250px;
+		top:15px;
+		text-transform: uppercase;
+		display:inline-block;
+
+
+		&__text {
+			color:white;
+		}
+	}
+
+	.practice {
+		font-family: $montserrat;
+		color: white;
+		font-weight: 700;
+		position:absolute;
+		left:370px;
 		top:15px;
 		text-transform: uppercase;
 		display:inline-block;

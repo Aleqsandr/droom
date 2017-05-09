@@ -117,6 +117,7 @@ export default class App extends Component {
         {!this.props.isFreemode ? (
           <HudLeft
             track={this.props.track}
+            isPractice={this.props.isPractice}
             finishCompteur={this.finishCompteur.bind(this)}
             timingNote={this.state.timingNote}
             isPlaying={this.props.isPlaying}
@@ -167,6 +168,7 @@ export default class App extends Component {
             scoreUpdate={this.scoreUpdate.bind(this)}
             shouldCheck={this.props.shouldCheck}
             isLive={this.props.isLive}
+            isPractice={this.props.isPractice}
           />
         ) : (
           <div className="hud hud--right hud--freemode">

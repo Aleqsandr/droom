@@ -54,9 +54,12 @@ export default class Menu extends Component
                     <div className="freemode">
                         <Link to="/freemode" className="freemode__text">Freemode</Link>
                     </div>
+                    <div className="practice">
+                        <Link to="/practice" className="practice__text">Practice</Link>
+                    </div>
                 </div>
             	<div className="library__logo"></div>
-            	<TrackList data={this.props.data}/>
+            	<TrackList data={this.props.data} title="TRACKS"/>
             </div>
         )
     }

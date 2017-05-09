@@ -48,6 +48,31 @@ var data = {
       "username":"droomy",
       "password":"droomyp"
     }
+  ],
+
+  "practice":[
+    {
+      "id":0,
+      "name": "Sprite",
+      "difficulty":1,
+      "bpm":150,
+      "nbNotes":5,
+
+    },
+    {
+      "id":1,
+      "name": "We Bros",
+      "difficulty":2,
+      "bpm":150,
+      "nbNotes":6,
+    },
+    {
+      "id":2,
+      "name": "We Bros",
+      "difficulty":3,
+      "bpm":150,
+      "nbNotes":7,
+    }
   ]
 }
 

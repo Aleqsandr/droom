@@ -11,21 +11,33 @@ export default class Track extends Component{
             stars.push(<Star key={i}/>)
         }
 
-        let repeatUrl = "/app/"+ this.props.dataTrack.id + "/studio",
-            liveUrl   = "/app/"+ this.props.dataTrack.id + "/live";
+        let repeatUrl   = "/app/"+ this.props.dataTrack.id + "/studio",
+            liveUrl     = "/app/"+ this.props.dataTrack.id + "/live",
+            practiceUrl = "/app/"+ this.props.dataTrack.id + "/practice";
+
         return (
             <div className="trackelement">
                 <div className="trackelement__left">
                     <p className="tracktitle">{this.props.dataTrack.name}</p>
-                    <p className="trackartist">{this.props.dataTrack.artist}</p>
+                    {!this.props.practice ? (
+                        <p className="trackartist">{this.props.dataTrack.artist}</p>
+                    ) : (<div/>)}
                     <div className="trackdetails">
-                        <p className="trackyear">{this.props.dataTrack.year} &mdash; </p>
+                        {!this.props.practice ? (
+                            <p className="trackyear">{this.props.dataTrack.year} &mdash; </p>
+                        ) : (<div/>)}
                         <p className="trackdifficulty">{stars}</p>
                     </div>
                 </div>
-                <div className="trackelement__right" onClick={utils.goFullScreen}>
-                    <Link to={repeatUrl}><div className="repeat"><p>STUDIO</p></div></Link>
-                    <Link to={liveUrl}><div className="live"><p>LIVE</p></div></Link>
+                <div className={!this.props.practice ? ("trackelement__right") : ("trackelement__right trackelement__right--practice")} onClick={utils.goFullScreen}>
+                    {!this.props.practice ? (
+                        <div className="trackelement__wrapper">
+                            <Link to={repeatUrl}><div className="repeat"><p>STUDIO</p></div></Link>
+                            <Link to={liveUrl}><div className="live"><p>LIVE</p></div></Link>
+                        </div>
+                    ) : (
+                        <Link to={practiceUrl}><div className="live"><p>PRACTICE</p></div></Link>
+                    )}
                 </div>
             </div>
         );

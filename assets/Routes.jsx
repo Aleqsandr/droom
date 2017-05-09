@@ -11,6 +11,8 @@ import NotFound from 'components/notFound/NotFound';
 import About from 'components/pages/About';
 import Menu from 'components/pages/Menu';
 import Freemode from 'components/pages/Freemode';
+import Practice from 'components/pages/Practice';
+import PracticeMusic from 'components/interfaces/PracticeMusic';
 
 export default class Routes extends Component{
 
@@ -21,6 +23,7 @@ export default class Routes extends Component{
                 <IndexRoute component={Home}/>
                 <Route path="/app/:id/:type" component={Music} />
                 <Route path="/menu" component={Menu} />
+                <Route path="/practice" component={Practice} />
                 <Route path="/about" component={About} />
                 <Route path="/freemode" component={Freemode} />
                 <Route path='*' component={NotFound} />

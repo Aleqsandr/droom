@@ -14,14 +14,6 @@ export default class Snare extends Component {
     if(this.props.y)
         y = this.props.y;
 
-
-    console.log({
-      "size":this.props.size,
-      "x":this.props.x,
-      "y":this.props.y
-    })
-
-
     let newY=-this.props.size, newX = this.props.x;
     if(this.props.isFreemode){
       let rndY = utils.randBetween(-350, 350);

@@ -23,7 +23,9 @@ export default class HudRight extends Component {
   }
 
   handleEndMusic(score) {
-    this.props.onEndMusic(score);
+    console.log("ok")
+    if(!this.props.isPractice)
+      this.props.onEndMusic(score);
   }
   componentWillReceiveProps(nextProps) {
     if(!nextProps.shouldCheck) return;
@@ -72,6 +74,7 @@ export default class HudRight extends Component {
               velocity={this.props.velocity}
               isPlaying={this.props.isPlaying}
               shouldCheck={this.props.shouldCheck}
+              isPractice={this.props.isPractice}
             />
           </div>
           <div className="hud__bottom">

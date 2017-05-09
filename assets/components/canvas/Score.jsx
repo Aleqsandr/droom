@@ -29,7 +29,6 @@ export default class Score extends Component {
     if(this.state.streak > bestStreak)
       bestStreak = this.state.streak;
 
-    console.log()
     let scores = {
       "score":this.state.score,
       "streak":bestStreak,
@@ -39,7 +38,8 @@ export default class Score extends Component {
   }
 
   handleEndMusic() {
-    this.props.onEndMusic(this.state.score);
+    if(!this.props.isPractice)
+      this.props.onEndMusic(this.state.score);
   }
 
   componentWillReceiveProps(nextProps) {
@@ -123,10 +123,19 @@ export default class Score extends Component {
   render() {
     return (
       <div className="score">
-        <div className="score__real">{this.state.score}</div>
-        <div className="score__streak">{this.state.streak} streak notes</div>
-        <div className="score__multiplier">x{this.state.multiplier} MULTIPLIER</div>
-        <VanessaBar fail={this.state.fails}/>
+        {!this.props.isPractice ? (
+          <div>
+            <div className="score__real">{this.state.score}</div>
+            <div className="score__streak">{this.state.streak} streak notes</div>
+            <div className="score__multiplier">x{this.state.multiplier} MULTIPLIER</div>
+          </div>
+        ):(
+          <div className="score__real">{this.state.streak} streaks</div>
+        )}
+
+        {!this.props.isPractice ? (
+          <VanessaBar fail={this.state.fails}/>
+        ) : (<div/>)}
       </div>
     );
   }

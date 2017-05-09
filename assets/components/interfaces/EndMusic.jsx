@@ -5,6 +5,8 @@ export default class EndMusic extends Component
 {
     constructor(props) {
         super(props);
+        if(this.props.isPractice)
+            return;
         if (this.props.score.vanessabar <= 10)  {
             this.state = {
                 "text": "TRY AGAIN"
@@ -24,7 +26,19 @@ export default class EndMusic extends Component
 
   render() {
     var contentLive = (<div/>)
-    if(this.props.isLive) {
+
+    if(this.props.isPractice) {
+        let nb = parseInt(this.props.idSong)+1;
+        let url = "/app/"+ nb +"/practice"
+        let contentLink = (<Link to={url}><div className="button"><p>NEXT PATTERN</p></div></Link>);
+        if(this.props.idSong+1 >= this.props.nbTracks)
+            contentLink = (<div/>)
+        contentLive = (
+            <div>
+                <div className="end__score"> Streak notes : {this.props.score.streak}</div>
+            </div>
+        )
+    } else if(this.props.isLive) {
         contentLive = (
             <div>
                 <div className="end__title">{this.state.text}</div>
