@@ -45,7 +45,7 @@ export default class Freemode extends Component {
   componentDidMount() {
     var self = this;
     MIDI.loadPlugin({
-      soundfontUrl: "/app/vendors/soundfont/",
+      soundfontUrl: "/assets/soundfont/",
       instrument: "synth_drum",
       onsuccess:function() {
         MIDI.programChange(0, 118);
@@ -53,7 +53,7 @@ export default class Freemode extends Component {
         self.setState({
           player:MIDI.Player,
         })
-        self.state.player.loadFile( "app/vendors/musics/"+self.state.id+"/song.mid", self.launchGame.bind(self),null,function() {console.log("nope")} );
+        self.state.player.loadFile( "/assets/musics/"+self.state.id+"/song.mid", self.launchGame.bind(self),null,function() {console.log("nope")} );
       }
     })
   }

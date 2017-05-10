@@ -55,7 +55,7 @@ export default class Music extends Component {
     console.log(MIDI)
     MIDI.Player.BPM = 0;
     MIDI.loadPlugin({
-      soundfontUrl: "/app/vendors/soundfont/",
+      soundfontUrl: "/assets/soundfont/",
       instrument: "synth_drum",
       onsuccess:() => {
         MIDI.programChange(0, 118);
@@ -66,21 +66,21 @@ export default class Music extends Component {
           self.setState({
             player:MIDI.Player,
             musicMP3 : new Howl({
-              src: ['/app/vendors/musics/'+self.state.id+'/song.mp3'],
+              src: ['/assets/musics/'+self.state.id+'/song.mp3'],
               onend : () => {
                 self.handleEnd()
               }
             }),
             velocity: MIDI.Player.BPM
           })
-          self.state.player.loadFile( "/app/vendors/musics/"+self.state.id+"/song.mid", self.launchGame.bind(self),null,function() {console.log("nope")} );
+          self.state.player.loadFile( "/assets/musics/"+self.state.id+"/song.mid", self.launchGame.bind(self),null,function() {console.log("nope")} );
         } else {
           self.setState({
             player:MIDI.Player,
             musicMP3 : null,
             velocity: MIDI.Player.BPM
           })
-          self.state.player.loadFile( "/app/vendors/patterns/"+self.state.id+"/song.mid", self.launchGame.bind(self),null,function() {console.log("nope")} );
+          self.state.player.loadFile( "/assets/patterns/"+self.state.id+"/song.mid", self.launchGame.bind(self),null,function() {console.log("nope")} );
         }
       }
     })
