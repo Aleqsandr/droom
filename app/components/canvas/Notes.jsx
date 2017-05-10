@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import {Layer, Rect, Stage, Group} from 'react-konva';
 import Note from './Note.jsx';
 import update from 'react-addons-update';
-import MIDI from '../../vendors/MIDI.js';
+import MIDI from 'MIDI.js';
 import utils from "../../assets/modules/useful.js";
 
 var player, notes = [], times = [], noteValues = [], prevTime= 0, prevCheck=true;
