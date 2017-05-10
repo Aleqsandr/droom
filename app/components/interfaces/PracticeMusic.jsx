@@ -42,7 +42,7 @@ export default class PracticeMusic extends Component {
     var self = this;
     MIDI.Player.BPM = 0;
     MIDI.loadPlugin({
-      soundfontUrl: "/assets/soundfont/",
+      soundfontUrl: "/vendors/soundfont/",
       instrument: "synth_drum",
       onsuccess:function() {
         MIDI.programChange(0, 118);
@@ -51,14 +51,14 @@ export default class PracticeMusic extends Component {
         self.setState({
           player:MIDI.Player,
           musicMP3 : new Howl({
-            src: ['/assets/musics/'+self.state.id+'/song.mp3'],
+            src: ['/vendors/musics/'+self.state.id+'/song.mp3'],
             onend : () => {
               self.handleEnd()
             }
           }),
           velocity: MIDI.Player.BPM
         })
-        self.state.player.loadFile( "/assets/musics/"+self.state.id+"/song.mid", self.launchGame.bind(self),null,function() {console.log("nope")} );
+        self.state.player.loadFile( "/vendors/musics/"+self.state.id+"/song.mid", self.launchGame.bind(self),null,function() {console.log("nope")} );
       }
     })
   }
