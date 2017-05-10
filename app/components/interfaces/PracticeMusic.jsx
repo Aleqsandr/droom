@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import Compteur from '../canvas/Compteur.jsx';
 import App from '../App.jsx';
-import MIDI from '../../../node_modules/MIDI.js';
+import MIDI from '../../vendors/MIDI.js';
 import "howler";
 import utils from "../../assets/modules/useful.js";
 import EndMusic from '../interfaces/EndMusic.jsx';
@@ -42,7 +42,7 @@ export default class PracticeMusic extends Component {
     var self = this;
     MIDI.Player.BPM = 0;
     MIDI.loadPlugin({
-      soundfontUrl: "/soundfont/",
+      soundfontUrl: "/app/vendors/soundfont/",
       instrument: "synth_drum",
       onsuccess:function() {
         MIDI.programChange(0, 118);
@@ -51,14 +51,14 @@ export default class PracticeMusic extends Component {
         self.setState({
           player:MIDI.Player,
           musicMP3 : new Howl({
-            src: ['/musics/'+self.state.id+'/song.mp3'],
+            src: ['/app/vendors/musics/'+self.state.id+'/song.mp3'],
             onend : () => {
               self.handleEnd()
             }
           }),
           velocity: MIDI.Player.BPM
         })
-        self.state.player.loadFile( "/musics/"+self.state.id+"/song.mid", self.launchGame.bind(self),null,function() {console.log("nope")} );
+        self.state.player.loadFile( "/app/vendors/musics/"+self.state.id+"/song.mid", self.launchGame.bind(self),null,function() {console.log("nope")} );
       }
     })
   }

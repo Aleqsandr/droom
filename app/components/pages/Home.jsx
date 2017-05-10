@@ -136,7 +136,6 @@ export default class Home extends Component {
     }
 
     render() {
-        console.log(this.state.si,this.state.signupPwd)
         return (
             <div className="Home-container">
                 <div className="bg1"></div>
@@ -151,11 +150,6 @@ export default class Home extends Component {
                     </ul>
                 </nav>
 
-
-
-
-
-
                 <div className="logincontainer">
                     <div className="logincontainer__login">
                         <Link to="#"><div className="logincontainer__login__back" onClick={this.loginout}></div></Link>
@@ -169,12 +163,6 @@ export default class Home extends Component {
                         </form>
                     </div>
                 </div>
-
-
-
-
-
-
 
                 <div className="signupcontainer">
                     <div className="signupcontainer__signup">

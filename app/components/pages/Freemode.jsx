@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import Compteur from '../canvas/Compteur.jsx';
 import App from '../App.jsx';
-import MIDI from '../../../node_modules/MIDI.js';
+import MIDI from '../../vendors/MIDI.js';
 import "howler";
 import utils from "../../assets/modules/useful.js";
 import EndMusic from '../interfaces/EndMusic.jsx';
