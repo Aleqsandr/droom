@@ -28,6 +28,12 @@ export default class Track extends Component{
                         ) : (<div/>)}
                         <p className="trackdifficulty">{stars}</p>
                     </div>
+                    {!this.props.practice ? (
+                            <div className="track_scores">
+                                <div className="track__best">Best &nbsp;&nbsp;&nbsp;<span>10232</span> pts</div>
+                                <div className="track__best">Yours &nbsp;<span>973</span> pts</div>
+                            </div>
+                    ) : (<div/>)}
                 </div>
                 <div className={!this.props.practice ? ("trackelement__right") : ("trackelement__right trackelement__right--practice")} onClick={utils.goFullScreen}>
                     {!this.props.practice ? (

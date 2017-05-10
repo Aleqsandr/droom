@@ -6,6 +6,7 @@ export default class TrackList extends Component{
 
     render(){
         let self = this;
+        console.log(this.props.data)
         let nodes = this.props.data.tracks.map((track,i) => {
           return(<Track dataTrack={track} key={i} practice={this.props.practice}/>);
         });

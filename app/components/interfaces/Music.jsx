@@ -16,8 +16,10 @@ export default class Music extends Component {
     let isLive = false,
         isPractice = false;
     let track = this.props.data.tracks[this.props.params.id]
-    if(this.props.params.type == "live" || "practice")
+    if(this.props.params.type == "live" || this.props.params.type == "practice"){
+      console.log("kawabunga")
       isLive = true;
+    }
 
     if(this.props.params.type=="practice"){
       track = this.props.data.practice[this.props.params.id]
@@ -52,7 +54,6 @@ export default class Music extends Component {
 
   componentDidMount() {
     var self = this;
-    console.log(MIDI)
     MIDI.Player.BPM = 0;
     MIDI.loadPlugin({
       soundfontUrl: "/vendors/soundfont/",

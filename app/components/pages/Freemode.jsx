@@ -53,7 +53,7 @@ export default class Freemode extends Component {
         self.setState({
           player:MIDI.Player,
         })
-        self.state.player.loadFile( "/vendors/musics/0/song.mid",null,function() {console.log("nope")} );
+        self.state.player.loadFile( "/vendors/musics/"+self.state.id+"/song.mid",null,function() {console.log("nope")} );
       }
     })
   }
