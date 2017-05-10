@@ -1,7 +1,7 @@
 {
-  "name": "react-webpack-boilerplate",
-  "version": "2.0.0",
-  "description": "Minimalistic ES6 React boilerplate",
+  "name": "droom",
+  "version": "0.1.0",
+  "description": "A simple web browser rhythm game",
   "main": "index.js",
   "scripts": {
     "prestart": "npm run production",
@@ -13,11 +13,12 @@
     "precommit": "cross-env npm run lint && npm test",
     "prepush": "cross-env npm run lint && npm test"
   },
-  "author": "Kliment Petrov <kleopetroff@gmail.com>",
+  "author": "Droom Team",
   "license": "MIT",
   "dependencies": {
     "canvas": "^1.6.5",
     "cross-env": "4.0.0",
+    "firebase": "^3.9.0",
     "fs": "0.0.1-security",
     "howler": "^2.0.3",
     "jsdom": "^10.1.0",

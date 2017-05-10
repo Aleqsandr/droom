@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import {Link, browserHistory} from 'react-router';
+import * as firebase from "firebase";
 
 // App component - represents the whole app
 export default class Home extends Component {
@@ -7,8 +8,10 @@ export default class Home extends Component {
     super(props);
 
     this.state = {
-      "usernameSignIn":"",
-      "password":""
+      signupEmail: null,
+      signupPwd: null,
+      signinEmail: null,
+      signinPwd: null
     };
   }
 
@@ -57,30 +60,66 @@ export default class Home extends Component {
     setTimeout(function(){signup.style.display = "none"}, 1000);
   }
 
-  handleChangeUsernameLogIn(event) {
-    this.setState({usernameSignIn: event.target.value});
+  handleChangeSignupEmail(event) {
+    this.setState({signupEmail: event.target.value});
   }
 
-  handleChangePasswordLogIn(event) {
-    this.setState({passwordSignIn: event.target.value});
+  handleChangeSignupPwd(event) {
+    this.setState({signupPwd: event.target.value});
   }
 
-  handleSubmitLogIn(event) {
-    event.preventDefault();
-    let users = this.props.data.users;
-    for (var i = users.length - 1; i >= 0; i--) {
-      console.log(users[i].username , this.state.usernameSignIn)
-      console.log(users[i].password , this.state.passwordSignIn)
-      if(users[i].username == this.state.usernameSignIn && users[i].password == this.state.passwordSignIn){
-        console.log(this.transitionTo)
-        browserHistory.push('/menu/'+users[i].username)
-      }
+  handleChangeSigninEmail(event) {
+    this.setState({signinEmail: event.target.value});
+  }
+
+  handleChangeSigninPwd(event) {
+    this.setState({signinPwd: event.target.value});
+  }
+
+  handleSubmitLogIn(e) {
+    e.preventDefault();
+
+    let myEmail = this.state.signinEmail;
+    let myPwd = this.state.signinPwd;
+    console.log(myEmail)
+    console.log(myPwd)
+    if( myEmail == null && myPwd == null){
+      alert('You need to complete the following inputs : Email, Password');
     }
+    else{
+      alert('normalement t\'es connecté');
 
+      firebase.auth().signInWithEmailAndPassword(myEmail, myPwd)
+        .then((firebaseUser)=>{
+               console.log(firebaseUser)
+           })
+          .catch(function(error) {
+               // Error Handling
+          });
+    }
+      
+
+  }
+
+  handleSubmitSignup(e){
+    e.preventDefault();
+    let myEmail = this.state.signupEmail;
+    let myPwd = this.state.signupPwd;
+    if( myEmail == null && myPwd == null){
+      alert('You need to complete the following inputs : Email, Password');
+    }
+    else{
+      alert('normalement t\'es inscrits');
+      firebase.auth().createUserWithEmailAndPassword(myEmail, myPwd)
+        .catch((error) => {
+          console.log(error)
+        })
+    }
+    
   }
 
   render() {
-    console.log(this.state.usernameSignIn,this.state.passwordSignIn)
+    console.log(this.state.si,this.state.signupPwd)
     return (
       <div className="Home-container">
         <div className="bg1"></div>
@@ -105,8 +144,8 @@ export default class Home extends Component {
             <Link to="#"><div className="logincontainer__login__back" onClick={this.loginout}></div></Link>
             <div className="logincontainer__login__logo"></div>
             <form className="logincontainer__login__form" onSubmit={this.handleSubmitLogIn.bind(this)}>
-              <input type="text" placeholder="USERNAME" value={this.state.usernameSignIn} onChange={this.handleChangeUsernameLogIn.bind(this)}/><br />
-              <input type="password" placeholder="PASSWORD" value={this.state.passwordSignIn} onChange={this.handleChangePasswordLogIn.bind(this)}/><br />
+              <input type="text" placeholder="EMAIL" value={this.state.signinEmail} onChange={this.handleChangeSigninEmail.bind(this)}/><br />
+              <input type="password" placeholder="PASSWORD" value={this.state.signinPwd} onChange={this.handleChangeSigninPwd.bind(this)}/><br />
               <input className="submit" type="submit" value="GO" action="#"/><br />
               <Link to="#"><p className="signupbutton" onClick={this.signupin}>Don&rsquo;t have an account yet ? Sign up here</p></Link><br />
               <Link to="/menu"><p>Play as Droomy (guest with no score)</p></Link>
@@ -123,11 +162,10 @@ export default class Home extends Component {
         <div className="signupcontainer">
           <div className="signupcontainer__signup">
             <Link to="#"><div className="signupcontainer__signup__back" onClick={this.signupout}></div></Link>
-            <p>WELCOME ON DROOM.<br/>READY TO KICK THE INTERNET ?</p>
-            <form className="signupcontainer__signup__form">
-              <input type="text" placeholder="USERNAME" /><br />
-              <input type="password" placeholder="PASSWORD" /><br />
-              <input type="mail" placeholder="EMAIL" /><br />
+            <p>WELCOME TO DROOM.<br/>READY TO KICK THE INTERNET ?</p>
+            <form className="signupcontainer__signup__form" onSubmit={this.handleSubmitSignup.bind(this)}>
+              <input type="mail" placeholder="EMAIL" value={this.state.signupEmail} onChange={this.handleChangeSignupEmail.bind(this)}/><br />
+              <input type="password" placeholder="PASSWORD" value={this.state.signupPwd} onChange={this.handleChangeSignupPwd.bind(this)}/><br />
               <input className="submit" type="submit" value="I SIGN UP" action="#"/><br />
             </form>
           </div>
