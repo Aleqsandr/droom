@@ -32,6 +32,8 @@ export default class FreeNote extends Component {
     let note = data[0], isKick=false;
     noteValues.push(note);
 
+    console.log("ok + " + note)
+
     notes.push(<Note
       velocity={this.props.velocity}
       key={time}
@@ -54,7 +56,10 @@ export default class FreeNote extends Component {
   }
 
   componentWillReceiveProps(nextProps) {
-    this.checkKey(nextProps.keyCode);
+    if(this.props.isKeyboard)
+      this.checkKey(nextProps.keyCode);
+    else
+      this.playNote([nextProps.noteIO,0])
   }
 
 

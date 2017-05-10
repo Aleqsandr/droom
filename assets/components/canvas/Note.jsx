@@ -34,7 +34,6 @@ export default class Note extends Component {
           }
       });
     } else {
-      console.log("no freemode")
       let self = this;
 
       note.to({

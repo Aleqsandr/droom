@@ -246,15 +246,27 @@ $montserrat: 'Montserrat', sans-serif;
 					margin-top: 3px;
 				}
 
-				.trackyear, .trackdifficulty
+				.trackyear, .trackdifficulty, .track__best,
 				{
 					display: inline-block;
 					letter-spacing: 2px;
 					margin: 0;
 					font-style: normal;
 					font-size: 0.8em;
+
+					span {
+						font-size:1em;
+					}
+				}
+
+				.track__best {
+					display:block;
 				}
 			}
+		}
+
+		.track_scores {
+			margin-top:10px;
 		}
 
 		&__homies

@@ -52,7 +52,7 @@ export default class Menu extends Component
                 		</div>
                 	</div>
                     <div className="freemode">
-                        <Link to="/freemode" className="freemode__text">Freemode</Link>
+                        <Link to="/freemode" className="freemode__text">Freedrum</Link>
                     </div>
                     <div className="practice">
                         <Link to="/practice" className="practice__text">Practice</Link>

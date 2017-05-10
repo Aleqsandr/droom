@@ -48,24 +48,26 @@ export default class Kick extends Component {
       )
     }
 
+    console.log(this.props.x)
+
     return (
       <Group
         width={this.props.size}
         height={this.props.size}
-        x={this.props.x}
+        x={newX}
         ref="note"
-        y={-this.props.size}
+        y={newY}
         offset={{
           x:this.props.size*0.5,
           y:this.props.size*0.5
         }}
       >
-
         <Rect
             width={this.props.size}
             height={this.props.size}
+            x={0}
+            y={0}
             fill="black" />
-
       </Group>
     )
   }

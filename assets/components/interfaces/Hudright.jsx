@@ -23,7 +23,6 @@ export default class HudRight extends Component {
   }
 
   handleEndMusic(score) {
-    console.log("ok")
     if(!this.props.isPractice)
       this.props.onEndMusic(score);
   }
@@ -49,7 +48,7 @@ export default class HudRight extends Component {
   }
 
   render() {
-    if(!this.props.isLive) {
+    if(!this.props.isLive && !this.props.isPractice) {
       return (
           <div className="hud hud--right">
             <div className="hud__top">
@@ -64,6 +63,7 @@ export default class HudRight extends Component {
           </div>
       )
     }
+
     return (
         <div className="hud hud--right">
           <div className="hud__top">
