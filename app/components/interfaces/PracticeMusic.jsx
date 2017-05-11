@@ -91,7 +91,6 @@ export default class PracticeMusic extends Component {
   }
 
   getScore(score){
-    console.log(score);
     scoreFinal = score;
   }
 

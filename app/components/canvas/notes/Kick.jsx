@@ -48,8 +48,6 @@ export default class Kick extends Component {
       )
     }
 
-    console.log(this.props.x)
-
     return (
       <Group
         width={this.props.size}

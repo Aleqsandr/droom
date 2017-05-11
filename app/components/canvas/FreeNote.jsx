@@ -32,8 +32,6 @@ export default class FreeNote extends Component {
     let note = data[0], isKick=false;
     noteValues.push(note);
 
-    console.log("ok + " + note)
-
     notes.push(<Note
       velocity={this.props.velocity}
       key={time}
@@ -187,8 +185,6 @@ export default class FreeNote extends Component {
 
     let totalWidth = size*(8+diff)+padding*(7+diff),
         left = window.innerWidth*0.5 - totalWidth;
-
-    console.log(notes);
 
     return (
       <Layer>

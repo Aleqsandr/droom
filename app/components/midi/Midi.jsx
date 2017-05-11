@@ -65,7 +65,6 @@ export default class Midi extends Component {
   }
 
   onMIDIMessage(event) {
-    console.log(event.data[1])
     if(event.data[2] != 64 && event.data[1] && event.data[2]!=0 ){
         if(event.data[1] == 40)
           event.data[1] = 38;

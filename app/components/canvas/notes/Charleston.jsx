@@ -50,7 +50,6 @@ export default class Charleston extends Component {
     );
 
     if(this.props.y){
-      console.log("y a un Y : " + this.props.y)
       y = this.props.y
     }
     return (

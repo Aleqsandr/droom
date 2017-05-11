@@ -33,7 +33,7 @@ a {
 html,
 body{
   margin: 0;
-  background-image: url(../images/bg.jpg);
+  background-image: url("http://code-418.com/droom/bg.jpg");
   background-size: cover;
   background-position: center center;
   height:100vh;
@@ -136,4 +136,15 @@ body{
 
 .star {
     display:inline-block;
+}
+
+.beta {
+    color:white;
+    font-family: $montserrat;
+    font-size: 12px;
+    color:white;
+    position:absolute;
+    bottom:5px;
+    left:5px;
+    z-index: 99999999999;
 }

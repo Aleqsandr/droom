@@ -13,7 +13,6 @@ export default class TrackList extends Component{
                     return(<Track dataTrack={track} key={i} practice={this.props.practice}/>);
                 });
             }else{
-                console.log(this.props.data);
                 nodes = this.props.data.tracks.map((track,i) => {
                     return(<Track dataTrack={track} key={i} practice={this.props.practice}/>);
                 });

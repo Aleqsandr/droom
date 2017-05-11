@@ -21,7 +21,6 @@ export default class LogIn extends Component {
   }
 
   componentWillReceiveProps(nextProps) {
-    console.log(nextProps.isSignup)
     if(nextProps.isSignup)
       this.signupin();
   }

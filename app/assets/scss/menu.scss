@@ -6,7 +6,7 @@ $montserrat: 'Montserrat', sans-serif;
 {
     width: 100vw;
     height: 100vh;
-    background-image: url(../images/librarybg.jpg);
+    background-image: url("http://code-418.com/droom/bg_dark.jpg");
     background-size: cover;
 
     &__left {
@@ -50,7 +50,7 @@ $montserrat: 'Montserrat', sans-serif;
             {
                 width: 100%;
                 height: 100%;
-                background-image: url(../images/usernametriangle.png);
+                background-image: url("http://code-418.com/droom/usernametriangle.png");
                 background-size: cover;
                 transform: rotate(0deg);
                 transition: .2s;
@@ -84,7 +84,7 @@ $montserrat: 'Montserrat', sans-serif;
                 left: 50%;
                 transform: translateX(-50%) translateY(-50%);
                 transition: .2s;
-                background-image: url(../images/logout.png);
+                background-image: url("http://code-418.com/droom/logout.png");
                 background-size: cover;
 
 
@@ -123,7 +123,7 @@ $montserrat: 'Montserrat', sans-serif;
         top: 40px;
         width: 250px;
         height: 125px;
-        background-image: url(../images/mainlogoblack.gif);
+        background-image: url("http://code-418.com/droom/mainlogoblack.gif");
         background-size: cover;
     }
 

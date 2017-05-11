@@ -109,7 +109,7 @@ $montserrat: 'Montserrat', sans-serif;
 
     .bg1
     {
-        background-image: url(../images/background1.jpg);
+        background-image: url("http://code-418.com/droom/green.jpg");
         opacity: 1;
         animation: bgone 40s infinite;
         animation-delay: 0s;
@@ -118,7 +118,7 @@ $montserrat: 'Montserrat', sans-serif;
 
     .bg2
     {
-        background-image: url(../images/background2.jpg);
+        background-image: url("http://code-418.com/droom/yellow.jpg");
         opacity: 0;
         animation: bgtwo 40s infinite;
         animation-delay: 0s;
@@ -127,7 +127,7 @@ $montserrat: 'Montserrat', sans-serif;
 
     .bg3
     {
-        background-image: url(../images/background3.jpg);
+        background-image: url("http://code-418.com/droom/blue.jpg");
         opacity: 0;
         animation: bgthree 40s infinite;
         animation-delay: 0s;
@@ -136,7 +136,7 @@ $montserrat: 'Montserrat', sans-serif;
 
     .bg4
     {
-        background-image: url(../images/background4.jpg);
+        background-image: url("http://code-418.com/droom/red.jpg");
         opacity: 0;
         animation: bgfour 40s infinite;
         animation-delay: 0s;
@@ -250,7 +250,7 @@ $montserrat: 'Montserrat', sans-serif;
         {
             width: 50px;
             height: 50px;
-            background: url(../images/back.png) no-repeat;
+            background-image: url("http://code-418.com/droom/back.png");
             background-size: cover;
             position: relative;
             left: 50%;
@@ -365,7 +365,7 @@ $montserrat: 'Montserrat', sans-serif;
         {
             width: 50px;
             height: 50px;
-            background: url(../images/backwhite.png) no-repeat;
+            background-image: url("http://code-418.com/droom/arrow_back.png") no-repeat;
             background-size: cover;
             position: relative;
             left: 50%;

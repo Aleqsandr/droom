@@ -19,7 +19,6 @@ export default class GameHandler extends Component {
     }
 
     render() {
-        console.log("gamehandler")
         return(
             <div className="game">
                 {React.cloneElement(this.props.children, {
@@ -27,6 +26,7 @@ export default class GameHandler extends Component {
                      data:this.state.datas,
                      id:this.state.id
                  })}
+                <div className="beta">droom beta 0.1</div>
             </div>
         )
     }

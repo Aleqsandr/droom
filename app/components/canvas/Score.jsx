@@ -42,6 +42,10 @@ export default class Score extends Component {
       this.props.onEndMusic(this.state.score);
   }
 
+  componentWillUnmount() {
+    bestStreak = 0;
+  }
+
   componentWillReceiveProps(nextProps) {
     let savePrev = prevTime;
     if(!nextProps.shouldCheck)return;
