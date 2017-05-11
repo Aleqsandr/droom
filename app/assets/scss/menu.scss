@@ -1,0 +1,318 @@
+@import url('https://fonts.googleapis.com/css?family=Montserrat:400,700');
+
+$montserrat: 'Montserrat', sans-serif;
+
+.library
+{
+    width: 100vw;
+    height: 100vh;
+    background-image: url(../images/librarybg.jpg);
+    background-size: cover;
+
+    &__left {
+        position: absolute;
+        left: 40px;
+        top: 40px;
+        display: flex;
+        flex-direction: row;
+        justify-content: space-between;
+        align-items: center;
+    }
+
+    .user
+    {
+        font-family: $montserrat;
+        color: white;
+        font-weight: 700;
+        font-size: 1.5em;
+        text-transform: uppercase;
+        height: 50px;
+        background-color: black;
+        margin-right: 25px;
+        & > *
+        {
+            display: inline-block;
+        }
+
+        .isconnected
+        {
+            height: 100%;
+            width: 10px;
+            background: #55FF22;
+        }
+
+        .avatar
+        {
+            height: 50px;
+            width: 50px;
+
+            &__img
+            {
+                width: 100%;
+                height: 100%;
+                background-image: url(../images/usernametriangle.png);
+                background-size: cover;
+                transform: rotate(0deg);
+                transition: .2s;
+
+                &--isopen
+                {
+                    transform: rotate(90deg);
+                }
+            }
+        }
+
+        .logout
+        {
+            height: 50px;
+            width: 50px;
+            position: absolute;
+            left: 10px;
+            background: black;
+            transition: .2s;
+
+            &:hover{
+                cursor: pointer;
+            }
+
+            &__img
+            {
+                position: absolute;
+                width: 50%;
+                height: 50%;
+                top: 50%;
+                left: 50%;
+                transform: translateX(-50%) translateY(-50%);
+                transition: .2s;
+                background-image: url(../images/logout.png);
+                background-size: cover;
+
+
+
+                &--invisible
+                {
+                    opacity: 0;
+                }
+            }
+
+            &--lower
+            {
+                transform: translateY(100%);
+            }
+        }
+
+        .username
+        {
+            margin: 0;
+
+            &__text
+            {
+                margin: 0;
+                position: relative;
+                top: 50%;
+                transform: translateY(-50%);
+                padding: 0 18px;
+            }
+        }
+    }
+
+    &__logo
+    {
+        position: fixed;
+        right: 40px;
+        top: 40px;
+        width: 250px;
+        height: 125px;
+        background-image: url(../images/mainlogoblack.gif);
+        background-size: cover;
+    }
+
+    &__slider
+    {
+        font-family: $montserrat;
+        font-weight: 900;
+        font-style: italic;
+        position: absolute;
+        width: 100%;
+        height: 75%;
+        bottom: 0;
+        color: white;
+
+        &__tracks
+        {
+            position: relative;
+            width: 100%;
+            height: 100%;
+            left: 40px;
+            display: inline-block;
+
+            .trackwrapper
+            {
+                height: 75%;
+                overflow-y: scroll;
+            }
+
+            .sectiontitle
+            {
+                position: relative;
+                top: 15px;
+                left: 15px;
+                margin: 0 0 25px 0;
+                font-size: 3em;
+            }
+
+            .trackelement
+            {
+                width: 800px;
+                height: auto;
+                display: flex;
+                margin-top: 5px;
+
+                &__wrapper {
+                    display:flex;
+                    height:100%;
+                }
+
+                &__left
+                {
+                    padding: 10px;
+                    flex: 9.25;
+                    box-sizing: border-box;
+                    border: 3px inset black;
+                    background-color: rgba(255, 255, 255, .5);
+                    color: black;
+                }
+
+                &__right
+                {
+                    flex: 5;
+
+                    &--practice {
+                        flex:1;
+                    }
+                }
+
+                .repeat
+                {
+                    background: rgba(245, 110, 80, .5);
+
+                    &:hover
+                    {
+                        background: rgba(245, 110, 80, 1);
+                    }
+                }
+
+                .live
+                {
+                    background: rgba(44, 270, 165, .5);
+
+                    &:hover
+                    {
+                        background: rgba(44, 270, 165, 1);
+                    }
+                }
+
+                .repeat, .live
+                {
+                    box-sizing: border-box;
+                    margin-left: 5px;
+                    border: 3px inset black;
+                    position: relative;
+                    float: right;
+                    width: auto;
+                    height: 100%;
+                    font-size: 1em;
+                    padding: 0 20px;
+                    transition: .2s;
+
+                    p
+                    {
+                        text-align: center;
+                        margin: 0;
+                        position: relative;
+                        top: 50%;
+                        transform: translateY(-50%);
+                        color: black;
+                        transition: .2s;
+                    }
+                }
+
+                .tracktitle
+                {
+                    margin: 0;
+                    font-size: 1.4em;
+                }
+
+                .trackartist
+                {
+                    text-transform: uppercase;
+                    letter-spacing: 2px;
+                    margin: 0;
+                    font-style: normal;
+                    font-size: 0.8em;
+                    margin-top: 3px;
+                }
+
+                .trackscores{
+                    display: flex;
+                    width:100%;
+                    padding-right:5px;
+                    flex-direction: row;
+                    align-content: center;
+                    align-items: center;
+                    justify-content: space-between;
+
+                    .bestscore{
+                        font-style: default;
+                        font-size: 0.7em;
+                    }
+                }
+
+                .trackyear, .trackdifficulty
+                {
+                    display: inline-block;
+                    letter-spacing: 2px;
+                    margin: 0;
+                    font-style: normal;
+                    font-size: 0.8em;
+                }
+            }
+        }
+
+        &__homies
+        {
+            position: absolute;
+            width: 500px;
+            height: 100%;
+            background: yellow;
+            display: inline-block;
+            left: 45%;
+        }
+    }
+
+    .freemode {
+        font-family: $montserrat;
+        color: white;
+        font-weight: 700;
+        text-transform: uppercase;
+        display:inline-block;
+        margin-right: 20px;
+
+        &__text {
+            color:white;
+        }
+    }
+
+    .practice {
+        font-family: $montserrat;
+        color: white;
+        font-weight: 700;
+        text-transform: uppercase;
+        display:inline-block;
+
+
+        &__text {
+            color:white;
+        }
+    }
+}
