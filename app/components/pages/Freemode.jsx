@@ -5,6 +5,7 @@ import MIDI from 'MIDI.js';
 import "howler";
 import utils from "../../assets/modules/useful.js";
 import EndMusic from '../interfaces/EndMusic.jsx';
+import * as firebase from "firebase";
 
 let scoreFinal = 0;
 
@@ -18,6 +19,7 @@ export default class Freemode extends Component {
       isLive = true;
 
     this.state = {
+      allDatas:null,
       finishStarter:false,
       player:null,
       data:null,
@@ -31,7 +33,6 @@ export default class Freemode extends Component {
       isPlaying:true,
       rewindTime:5000,
       score:null,
-      track:this.props.data.tracks[this.props.params.id || 0],
       id:this.props.params.id,
       shouldCheck:true,
       isLive:isLive
@@ -53,7 +54,7 @@ export default class Freemode extends Component {
         self.setState({
           player:MIDI.Player,
         })
-        self.state.player.loadFile( "/vendors/musics/"+self.state.id+"/song.mid",null,function() {console.log("nope")} );
+        self.state.player.loadFile( "/vendors/musics//song.mid",null,function() {console.log("nope")} );
       }
     })
   }
@@ -69,7 +70,6 @@ export default class Freemode extends Component {
         data={this.state.data}
         canStart={true}
         velocity={this.state.velocity}
-        track={this.state.track}
       />
     );
   }

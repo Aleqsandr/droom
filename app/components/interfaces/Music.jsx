@@ -17,18 +17,16 @@ export default class Music extends Component {
         let isLive = false,
             isPractice = false;
 
-        let track = this.props.data.tracks[this.props.params.id]
         if(this.props.params.type == "live" || this.props.params.type == "practice"){
-            console.log("kawabunga")
             isLive = true;
         }
 
         if(this.props.params.type=="practice"){
-            track = this.props.data.practice[this.props.params.id]
             isPractice=true;
         }
 
         this.state = {
+            allData:null,
             finishStarter:false,
             player:null,
             data:null,
@@ -42,7 +40,7 @@ export default class Music extends Component {
             isPlaying:false,
             rewindTime:5000,
             score:null,
-            track:track,
+            track:null,
             id:this.props.params.id,
             shouldCheck:true,
             isLive:isLive,
@@ -55,39 +53,50 @@ export default class Music extends Component {
     }
 
     componentDidMount() {
-        var self = this;
-        console.log(MIDI)
-        MIDI.Player.BPM = 0;
-        MIDI.loadPlugin({
-            soundfontUrl: "/vendors/soundfont/",
-            instrument: "synth_drum",
-            onsuccess:() => {
-                MIDI.programChange(0, 118);
-                MIDI.setVolume(0, 0);
-                MIDI.Player.BPM = parseInt(self.state.track.bpm);
+      var self = this;
+      firebase.database().ref("/").once('value')
+          .then((vals) => {
+            let newd = vals.val();
+            let track = newd.tracks[this.props.params.id];
+            if(this.props.params.type=="practice")
+                track = newd.practice[this.props.params.id]
 
-                if(!this.state.isPractice){
-                    self.setState({
-                        player:MIDI.Player,
-                        musicMP3 : new Howl({
-                            src: ['/vendors/musics/'+self.state.id+'/song.mp3'],
-                            onend : () => {
-                                self.handleEnd()
-                            }
-                        }),
-                        velocity: MIDI.Player.BPM
-                    })
-                    self.state.player.loadFile( "/vendors/musics/"+self.state.id+"/song.mid", self.launchGame.bind(self),null,function() {console.log("nope")} );
-                } else {
-                    self.setState({
-                        player:MIDI.Player,
-                        musicMP3 : null,
-                        velocity: MIDI.Player.BPM
-                    })
-                    self.state.player.loadFile( "/vendors/patterns/"+self.state.id+"/song.mid", self.launchGame.bind(self),null,function() {console.log("nope")} );
+            this.setState({
+                allData:newd,
+                track:track
+            });
+            MIDI.Player.BPM = 0;
+            MIDI.loadPlugin({
+                soundfontUrl: "/vendors/soundfont/",
+                instrument: "synth_drum",
+                onsuccess:() => {
+                    MIDI.programChange(0, 118);
+                    MIDI.setVolume(0, 0);
+                    MIDI.Player.BPM = parseInt(track.bpm);
+
+                    if(!this.state.isPractice){
+                        self.setState({
+                            player:MIDI.Player,
+                            musicMP3 : new Howl({
+                                src: ['/vendors/musics/'+self.state.id+'/song.mp3'],
+                                onend : () => {
+                                    self.handleEnd()
+                                }
+                            }),
+                            velocity: MIDI.Player.BPM
+                        })
+                        self.state.player.loadFile( "/vendors/musics/"+self.state.id+"/song.mid", self.launchGame.bind(self),null,function() {console.log("nope")} );
+                    } else {
+                        self.setState({
+                            player:MIDI.Player,
+                            musicMP3 : null,
+                            velocity: MIDI.Player.BPM
+                        })
+                        self.state.player.loadFile( "/vendors/patterns/"+self.state.id+"/song.mid", self.launchGame.bind(self),null,function() {console.log("nope")} );
+                    }
                 }
-            }
-        })
+            })
+          })
     }
 
     handleEnd() {
@@ -203,7 +212,7 @@ export default class Music extends Component {
 
     render() {
         if(this.state.isFinish)
-            return (<EndMusic score={this.state.score} isLive={this.state.isLive} isPractice={this.state.isPractice} idSong={parseInt(this.props.params.id)} nbTracks={this.props.data.practice.length}/>)
+            return (<EndMusic score={this.state.score} isLive={this.state.isLive} isPractice={this.state.isPractice} idSong={parseInt(this.props.params.id)} nbTracks={this.state.allData.practice.length}/>)
 
         if(!this.state.finishStarter)
             return (<div className="Music-container"><div className="loading">Loading...</div></div>);

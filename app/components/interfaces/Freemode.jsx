@@ -17,25 +17,35 @@ export default class Freemode extends Component {
     if(this.props.params.type == "live")
       isLive = true;
 
-    this.state = {
-      finishStarter:false,
-      player:null,
-      data:null,
-      shouldAnim:false,
-      score:null,
-      isFinish:false,
-      musicMP3:null,
-      velocity:null,
-      startTime:null,
-      pauseTime:null,
-      isPlaying:false,
-      rewindTime:5000,
-      score:null,
-      track:this.props.data.tracks[this.props.params.id],
-      id:this.props.params.id,
-      shouldCheck:true,
-      isLive:isLive
-    };
+    let data = [];
+    firebase.auth().onAuthStateChanged((user) => {
+      if (user) {
+        let str = user.email;
+        let curUserName = str.substring(0, str.indexOf("@"));
+
+        firebase.database().ref("/").once('value')
+            .then((vals) => {
+              data = vals.val();
+                this.state = {
+                  finishStarter:false,
+                  player:null,
+                  data:null,
+                  shouldAnim:false,
+                  score:null,
+                  isFinish:false,
+                  musicMP3:null,
+                  velocity:null,
+                  startTime:null,
+                  pauseTime:null,
+                  isPlaying:false,
+                  rewindTime:5000,
+                  score:null,
+                  track:data.tracks[this.props.params.id],
+                  id:this.props.params.id,
+                  shouldCheck:true,
+                  isLive:isLive
+                };
+            })
   }
 
   componentWillMount() {
@@ -43,7 +53,6 @@ export default class Freemode extends Component {
   }
 
   componentDidMount() {
-    var self = this;
     MIDI.loadPlugin({
       soundfontUrl: "/vendors/soundfont/",
       instrument: "synth_drum",

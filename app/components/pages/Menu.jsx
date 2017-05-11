@@ -12,6 +12,7 @@ export default class Menu extends Component
         this.state = {
             username: null,
             "it": 0,
+            data:[]
         };
     }
 
@@ -34,22 +35,34 @@ export default class Menu extends Component
     }
 
     componentDidMount() {
-
-        let curUser = firebase.auth().currentUser;
-
-        if(!(curUser)){
-            this.setState({username: "droomy"});
-        }else{
-            let str = curUser.email;
+        firebase.auth().onAuthStateChanged((user) => {
+          if (user) {
+            let str = user.email;
             let curUserName = str.substring(0, str.indexOf("@"));
-            this.setState({username: curUserName});
-        }
+
+            firebase.database().ref("/").once('value')
+                .then((vals) => {
+                    this.setState({
+                        data: vals.val(),
+                        username:curUserName
+                    });
+                })
+          } else {
+            // No user is signed in.
+            firebase.database().ref("/").once('value')
+                .then((vals) => {
+                    this.setState({
+                        data: vals.val(),
+                        username:"droomy"
+                    });
+                })
+          }
+        });
 
         utils.exitFullScreen();
     }
 
     handleLogout = () => {
-
         firebase.auth().signOut()
                 .then(() => {
                     browserHistory.push('/');
@@ -76,14 +89,17 @@ export default class Menu extends Component
                         </div>
                     </div>
                     <div className="freemode">
-                        <Link to="/freemode" className="freemode__text">Freemode</Link>
+                        <Link to="/menu" className="practice__text">Home</Link>
                     </div>
-                    <div className="practice">
+                    <div className="freemode">
                         <Link to="/practice" className="practice__text">Practice</Link>
+                    </div>
+                    <div className="freemode">
+                        <Link to="/freemode" className="freemode__text">Freemode</Link>
                     </div>
                 </div>
                 <div className="library__logo"></div>
-                <TrackList data={this.props.data} title="TRACKS"/>
+                <TrackList data={this.state.data} title="TRACKS"/>
             </div>
         )
     }

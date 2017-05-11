@@ -16,19 +16,14 @@ export default class Home extends Component {
     }
 
     componentWillMount(){
-
-        setTimeout(function(){
-            let curUser;
-            curUser = firebase.auth().currentUser;
-            console.log("cur :",curUser.email)
-            if(!(curUser)){
-                console.log("welcome visitor !")
-            }
-            else{
-                browserHistory.push('/menu');
-            }
-        },1500)
-
+        firebase.auth().onAuthStateChanged(function(user) {
+          if (user) {
+            // User is signed in.
+            browserHistory.push('/menu')
+          } else {
+            // No user is signed in.
+          }
+        });
     }
 
     loginin(){
@@ -102,14 +97,13 @@ export default class Home extends Component {
             alert('You need to complete the following inputs : Email, Password');
         }
         else{
-
             firebase.auth().signInWithEmailAndPassword(myEmail, myPwd)
-                    .then((firebaseUser)=>{
-                        browserHistory.push('/menu');
-                    })
-                    .catch((error) => {
-                        console.log(error)
-                    });
+                .then((firebaseUser)=>{
+                    browserHistory.push('/menu');
+                })
+                .catch((error) => {
+                    console.log(error)
+                });
 
         }
 
