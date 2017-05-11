@@ -48,6 +48,10 @@ export default class Kick extends Component {
       )
     }
 
+    let datX = 0;
+    if(this.props.invisible && !this.props.realKey)
+      datX=-1000000;
+
     return (
       <Group
         width={this.props.size}
@@ -63,7 +67,7 @@ export default class Kick extends Component {
         <Rect
             width={this.props.size}
             height={this.props.size}
-            x={0}
+            x={datX}
             y={0}
             fill="black" />
       </Group>

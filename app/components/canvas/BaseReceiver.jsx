@@ -58,7 +58,7 @@ export default class BaseReceiver extends Component {
         break;
 
       case 36 :
-        node = ( <Kick y={this.props.size} hasToAnim={false} isKeyboard={true} x={0} size={this.props.size} />);
+        node = ( <Kick y={this.props.size} hasToAnim={false} isKeyboard={true} realKey={this.props.isKeyboard} x={0} size={this.props.size} invisible/>);
         break;
 
       case 45 :

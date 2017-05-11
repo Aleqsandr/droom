@@ -48,10 +48,6 @@ export default class Music extends Component {
         };
     }
 
-    componentDidUpdate(prevProps, prevState) {
-        scoreFinal=0;
-    }
-
     componentWillMount() {
         scoreFinal=0;
         utils.goFullScreen();
@@ -134,7 +130,6 @@ export default class Music extends Component {
     }
 
     getScore(score){
-        console.log("getscore")
         scoreFinal = score;
     }
 
@@ -184,10 +179,8 @@ export default class Music extends Component {
         let i= 0;
         let start = Date.now();
         this.state.player.addListener((data) => {
-            console.log(this.state.isPractice);
             if(this.state.isPractice) {
-                if(Date.now() > start+data.end) {
-                    console.log("enter")
+                if(Date.now() + 500 > start+data.end) {
                     start = Date.now();
                     this.state.player.currentTime = 0;
                     this.state.player.resume();
@@ -214,6 +207,8 @@ export default class Music extends Component {
     }
 
     componentWillUnmount() {
+        scoreFinal.streak=0;
+        scoreFinal.score=0;
         scoreFinal=0;
         if(this.state.musicMP3)
             this.state.musicMP3.unload();
