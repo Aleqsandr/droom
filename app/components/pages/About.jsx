@@ -8,7 +8,12 @@ export default class About extends Component{
             <div className="About-container">
                 <Link to="/"><div className="back"></div></Link>
                 <p className="title">ABOUT</p>
-                <p className="text">Lorem Elsass Ipsum mitt picon bière munster du ftomi! Ponchour bisame. Bibbeleskaas jetz rossbolla sech choucroute un schwanz geburtstàg, Chinette dû, ìch bier deppfele schiesser. Flammekueche de knèkes Seppele gal! a hopla geburtstàg, alles fraü Chulia Roberts oder knäckes dûû blottkopf. Noch bredele schissabibala, yetz Chorchette de Scharrarbergheim. Kouglopf ech ìch wurscht gueut mitt schneck jetz a schiss mannele, knèkes saucisse de Niederhausbergen of fill mauls schéni fleischwurcht schnaps de eme gal nüdle blottkopf, de Chulien Roger hop pfourtz! Kouglopf ech ìch wurscht gueut mitt schneck jetz a schiss mannele, knèkes saucisse de Niederhausbergen of fill mauls schéni fleischwurcht schnaps de eme gal nüdle blottkopf, de Chulien Roger hop pfourtz! bett mer ech schpeck un salami schmutz. Gal!</p>
+                <p className="text">
+                    Droom is a web application/game which makes you able to learn or improve your drumming skills. You can test your rythmic capacities
+                    by playing on your keyboard, but the best conditions is of course to play with a connected MIDI drumset. Three play modes are now
+                    available : Rhythm mode, Practice mode, Freedrum mode. Hit the right note at the right time and chain streak notes to blow up your
+                    score. Create your account, challenge your friends, be the best, and let's music.
+                </p>
                 <br />
                 <div className="names">
                     <a href="http://www.matthieubessol.com"><p className="text name">Matthieu Bessol</p></a>
