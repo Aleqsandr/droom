@@ -1,104 +1,48 @@
 import React, { Component } from 'react';
+import * as firebase from "firebase";
 
-var data = {
-  "tracks": [
-    {
-      "id":0,
-      "name": "Ways (noisiv cover)",
-      "artist": "Triathalon",
-      "year": "2016",
-      "difficulty":3,
-      "bpm":98
-    },
-    {
-      "id":1,
-      "name": "Killing in the name of",
-      "artist": "Rage against the machine",
-      "year": "1992",
-      "difficulty":2,
-      "bpm":150
-
-    },
-    {
-      "id":2,
-      "name": "Sprite",
-      "artist": "Droom Team",
-      "year": "2017",
-      "difficulty":2,
-      "bpm":150
-
-    },
-    {
-      "id":3,
-      "name": "We Bros",
-      "artist": "Atomic Boom",
-      "year": "2013",
-      "difficulty":2,
-      "bpm":150
-
-    }
-  ],
-
-  "users":[
-    {
-      "username":"test",
-      "password":"password"
-    },
-    {
-      "username":"droomy",
-      "password":"droomyp"
-    }
-  ],
-
-  "practice":[
-    {
-      "id":0,
-      "name": "Sprite",
-      "difficulty":1,
-      "bpm":150,
-      "nbNotes":5,
-
-    },
-    {
-      "id":1,
-      "name": "We Bros",
-      "difficulty":2,
-      "bpm":150,
-      "nbNotes":6,
-    },
-    {
-      "id":2,
-      "name": "We Bros",
-      "difficulty":3,
-      "bpm":150,
-      "nbNotes":7,
-    }
-  ]
-}
+let config = {
+    apiKey: "AIzaSyDtxBHh5p5jLvEfP_O0iuDxMh32hubEnpk",
+    authDomain: "droom-c7526.firebaseapp.com",
+    databaseURL: "https://droom-c7526.firebaseio.com",
+    projectId: "droom-c7526",
+    storageBucket: "droom-c7526.appspot.com",
+    messagingSenderId: "622797889787"
+};
+firebase.initializeApp(config)
 
 export default class GameHandler extends Component {
-  constructor(props) {
-    super(props);
+    constructor(props) {
+        super(props);
 
-    this.state = {
-      id:null,
-    };
-  }
-  sendMusicId(id) {
-    this.setState({
-      id:id
-    })
-  }
+        this.state = {
+            datas:null,
+            id:null
+        };
+    }
+    sendMusicId(id) {
+        this.setState({
+            id:id
+        })
+    }
 
-  render() {
-    return(
-      <div className="game">
-        {React.cloneElement(this.props.children, {
-          sendMusicId:this.sendMusicId.bind(this),
-          data:data,
-          id:this.state.id
-        })}
-      </div>
-    )
-  }
+    componentWillMount(){
+        firebase.database().ref().once('value')
+                .then((vals) => {
+                    this.setState({datas: vals.val()});
+                })
+    }
+
+    render() {
+
+        return(
+            <div className="game">
+                {React.cloneElement(this.props.children, {
+                     sendMusicId:this.sendMusicId.bind(this),
+                     data:this.state.datas,
+                     id:this.state.id
+                 })}
+            </div>
+        )
+    }
 }

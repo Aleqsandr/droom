@@ -49,8 +49,8 @@ export default class Menu extends Component
     }
 
     handleLogout = () => {
+
         firebase.auth().signOut()
-        console.log('clicked')
                 .then(() => {
                     browserHistory.push('/');
                 })

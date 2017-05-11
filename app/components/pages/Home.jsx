@@ -15,10 +15,11 @@ export default class Home extends Component {
         };
     }
 
-    componentDidMount(){
+    componentWillMount(){
 
         setTimeout(function(){
-            let curUser = firebase.auth().currentUser;
+            let curUser;
+            curUser = firebase.auth().currentUser;
             console.log("cur :",curUser.email)
             if(!(curUser)){
                 console.log("welcome visitor !")
@@ -26,7 +27,7 @@ export default class Home extends Component {
             else{
                 browserHistory.push('/menu');
             }
-        },500)
+        },1500)
 
     }
 
@@ -126,6 +127,14 @@ export default class Home extends Component {
             firebase.auth().createUserWithEmailAndPassword(myEmail, myPwd)
                     .then(()=>{
                         console.log("bien joué")
+
+                        var curUser = firebase.auth().currentUser;
+                        firebase.database().ref('users').push({
+                            id: curUser.uid,
+                            email:myEmail
+                        });
+                    })
+                    .then( ()=> {
                         browserHistory.push('/menu');
                     })
                     .catch((error) => {
@@ -138,6 +147,7 @@ export default class Home extends Component {
     render() {
         return (
             <div className="Home-container">
+                <div className="bg-overlay"></div>
                 <div className="bg1"></div>
                 <div className="bg2"></div>
                 <div className="bg3"></div>

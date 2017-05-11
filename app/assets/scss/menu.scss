@@ -7,6 +7,7 @@ $montserrat: 'Montserrat', sans-serif;
     width: 100vw;
     height: 100vh;
     background-image: url(../images/librarybg.jpg);
+    background-size: cover;
 
     &__left {
         position: absolute;
@@ -162,7 +163,7 @@ $montserrat: 'Montserrat', sans-serif;
 
             .trackelement
             {
-                width: 600px;
+                width: 800px;
                 height: auto;
                 display: flex;
                 margin-top: 5px;
@@ -250,6 +251,21 @@ $montserrat: 'Montserrat', sans-serif;
                     font-style: normal;
                     font-size: 0.8em;
                     margin-top: 3px;
+                }
+
+                .trackscores{
+                    display: flex;
+                    width:100%;
+                    padding-right:5px;
+                    flex-direction: row;
+                    align-content: center;
+                    align-items: center;
+                    justify-content: space-between;
+
+                    .bestscore{
+                        font-style: default;
+                        font-size: 0.7em;
+                    }
                 }
 
                 .trackyear, .trackdifficulty
