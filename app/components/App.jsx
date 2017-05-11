@@ -22,6 +22,7 @@ export default class App extends Component {
       keyCode:null,
       group:null,
       note:null,
+
       velocity:null,
       finishStarter:false,
       shouldAnim:false,

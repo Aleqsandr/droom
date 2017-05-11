@@ -7,6 +7,7 @@ export default class TrackList extends Component{
 
     render(){
         let self = this;
+
         var nodes = null;
         if(this.props.practice){
             nodes = this.props.data.practice.map((track,i) => {

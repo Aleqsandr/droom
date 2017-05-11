@@ -38,7 +38,7 @@ export default class Score extends Component {
   }
 
   handleEndMusic() {
-    if(!this.props.isPractice)
+    if(!this.props.isPractice && !this.props.isLive)
       this.props.onEndMusic(this.state.score);
   }
 

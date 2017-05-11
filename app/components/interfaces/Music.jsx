@@ -16,9 +16,12 @@ export default class Music extends Component {
 
         let isLive = false,
             isPractice = false;
+
         let track = this.props.data.tracks[this.props.params.id]
-        if(this.props.params.type == "live" || "practice")
+        if(this.props.params.type == "live" || this.props.params.type == "practice"){
+            console.log("kawabunga")
             isLive = true;
+        }
 
         if(this.props.params.type=="practice"){
             track = this.props.data.practice[this.props.params.id]
@@ -94,14 +97,6 @@ export default class Music extends Component {
             score:scoreFinal
         });
 
-        var curUser = firebase.auth().currentUser;
-        if(!curUser){
-            console.log('Iwashere')
-            firebase.database().ref('tracks/' + this.state.id +'/scores').push({
-                score:this.state.score,
-                userid:curUser.uid
-            });
-        }
     }
 
     launchGame() {
