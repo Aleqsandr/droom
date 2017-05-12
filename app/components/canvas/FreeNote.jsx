@@ -118,7 +118,7 @@ export default class FreeNote extends Component {
 
   playNote(valNote) {
     this.addNewNote(valNote);
-    MIDI.setVolume(0,35);
+    MIDI.setVolume(0,70);
     MIDI.noteOn(0, valNote[0], 20, 0);
   }
 

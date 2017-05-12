@@ -142,7 +142,8 @@ export default class Music extends Component {
     onPauseMusic() {
         // Launche pause.
         if(this.state.isPlaying) {
-            this.state.musicMP3.pause();
+            if(this.state.musicMP3)
+                this.state.musicMP3.pause();
             this.state.player.pause();
             this.setState({isPlaying:false,shouldCheck:false,data:null})
         } else {
@@ -152,9 +153,11 @@ export default class Music extends Component {
             this.setState({isPlaying:true,data:null})
             MIDI.setVolume(0, 0);
             this.state.player.resume();
-            this.state.musicMP3.seek(utils.checkTime( self.state.musicMP3.seek() - (self.state.rewindTime*0.001) ));
+            if(this.state.musicMP3)
+                this.state.musicMP3.seek(utils.checkTime( self.state.musicMP3.seek() - (self.state.rewindTime*0.001) ));
             setTimeout(function() {
                 if(self.state.isPlaying){
+                    if(self.state.musicMP3)
                     self.state.musicMP3.play();
                     self.setState({
                         shouldCheck:true
@@ -178,9 +181,11 @@ export default class Music extends Component {
 
         let i= 0;
         let start = Date.now();
+        this.state.player.currentTime = 0;
         this.state.player.addListener((data) => {
+            MIDI.setVolume(0, 0);
             if(this.state.isPractice) {
-                if(Date.now() + 500 > start+data.end) {
+                if(Date.now()  > start+data.end) {
                     start = Date.now();
                     this.state.player.currentTime = 0;
                     this.state.player.resume();
@@ -188,10 +193,10 @@ export default class Music extends Component {
                 this.checkStreak();
             }
             // play the note
-            MIDI.setVolume(0, 0);
             if(data.message == 144 || data.now == 100.5){ // NoteOn
                 this.setState({data:data, shouldAnim:false});
             }
+            MIDI.setVolume(0, 0);
         })
     }
 
@@ -213,6 +218,7 @@ export default class Music extends Component {
         if(this.state.musicMP3)
             this.state.musicMP3.unload();
         this.state.player.stop();
+        MIDI.Player.removeListener();
     }
 
     render() {
