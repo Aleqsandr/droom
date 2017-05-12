@@ -100,10 +100,18 @@ export default class Notes extends Component {
   }
 
   animKick(id) {
+
     let self = this, time =50;
 
     if(!this.state.group || id==null)return;
-    this.state.group.getChildren()[id].getChildren()[0].to({
+    let element = this.state.group.getChildren()[id].getChildren()[0],
+        val = 1.3;
+    if(id == 4 && !this.props.isKeyboard) {
+      element=this.state.group;
+      val = 1.05;
+    }
+
+    element.to({
       scaleX: 1,
       scaleY: 1,
       duration: 0
@@ -112,9 +120,9 @@ export default class Notes extends Component {
     setTimeout(function() {
       if(!self.state.group)return;
       if(!self.state.group.getChildren()[id])return;
-      self.state.group.getChildren()[id].getChildren()[0].to({
-        scaleX: 1.3,
-        scaleY: 1.3,
+      element.to({
+        scaleX: val,
+        scaleY: val,
         duration: 0.1
       });
     }, 5);
@@ -122,7 +130,7 @@ export default class Notes extends Component {
     setTimeout(function() {
       if(!self.state.group)return;
       if(!self.state.group.getChildren()[id])return;
-      self.state.group.getChildren()[id].getChildren()[0].to({
+      element.to({
         scaleX: 1,
         scaleY: 1,
         duration: 0.1
